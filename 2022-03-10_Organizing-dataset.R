@@ -1,9 +1,12 @@
 ##
+# setwd("~/Desktop/James_perennial_annual/life_history_houwie")
+# rm(list=ls())
 library(ape)
 library(data.table)
 library(rgbif)
 library(maptools)
 library(raster)
+library(taxize)
 #data("wrld_simpl")
 
 #' Taxize GBIF
@@ -78,8 +81,8 @@ MeanRasterWCVP <- function(path_raster="3_Landscape_instability/bio_1_instabilit
 
 
 # Make sure the WCVP tables are in the same folder and load them
-dist_sample <- read.csv("Sample WCVP/wcvp_distribution_sample.txt", sep="|")
-names_sample <- read.csv("Sample WCVP/wcvp_names_sample.txt", sep="|")
+dist_sample <- read.csv("wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|")
+names_sample <- read.csv("wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|")
 
 # Merge them in one big table
 all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
@@ -88,11 +91,29 @@ all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 species_list <- unique(all_vars$taxon_name)
 
 
+# Matching with trees
+
+tree.dir <- "trees"
+tree_files <- list.files(tree.dir, full.names = T)
+all_trees <- list()
+for(i in 1:length(tree_files)) {
+  load(tree_files[i])
+  if(exists("one_tree")) {
+    all_trees[[i]] <- one_tree
+    names(all_trees)[i] <- gsub(paste0(c(paste0(tree.dir,"/"), ".Rsave"), collapse="|"),"", tree_files[i])
+    rm("one_tree")
+  }
+}
+
+focal_species_trees <- unname(unlist(lapply(all_trees, "[[", "tip.label")))
+
+species_list
+
 # Now we send a request to GBIF to download the points for this list of species 
 
 user <- "" # username
 pwd <- "" # password
-email <- "" # email
+email <- "@gmail.com" # email
 
 taxized_names <- resolveGBIF(species_list) # This function adjust the names to the GBIF taxonomic backbone
 # Make sure WCVP and GBIF communicate
