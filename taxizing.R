@@ -30,6 +30,6 @@ species_list <- unique(all_vars$taxon_name)
 taxized_names_wcvp <- resolveGBIF(species_list) # This function adjust the names to the GBIF taxonomic backbone
 
 # Make sure WCVP and GBIF communicate
-reference_table <- data.frame(wcvp_name = species_list, gbif_name = taxized_names) # you will need this table later
+reference_table <- data.frame(wcvp_name = species_list, gbif_name = taxized_names_wcvp) # you will need this table later
 write.csv(reference_table, file="reference_table.csv", row.names = F) # saving table that you will need later
 
