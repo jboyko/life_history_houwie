@@ -1,6 +1,7 @@
 # Taxizing data
 
 library(taxize)
+library(data.table)
 
 #' Taxize GBIF
 #' @param name A character vector with species names.
@@ -18,8 +19,8 @@ resolveGBIF <- function(name) {
 }
 
 # Make sure the WCVP tables are in the same folder and load them
-dist_sample <- read.csv("wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|")
-names_sample <- read.csv("wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|")
+dist_sample <- read.table("wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
+names_sample <- read.table("wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 
 # Merge them in one big table
 all_vars <- merge(dist_sample, names_sample, by="plant_name_id")

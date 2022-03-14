@@ -6,23 +6,7 @@ library(data.table)
 library(rgbif)
 library(maptools)
 library(raster)
-library(taxize)
 #data("wrld_simpl")
-
-#' Taxize GBIF
-#' @param name A character vector with species names.
-resolveGBIF <- function(name) {
-  gnr_resolve_x <- function(x) {
-    sources <- taxize::gnr_datasources()
-    tmp.name <- suppressWarnings(taxize::gnr_resolve(names=x, data_source_ids=sources$id[sources$title == "GBIF Backbone Taxonomy"], best_match_only=TRUE)$matched_name)
-    if(is.null(tmp.name)) {
-      tmp.name <- paste0("UNMATCHED_",x)
-    }
-    return(tmp.name)
-  }
-  new.names <- pbapply::pbsapply(name, gnr_resolve_x)
-  return(as.character(new.names))
-}
 
 FilterWCVP <- function(points, all_vars, reference_table, species= "scientificName", lon="decimalLongitude", lat="decimalLatitude", path="wgsrpd-master/level3/level3.shp") {
   npoints_start <- nrow(points)
@@ -80,56 +64,7 @@ MeanRasterWCVP <- function(path_raster="3_Landscape_instability/bio_1_instabilit
 }
 
 
-# Make sure the WCVP tables are in the same folder and load them
-dist_sample <- read.csv("wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|")
-names_sample <- read.csv("wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|")
 
-# Merge them in one big table
-all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
-
-# Now getting the list of species in your WCVP table
-species_list <- unique(all_vars$taxon_name)
-
-
-# Matching with trees
-
-tree.dir <- "trees"
-tree_files <- list.files(tree.dir, full.names = T)
-all_trees <- list()
-for(i in 1:length(tree_files)) {
-  load(tree_files[i])
-  if(exists("one_tree")) {
-    all_trees[[i]] <- one_tree
-    names(all_trees)[i] <- gsub(paste0(c(paste0(tree.dir,"/"), ".Rsave"), collapse="|"),"", tree_files[i])
-    rm("one_tree")
-  }
-}
-
-focal_species_trees <- unname(unlist(lapply(all_trees, "[[", "tip.label")))
-
-species_list
-
-# Now we send a request to GBIF to download the points for this list of species 
-
-user <- "" # username
-pwd <- "" # password
-email <- "@gmail.com" # email
-
-taxized_names <- resolveGBIF(species_list) # This function adjust the names to the GBIF taxonomic backbone
-# Make sure WCVP and GBIF communicate
-reference_table <- data.frame(wcvp_name = species_list, gbif_name = taxized_names) # you will need this table later
-write.csv(reference_table, file="reference_table.csv", row.names = F) # saving table that you will need later
-
-rgbif::occ_download(rgbif::pred_in("scientificName", taxized_names),
-                    pred_in("basisOfRecord", 'PRESERVED_SPECIMEN'),
-                    pred("hasCoordinate", TRUE),
-                    format = "SIMPLE_CSV", user=user,pwd=pwd,email=email) # Sending request to GBIF
-
-# After this step, log in your GBIF account and manually download the table with distribution points.
-# (save the citation link too)
-
-# download, load back, etc
-reference_table <- read.csv("reference_table.csv") # read the reference table that we created earlier again
 gbif_data <- fread("0106966-210914110416597.csv") # load the table you downloaded from GBIF
 
 # Looking at the WCVP table and TDWG to clean GBIF points
