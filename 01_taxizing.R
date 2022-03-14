@@ -27,8 +27,9 @@ all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 
 # Now getting the list of species in your WCVP table
 species_list <- unique(all_vars$taxon_name)
+species_list <- subset(species_list, species_list!="")
 
-taxized_names_wcvp <- resolveGBIF(species_list) # This function adjust the names to the GBIF taxonomic backbone
+taxized_names_wcvp <- resolveGBIF(species_list[which(species_list=="")]) # This function adjust the names to the GBIF taxonomic backbone
 
 # Make sure WCVP and GBIF communicate
 reference_table <- data.frame(wcvp_name = species_list, gbif_name = taxized_names_wcvp) # you will need this table later
