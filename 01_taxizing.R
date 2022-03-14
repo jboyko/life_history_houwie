@@ -18,6 +18,13 @@ resolveGBIF <- function(name) {
   return(as.character(new.names))
 }
 
+taxize.batch <- function(species_names, file_name="") {
+  taxized_names_wcvp <- resolveGBIF(species_names) 
+  reference_table <- data.frame(wcvp_name = species_names, gbif_name = taxized_names_wcvp) 
+  write.csv(reference_table, file=file_name, row.names = F)  
+}
+
+
 # Make sure the WCVP tables are in the same folder and load them
 dist_sample <- read.table("wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 names_sample <- read.table("wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
@@ -29,9 +36,14 @@ all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 species_list <- unique(all_vars$taxon_name)
 species_list <- subset(species_list, species_list!="")
 
-taxized_names_wcvp <- resolveGBIF(species_list) # This function adjust the names to the GBIF taxonomic backbone
+species_list_1 <- species_list[1:100000]
+species_list_2 <- species_list[100001:200000]
+species_list_3 <- species_list[200001:300000]
+species_list_4 <- species_list[300001:length(species_list)]
 
-# Make sure WCVP and GBIF communicate
-reference_table <- data.frame(wcvp_name = species_list, gbif_name = taxized_names_wcvp) # you will need this table later
-write.csv(reference_table, file="reference_table.csv", row.names = F) # saving table that you will need later
+try(taxize.batch(species_list_1, file_name="reference_table_1.csv"))
+try(taxize.batch(species_list_2, file_name="reference_table_2.csv"))
+try(taxize.batch(species_list_3, file_name="reference_table_3.csv"))
+try(taxize.batch(species_list_4, file_name="reference_table_4.csv"))
+
 
