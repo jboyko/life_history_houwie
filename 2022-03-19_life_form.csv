@@ -1,0 +1,346 @@
+all_life_forms,Freq,scoring1
+Annual bamboo,15,annual
+Bamboo,3472,perennial
+Biennial,10336,annual
+Biennial or chamaephyte,696,annual
+Biennial or hemicryptophyte,8208,annual
+Biennial or nanophanerophyte,12,annual
+Bulbous geophyte,16958,perennial
+Bulbous geophyte or epiphyte,1,perennial
+Bulbous geophyte or helophyte,137,perennial
+Bulbous hydrogeophyte,1,perennial
+Caudex chamaephyte,54,perennial
+Caudex chamaephyte or nanophanerophyte,11,perennial
+Caudex geophyte,67,perennial
+Caudex nanophanerophyte,57,perennial
+Caudex nanophanerophyte or phanerophyte,18,perennial
+Caudex pachycaul nanophanerophyte,2,perennial
+Caudex phanerophyte,50,perennial
+Chamaephyte,67393,perennial
+Chamaephyte or climbing nanophanerophyte,113,perennial
+Chamaephyte or epiphyte,396,perennial
+Chamaephyte or helophyte,893,perennial
+Chamaephyte or hemicryptophyte,1404,perennial
+Chamaephyte or lithophyte,80,perennial
+Chamaephyte or nanophanerophyte,33599,perennial
+Chamaephyte or phanerophyte,261,perennial
+Chamaephyte or rhizomatous chamaephyte,7,perennial
+Chamaephyte or rhizomatous geophyte,28,perennial
+Chamaephyte or tuberous geophyte,112,perennial
+"Chamaephyte, nanophanerophyte or phanerophyte",395,perennial
+Climber,26307,perennial
+Climbing bamboo,26,perennial
+Climbing bulbous geophyte,25,perennial
+Climbing caudex geophyte,654,perennial
+Climbing caudex phanerophyte,1,perennial
+Climbing chamaephyte,3026,perennial
+Climbing chamaephyte or climbing nanophanerophyte,392,perennial
+Climbing chamaephyte or epiphyte,58,perennial
+Climbing chamaephyte or nanophanerophyte,381,perennial
+Climbing chamaephyte or phanerophyte,31,perennial
+Climbing epiphyte,460,perennial
+Climbing epiphyte or lithophyte,236,perennial
+Climbing helophyte,96,perennial
+Climbing hemicryptophyte,6266,perennial
+Climbing hemicryptophyte or chamaephyte,725,perennial
+Climbing hemicryptophyte or climbing chamaerophyte,26,perennial
+Climbing hemicryptophyte or herbaceous phanerophyt,75,perennial
+Climbing hemicryptophyte or nanophanerophyte,686,perennial
+Climbing hemiparasite,4,perennial
+Climbing herbaceous phanerophyte,1038,perennial
+Climbing herbaceous phanerophyte or liana,339,perennial
+Climbing holomycotroph,35,perennial
+Climbing holoparasite,165,perennial
+Climbing lithophyte,3,perennial
+Climbing nanophanerophyte,10709,perennial
+Climbing nanophanerophyte or liana,2748,perennial
+Climbing nanophanerophyte or phanerophyte,1090,perennial
+Climbing rhizomatous geophyte,264,perennial
+Climbing succulent,406,perennial
+Climbing therophyte,4128,annual
+Climbing therophyte or biennial,426,annual
+Climbing therophyte or hemicryptophyte,1930,annual
+Climbing tuberous geophyte,5223,perennial
+"Climbing, sometimes tuberous nanophanerophyte",15,perennial
+Epiphyte,38794,perennial
+Epiphyte or chamaephyte,38,perennial
+Epiphyte or hemicryptophyte,268,perennial
+Epiphyte or lithophyte,2606,perennial
+Epiphytic caudex chamaephyte,114,perennial
+Epiphytic chamaephyte,8193,perennial
+Epiphytic chamaephyte or nanophanerophyte,99,perennial
+Epiphytic climbing chamaephyte,7,perennial
+Epiphytic climbing nanophanerophyte,2,perennial
+Epiphytic hemicryptophyte  or chamaephyte,175,perennial
+Epiphytic hydrophyte,1,perennial
+Epiphytic liana,2,perennial
+Epiphytic nanophanerophyte,752,perennial
+Epiphytic nanophanerophyte or phanerophyte,63,perennial
+Epiphytic or lithophytic chamaerophyte,234,perennial
+Epiphytic or lithophytic nanophanerophyte,47,perennial
+Epiphytic or lithophytic tuberous geophyte,3,perennial
+Epiphytic rhizomatous chamaephyte,397,perennial
+Epiphytic rhizomatous geophyte,19,perennial
+Epiphytic scrambling chamaephyte,41,perennial
+Epiphytic therophyte or chamaephyte,22,annual
+Epiphytic tuberous chamaephyte,3,perennial
+Epiphytic tuberous chamerophyte,56,perennial
+Epiphytic tuberous geophyte,13,perennial
+Geophyte,191,perennial
+Helophyte,6637,perennial
+Helophyte or chamaephyte,72,perennial
+Helophyte or epiphyte,3,perennial
+Helophyte or hemicryptophyte,789,perennial
+Helophyte or hydrochamaephyte,35,perennial
+Helophyte or hydrohemicryptophyte,28,perennial
+Helophyte or lithophyte,26,perennial
+Helophyte or phanerophyte,13,perennial
+Helophyte or rhizomatous hydrogeophyte,919,perennial
+Helophyte or therophyte,114,annual
+Helophyte or tuberous chamaephyte,3,perennial
+Helophyte or tuberous geophyte,250,perennial
+Hemicryptophyte,275882,perennial
+Hemicryptophyte or bulbous geophyte,316,perennial
+Hemicryptophyte or chamaephyte,18617,perennial
+Hemicryptophyte or climbing hemicryptophyte,18,perennial
+Hemicryptophyte or epiphyte,1314,perennial
+Hemicryptophyte or geophyte,9,perennial
+Hemicryptophyte or helophyte,4161,perennial
+Hemicryptophyte or lithophyte,2798,perennial
+Hemicryptophyte or monocarpic hemicryptophyte,1,perennial
+Hemicryptophyte or nanophanerophyte,2030,perennial
+Hemicryptophyte or phanerophyte,80,perennial
+Hemicryptophyte or pseudobulb chamaephyte,16,perennial
+Hemicryptophyte or rhizomatous geophyte,69759,perennial
+Hemicryptophyte or therophyte,3996,annual
+Hemicryptophyte or tuberous geophyte,5155,perennial
+"Hemicryptophyte, chamaephyte or nanophanerophyte",844,perennial
+"Hemicryptophyte, lithophyte or epiphyte",915,perennial
+Hemiepiphyte,12,perennial
+Hemiepiphytic chamaephyte,342,perennial
+Hemiepiphytic chamaephyte or nanophanerophyte,64,perennial
+Hemiepiphytic hemicryptophyte,33,perennial
+Hemiepiphytic liana,4,perennial
+Hemiepiphytic nanophanerophyte,358,perennial
+Hemiepiphytic nanophanerophyte or phanerophyte,126,perennial
+Hemiepiphytic phanerophyte,105,perennial
+Hemillithophytic  chamaephyte,9,perennial
+Hemillithophytic nanophanerophyte,2,perennial
+Hemimycotrophic rhizomatous geophyte,23,perennial
+Hemimycotrophic therophyte,24,annual
+Hemimycotrophic tuberous geophyte,8,perennial
+Hemiparasite,90,perennial
+Hemiparasitic biennial,123,perennial
+Hemiparasitic biennial or hemicryptophyte,50,perennial
+Hemiparasitic chamaephyte,99,perennial
+Hemiparasitic chamaephyte or nanophanerophyte,58,perennial
+Hemiparasitic climber,13,perennial
+Hemiparasitic epiphyte,3136,perennial
+Hemiparasitic hemicryptophyte,506,perennial
+Hemiparasitic hemicryptophyte or rhizome geophyte,26,perennial
+Herbaceus phanerophyte,562,perennial
+Herbacious bamboo,394,perennial
+Herbacious nanophanerophyte,208,perennial
+Herbacious phanerophyte,2,perennial
+Herbacious therophyte,2914,annual
+Herbacious therophyte or biennial,17,annual
+Herbacious therophyte or hemicryptophyte,95,annual
+Holomycotroph,332,perennial
+Holomycotrophic chamaephyte,9,perennial
+Holomycotrophic geophyte,15,perennial
+Holomycotrophic hemicryptophyte,356,perennial
+Holomycotrophic rhizomatous geophyte,1975,perennial
+Holomycotrophic therophyte,84,annual
+Holomycotrophic tuberous geophyte,124,perennial
+Holoparasite,2278,perennial
+Holoparasitic chamaerophyte,135,perennial
+Holoparasitic epiphyte,7,perennial
+Holoparasitic geophyte,111,perennial
+Holoparasitic hemicryptophyte,765,perennial
+Holoparasitic therophyte,3303,annual
+Holoparasitic therophyte or hemicryptophyte,166,annual
+Holoparasitic tuberous geophyte,13,perennial
+Hydrochamaephyte,8290,perennial
+Hydrochamaephyte or chamaephyte,89,perennial
+Hydrochamaephyte or helophyte,130,perennial
+Hydrohemicryptophyte,2107,perennial
+Hydrohemicryptophyte or tuberous geophyte,23,perennial
+Hydronanophanerophyte,3,perennial
+Hydrotherophyte,4275,perennial
+Hydrotherophyte or helophyte,104,perennial
+Hydrotherophyte or hydrochamaephyte,961,perennial
+Hydrotherophyte or hydrohemicryptophyte,215,perennial
+Hydrotherophyte or tuberous geophyte,166,perennial
+Liana,19579,perennial
+Liana or chamaephyte,65,perennial
+Liana or nanophanerophyte,337,perennial
+Liana or phanerophyte,156,perennial
+Liana or rhizomatous geophyte,2,perennial
+Lithophyte,1930,perennial
+Lithophyte or chamaephyte,3,perennial
+Lithophyte or epiphyte,553,perennial
+Lithophyte or helophyte,2,perennial
+Lithophyte or hemicryptophyte,41,perennial
+Lithophyte or therophyte,36,annual
+Lithophytic chamaephyte,56,perennial
+Lithophytic pseudobulb geophyte,5,perennial
+Lithophytic therophyte,26,annual
+Lithophytic tuberous geophyte,16,perennial
+Monocarpic hemicryptophyte,398,perennial
+Monocarpic hemicryptophyte or chamaephyte,7,perennial
+Monocarpic hemicryptophyte or epiphyte,2,perennial
+Monocarpic hemicryptophyte or lithophyte,21,perennial
+Monocarpic lithophyte,5,perennial
+Monocarpic nanophanerophyte,1,perennial
+Monocarpic nanophanerophyte or phanerophyte,14,perennial
+Monocarpic phanerophyte,3,perennial
+Nanophan. or liana,174,perennial
+Nanophanerophyte,71283,perennial
+Nanophanerophyte or cl. phanerophyte,143,perennial
+Nanophanerophyte or phanerophyte,87935,perennial
+Pachycaul phanerophyte,1,perennial
+pachycaulous phanerophyte,2,perennial
+Parasitic,23,perennial
+Phanerophyte,142068,perennial
+Pseudobulbous chamaephyte,4,perennial
+Pseudobulbous epiphyte,18998,perennial
+Pseudobulbous epiphyte or geophyte,205,perennial
+Pseudobulbous epiphyte or hemicryptophyte,4,perennial
+Pseudobulbous epiphyte or lithophyte,1718,perennial
+Pseudobulbous geophyte,4329,perennial
+Pseudobulbous geophyte or epiphyte,610,perennial
+Pseudobulbous geophyte or lithophyte,132,perennial
+Pseudobulbous lithophyte,210,perennial
+Pseudobulbous lithophyte or epiphyte,71,perennial
+Rhizomatous chamaephyte,126,perennial
+Rhizomatous epiphyte,118,perennial
+Rhizomatous epiphyte or lithophyte,9,perennial
+Rhizomatous geophyte,23100,perennial
+Rhizomatous geophyte or chamaephyte,45,perennial
+Rhizomatous geophyte or epiphyte,306,perennial
+Rhizomatous geophyte or helophyte,638,perennial
+Rhizomatous geophyte or lithophyte,417,perennial
+Rhizomatous hemicryptophyte,127,perennial
+Rhizomatous hydrogeophyte,2574,perennial
+Rhizomatous hydrogeophyte or helophyte,40,perennial
+Rhizomatous lithophyte,232,perennial
+Rhizomatous nanophanerophyte,1,perennial
+Rhizomatous or tuberous geophyte,16,perennial
+Scrambling bamboo,7,perennial
+Scrambling caudex geophyte,47,perennial
+Scrambling caudex nanophanerophyte,1,perennial
+Scrambling chamaephyte,1912,perennial
+Scrambling chamaephyte or climbing nanophanerophyt,19,perennial
+Scrambling chamaephyte or liana,14,perennial
+Scrambling chamaephyte or lithophyte,2,perennial
+Scrambling chamaephyte or nanophanerophyte,1466,perennial
+Scrambling chamaephyte or phanerophyte,22,perennial
+Scrambling chamaephyte or tuberous geophyte,202,perennial
+Scrambling epiphyte,104,perennial
+Scrambling geophyte,13,perennial
+Scrambling hemicryptophyte,2059,perennial
+Scrambling hemicryptophyte or chamaephyte,1497,perennial
+Scrambling hemicryptophyte or epiphyte,3,perennial
+Scrambling hemicryptophyte or therophyte,27,perennial
+Scrambling hemicryptophyte or tuberous geophyte,14,perennial
+Scrambling herbaceous phanerophyte,6,perennial
+Scrambling nanophanerophyte,9733,perennial
+Scrambling nanophanerophyte or liana,1388,perennial
+Scrambling nanophanerophyte or phanerophyte,5461,perennial
+Scrambling phanerophyte,1076,perennial
+Scrambling rhizomatous geophyte,117,perennial
+Scrambling semisucculent chamaephyte or nanophaner,4,perennial
+Scrambling succulent,5,perennial
+Scrambling succulent chamaephyte,2,perennial
+Scrambling succulent chamaephyte or nanophanerophy,69,perennial
+Scrambling succulent nanophanerophyte,38,perennial
+Scrambling succulent tuberous nanophanerophyte,24,perennial
+Scrambling therophyte,1956,annual
+Scrambling therophyte or chamaephyte,908,annual
+Scrambling therophyte or hemicryptophyte,2317,annual
+Scrambling tuberous geophyte,483,perennial
+Semiaquatic chamaephyte,337,perennial
+Semiaquatic therophyte,316,annual
+Semisucculent chamaephyte,224,perennial
+Semisucculent chamaephyte or epiphyte,12,perennial
+Semisucculent chamaephyte or nanophanerophyte,278,perennial
+Semisucculent climber,37,perennial
+Semisucculent epiphyte,8,perennial
+Semisucculent hemicryptophyte,385,perennial
+Semisucculent liana,8,perennial
+Semisucculent nanophanerophyte,122,perennial
+Semisucculent nanophanerophyte or phanerophyte,128,perennial
+Semisucculent phanerophyte,29,perennial
+Semisucculent rhizomatous geophyte,1,perennial
+Semisucculent therophyte,799,annual
+Semisucculent therophyte or biennial,2,annual
+Semisucculent therophyte or chamaephyte,37,annual
+Semisucculent tuberous chamaephyte,6,perennial
+Semisucculent tuberous nanophanerophyte,1,perennial
+Sometimes tuberous chamaephyte,79,perennial
+Sometimes tuberous chamaephyte or nanophanerophyte,5,perennial
+Sometimes tuberous hemicryptophyte,25,perennial
+Sometimes tuberous nanophanerophyte,1,perennial
+Succulent,13,perennial
+Succulent biennial,66,annual
+Succulent biennial or chamaephyte,39,annual
+Succulent bulbous geophyte,10,perennial
+Succulent chamaephyte,10123,perennial
+Succulent chamaephyte or epiphyte,80,perennial
+Succulent chamaephyte or lithophyte,23,perennial
+Succulent chamaephyte or nanophanerophyte,839,perennial
+Succulent chamaephyte or phanerophyte,8,perennial
+Succulent epiphyte,470,perennial
+Succulent epiphyte or lithophyte,177,perennial
+Succulent epiphytic chamaerophyte,21,perennial
+Succulent hemicryptophyte,2796,perennial
+Succulent hemicryptophyte or bulbous geophyte,12,perennial
+Succulent hemicryptophyte or chamaerophyte,280,perennial
+Succulent hemicryptophyte or epiphyte,9,perennial
+Succulent lithophyte,1,perennial
+Succulent lithophyte or epiphyte,1,perennial
+Succulent nanophanerophyte,951,perennial
+Succulent nanophanerophyte or phanerophyte,735,perennial
+Succulent phanerophyte,534,perennial
+Succulent rhizomatous geophyte,3,perennial
+Succulent therophyte,470,annual
+Succulent therophyte or biennial,26,annual
+Succulent therophyte or chamaephyte,555,annual
+Succulent tuberous chamaephyte,143,perennial
+Succulent tuberous chamaephyte or nanophanerophyte,8,perennial
+Succulent tuberous geophyte,207,perennial
+Succulent tuberous nanophanerophyte,1,perennial
+"Succulent, somewhat tuberous chamaephyte",8,perennial
+Therophyte,150195,annual
+Therophyte or biennial,23569,annual
+Therophyte or chamaephyte,16903,annual
+Therophyte or helophyte,2110,annual
+Therophyte or hemicryptophyte,30110,annual
+Therophyte or lithophyte,199,annual
+Therophyte or nanophanerophyte,1130,annual
+Therophyte or rhizomatous geophyte,50,annual
+Therophyte or tuberous geophyte,127,annual
+"Therophyte, biennial or hemicryptophyte",471,annual
+"Therophyte, chamaephyte or nanophanerophyte",468,annual
+"Therophyte, hemicryptophyte or chamaephyte",4526,annual
+Tuberous chamaephyte,389,perennial
+Tuberous chamaephyte or nanophanerophyte,99,perennial
+Tuberous epiphyte,42,perennial
+Tuberous epiphyte or lithophyte,2,perennial
+Tuberous geophyte,33644,perennial
+Tuberous geophyte or chamaephyte,159,perennial
+Tuberous geophyte or epiphyte,33,perennial
+Tuberous geophyte or helophyte,40,perennial
+Tuberous geophyte or hemicryptophyte,138,perennial
+Tuberous geophyte or lithophyte,65,perennial
+Tuberous geophyte or therophyte,2,annual
+Tuberous helophyte,3,perennial
+Tuberous hemicryptophyte,159,perennial
+Tuberous hemicryptophyte or chamaephyte,11,perennial
+Tuberous hydrogeophyte,613,perennial
+Tuberous lithophyte,14,perennial
+Tuberous lithophyte or epiphyte,29,perennial
+Tuberous nanophanerophyte,114,perennial
+Tuberous nanophanerophyte or phanerophyte,157,perennial
+Tuberous or rhizomatous geophyte,104,perennial
+Tuberous phanerophyte,27,perennial

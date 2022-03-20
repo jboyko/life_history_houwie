@@ -1,7 +1,5 @@
 # Taxizing data
-
 library(taxize)
-library(data.table)
 
 #' Taxize GBIF
 #' @param name A character vector with species names.
@@ -26,8 +24,8 @@ taxize.batch <- function(species_names, file_name="") {
 
 
 # Make sure the WCVP tables are in the same folder and load them
-dist_sample <- read.table("wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
-names_sample <- read.table("wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
+dist_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
+names_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 
 # Merge them in one big table
 all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
@@ -36,12 +34,18 @@ all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 species_list <- unique(all_vars$taxon_name)
 species_list <- subset(species_list, species_list!="")
 
-species_list_1 <- species_list[1:100000]
+species_list_1a <- species_list[1:30000]
+species_list_1b <- species_list[30001:60000]
+species_list_1c <- species_list[60001:100000]
+
 species_list_2 <- species_list[100001:200000]
 species_list_3 <- species_list[200001:300000]
 species_list_4 <- species_list[300001:length(species_list)]
 
-try(taxize.batch(species_list_1, file_name="reference_table_1.csv"))
+try(taxize.batch(species_list_1a, file_name="reference_table_1a.csv"))
+try(taxize.batch(species_list_1b, file_name="reference_table_1b.csv"))
+try(taxize.batch(species_list_1c, file_name="reference_table_1c.csv"))
+
 try(taxize.batch(species_list_2, file_name="reference_table_2.csv"))
 try(taxize.batch(species_list_3, file_name="reference_table_3.csv"))
 try(taxize.batch(species_list_4, file_name="reference_table_4.csv"))
