@@ -1,3 +1,0 @@
-Error : Internal Server Error (HTTP 500)
-Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-  Timeout was reached: [resolver.globalnames.org] Connection timed out after 10000 milliseconds
