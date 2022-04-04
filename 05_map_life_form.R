@@ -6,9 +6,13 @@ library(maptools)
 library(raster)
 
 #########################
-all.life.forms <- function(reference_table, all_vars, scoring) {
+all.life.forms <- function(reference_table, all_vars, scoring, chunks=10000) {
   result_traits <- data.frame(species=reference_table$wcvp_name, life_form=NA)
+  log_preliminary <- seq(1, nrow(reference_table), chunks)[-1]
   for(species_index in 1:nrow(reference_table)) {
+    if(species_index %in% log_preliminary) {
+      save(result_traits, file="result_traits_tmp.Rsave")
+    }
     cat(species_index, "\r")
     wcvp_subset <- subset(all_vars, all_vars$taxon_name == reference_table$wcvp_name[species_index])
     life_form <- tail(names(sort(table(wcvp_subset$lifeform_description))),1)
@@ -18,18 +22,12 @@ all.life.forms <- function(reference_table, all_vars, scoring) {
       if(life_form[1]=="") {
         result_traits[species_index,2] <- "no_life_form_on_database"
       } else {
-        result_traits[species_index,2] <- life_form[1] 
+        result_traits[species_index,2] <- scoring$scoring1[which(scoring$all_life_forms==life_form[1])]
       }
       } else { 
-      result_traits[species_index,2]  <- life_form
+      result_traits[species_index,2]  <- scoring$scoring1[which(scoring$all_life_forms==life_form)]
       }
     }  
-  for(j in sequence(nrow(result_traits))) {
-    life_form2 <- result_traits[j,2]
-    if(life_form2!="no_life_form_on_database") {
-      result_traits[j,2] <- scoring$scoring1[which(scoring$all_life_forms==life_form2)]        
-    }
-  } 
   return(result_traits)
 }
 #########################
