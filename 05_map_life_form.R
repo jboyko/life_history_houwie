@@ -1,5 +1,3 @@
-# send names to gbif
-setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 # rm(list=ls())
 library(ape)
 library(phytools)
@@ -70,13 +68,32 @@ GetSpRichness <- function (ranges) {
 #########################
 #########################
 #########################
+# If local
+#setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
+source("/Users/thaisvasconcelos/Desktop/WCVP_special_issue/WCVPtools/WCVPtools_functions.R")
 dist_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 names_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
+#-----------------------------
+# If labcomputer
+# setwd("~/life_history_houwie")
+source("../WCVPtools/WCVPtools_functions.R")
+dist_sample <- read.table("/wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
+names_sample <- read.table("/wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
+
+#########################
 all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 
 #########################
+# reference table for taxized names
+#-----------------------------
+# If local
 reference_table <- list.files("/Users/thaisvasconcelos/Desktop/WCVP_special_issue/WCVPtools/taxized_reference_tables", full.names = T)
 reference_table <- do.call(rbind, lapply(reference_table, read.csv))
+#-----------------------------
+# If labcomputer
+reference_table <- list.files("../WCVPtools/taxized_reference_tables", full.names = T)
+reference_table <- do.call(rbind, lapply(reference_table, read.csv))
+#-----------------------------
 scoring = read.csv("2022-03-19_life_form.csv")
 
 #########################
