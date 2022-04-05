@@ -107,6 +107,11 @@ load.trees <- function(tree.dir) {
   return(all_trees)
 }
 ################
+fix.names.taxize.quick <- function(focal_species_trees) {
+  splitted_names <- strsplit(focal_species_trees," ")
+  return(unlist(lapply(splitted_names, function(x) paste0(unique(x), collapse = " "))))
+}
+################
 #----------------
 dist_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 names_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
