@@ -5,6 +5,8 @@ library(data.table)
 library(maptools)
 library(raster)
 
+# Making map for introduction
+
 #########################
 all.life.forms <- function(reference_table, all_vars, scoring, chunks=10000) {
   result_traits <- data.frame(species=reference_table$wcvp_name, life_form=NA)
@@ -79,7 +81,7 @@ sum.twgd.trait <- function(one_dataset,twgd_data,all_vars) {
 }
 #########################
 GetSpRichness <- function (ranges) {
-  template.map <- readRDS("global_map_life_form/template.map.Rdata")
+  template.map <- readRDS("figures/global_map_life_form/template.map.Rdata")
   tmp.raster.list <- list()
   for (i in 1:length(ranges)) {
     r1 <- ranges[[i]]
@@ -96,7 +98,7 @@ GetSpRichness <- function (ranges) {
 }
 #########################
 transform.raster <- function(organized_table_for_plot1, twgd_data) {
-  template.map <- readRDS("global_map_life_form/template.map.Rdata")
+  template.map <- readRDS("figures/global_map_life_form/template.map.Rdata")
   tmp.raster.list <- list()
   final_map <- template.map
   for(i in 1:nrow(organized_table_for_plot1)) {
@@ -112,7 +114,7 @@ transform.raster <- function(organized_table_for_plot1, twgd_data) {
 #########################
 # inefficient:
 transform.raster <- function(organized_table_for_plot1, twgd_data) {
-  template.map <- readRDS("global_map_life_form/template.map.Rdata")
+  template.map <- readRDS("figures/global_map_life_form/template.map.Rdata")
   tmp.raster.list <- list()
   for(i in 1:nrow(organized_table_for_plot1)) {
     one_area <- organized_table_for_plot1$one_area[i]
@@ -173,17 +175,17 @@ scoring = read.csv("2022-03-19_life_form.csv")
 #########################
 life_forms <- all.life.forms(reference_table[1:100,], all_vars, scoring)
 life_forms <- subset(life_forms, life_forms$life_form!="no_life_form_on_database")
-write.csv(life_forms, file="global_map_life_form/all_life_forms.csv", row.names=F)
+write.csv(life_forms, file="figures/global_map_life_form/all_life_forms.csv", row.names=F)
 
 ###########
-life_forms <- read.csv("global_map_life_form/all_life_forms_cleaned.csv")
+life_forms <- read.csv("figures/global_map_life_form/all_life_forms_cleaned.csv")
 organized_table_for_plot1 <- organize.bubble.plot(life_forms, reference_table, all_vars, twgd_data)
 
 
 #total_richness <- sprichness_map
 #writeRaster(total_richness, file="total_richness.tif")
 
-life_forms <- read.csv("global_map_life_form/all_life_forms_cleaned.csv")
+life_forms <- read.csv("figures/global_map_life_form/all_life_forms_cleaned.csv")
 organized_table_for_plot_total <- organize.bubble.plot(life_forms, reference_table, all_vars, twgd_data)
 organized_table_for_plot_annuals <- organize.bubble.plot(subset(life_forms, life_forms$life_form=="annual"), reference_table, all_vars, twgd_data)
 organized_table_for_plot_perennials <- organize.bubble.plot(subset(life_forms, life_forms$life_form=="perennial"), reference_table, all_vars, twgd_data)

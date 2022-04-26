@@ -1,4 +1,5 @@
-# send names to gbif
+# Code for visual inspection BEFORE data curation, using only Kew's data
+
 setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 #rm(list=ls())
 library(ape)
@@ -41,7 +42,7 @@ prepare.data<- function(trees, data, scoring, reference_table) {
         result_traits[j,2] <- scoring$scoring1[which(scoring$all_life_forms==life_form2)]        
       }
     }
-    write.csv(result_traits, file=paste0("trait_dataset/",one_label,"_life_form.csv"), row.names = F)
+    write.csv(result_traits, file=paste0("trait_dataset_pre_curation/",one_label,"_life_form.csv"), row.names = F)
     traits[[i]] <- result_traits
     names(traits)[i] <- names(trees)[i]
     
@@ -65,7 +66,7 @@ plot.life.form <- function(group_tree, group_traits, group) {
     colors_states <- c()
     
     #tip.cols <- colors_states[as.factor(mode)]
-    pdf(paste0(getwd(), "/figures/", group,"_life_form_overview.pdf"), width= 4, height= 12)
+    pdf(paste0(getwd(), "/plots/trees_pre_curation/", group,"_life_form_overview.pdf"), width= 4, height= 12)
     
     plot(group_tree, show.tip.label=T, edge.width=0.2, adj=1, cex=0.08)
     par(fg="transparent")
@@ -121,10 +122,10 @@ all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 
 ###################################
 # Load trees
-all_trees <- load.trees(tree.dir="trees")
+all_trees <- load.trees(tree.dir="trees_gbif_tips")
 focal_species_trees <- unname(unlist(lapply(all_trees, "[[", "tip.label")))
 # Load taxize reference tables back
-reference_table <- list.files("taxized_reference_tables", full.names = T)
+reference_table <- list.files("/Users/thaisvasconcelos/Desktop/WCVP_special_issue/WCVPtools/taxized_reference_tables", full.names = T)
 reference_table <- do.call(rbind, lapply(reference_table, read.csv))
 reference_table <- subset(reference_table, reference_table$gbif_name %in% focal_species_trees)
 data <- subset(all_vars, all_vars$taxon_name %in% reference_table$wcvp_name)

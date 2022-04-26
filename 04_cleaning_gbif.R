@@ -1,5 +1,6 @@
 # cleaning  points
 # rm(list=ls())
+setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 
 library(data.table)
 library(maptools)
@@ -37,7 +38,7 @@ reference_table <- list.files("../WCVPtools/taxized_reference_tables", full.name
 reference_table <- do.call(rbind, lapply(reference_table, read.csv))
 
 # Reading gbif file
-gbif_data <- fread("gbif_life_form/Antirrhineae_raw_points.csv") # load the table you downloaded from GBIF
+gbif_data <- fread("gbif_life_form/0236208-210914110416597.csv") # load the table you downloaded from GBIF
 all_vars <- subset(all_vars, all_vars$genus %in% unique(gbif_data$genus))
 
 # Looking at the WCVP table and TDWG to clean GBIF points
@@ -52,15 +53,16 @@ path="../WCVPtools/wgsrpd-master/level3/level3.shp"
 twgd_data <- suppressWarnings(maptools::readShapeSpatial(path))
 
 cleaned_points <- gbif_data
+nrow(cleaned_points)
 cleaned_points <- subset(cleaned_points, cleaned_points$basisOfRecord == "PRESERVED_SPECIMEN")
 cleaned_points <- subset(cleaned_points, cleaned_points$scientificName!="")
 cleaned_points <- FilterWCVP_genus(cleaned_points, all_vars, twgd_data)
 # testing a more "lose" cleaning
-#reference_table$gbif_name <- fix.names.taxize(reference_table$gbif_name)
-#subset_reference_table <- subset(reference_table, reference_table$gbif_name %in% unique(cleaned_points$scientificName))
-#if(nrow(subset_reference_table)>0){
-#  cleaned_points <- FilterWCVP(cleaned_points, all_vars, subset_reference_table, twgd_data) # This will filter the GBIF points acording to WCVP for species
-#}
+reference_table$gbif_name <- fix.names.taxize(reference_table$gbif_name)
+subset_reference_table <- subset(reference_table, reference_table$gbif_name %in% unique(cleaned_points$scientificName))
+if(nrow(subset_reference_table)>0){
+  cleaned_points <- FilterWCVP(cleaned_points, all_vars, subset_reference_table, twgd_data) # This will filter the GBIF points acording to WCVP for species
+}
 # Cleaning common problems:
 #cleaned_points <- RemoveNoDecimal(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
 #cleaned_points <- RemoveCentroids(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
@@ -68,10 +70,10 @@ cleaned_points <- FilterWCVP_genus(cleaned_points, all_vars, twgd_data)
 #cleaned_points <- RemoveOutliers(cleaned_points, species="scientificName", lon="decimalLongitude", lat="decimalLatitude")
 #cleaned_points <- RemoveZeros(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
 #cleaned_points <- RemoveSeaPoints(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
-write.csv(cleaned_points, file="gbif_life_form/Antirrhineae_cleaned_points.csv", row.names=F)  
+write.csv(cleaned_points, file="gbif_life_form/preliminary_cleaned_points.csv", row.names=F)  
 
 #------------------------
-all_cleaned_points_files <- read.csv("gbif_life_form/Antirrhineae_cleaned_points.csv")
+all_cleaned_points_files <- read.csv("gbif_life_form/preliminary_cleaned_points.csv")
 
 # Plotting to inspect distributions
 species <- unique(all_cleaned_points_files$scientificName)

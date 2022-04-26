@@ -39,7 +39,7 @@ focal_species_trees <- get.tip.names(tree_files)
 
 
 # PILOT #----------------------
-focal_species_trees <- get.tip.names(tree_files[grep("Antirrhineae", tree_files)])
+#focal_species_trees <- get.tip.names(tree_files[grep("Antirrhineae", tree_files)])
 #----------------------
 
 # Now we send a request to GBIF to download the points for this list of species 
