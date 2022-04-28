@@ -14,6 +14,7 @@ data("wrld_simpl")
 # If local
 setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie/")
 source("/Users/thaisvasconcelos/Desktop/WCVP_special_issue/WCVPtools/WCVPtools_functions.R")
+source("/Users/thaisvasconcelos/Desktop/WCVP_special_issue/WCVPtools/fix_taxized_names.R")
 dist_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_distribution.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 names_sample <- read.table("../../wcvp_names_and_distribution_special_edition_2022/wcvp_names.txt", sep="|", header=TRUE, quote = "", fill=TRUE, encoding = "UTF-8")
 #-----------------------------
@@ -38,7 +39,7 @@ reference_table <- list.files("../WCVPtools/taxized_reference_tables", full.name
 reference_table <- do.call(rbind, lapply(reference_table, read.csv))
 
 # Reading gbif file
-gbif_data <- fread("gbif_life_form/0236208-210914110416597.csv") # load the table you downloaded from GBIF
+gbif_data <- fread("gbif_life_form/all_points.csv") # load the table you downloaded from GBIF
 all_vars <- subset(all_vars, all_vars$genus %in% unique(gbif_data$genus))
 
 # Looking at the WCVP table and TDWG to clean GBIF points
@@ -53,7 +54,8 @@ path="../WCVPtools/wgsrpd-master/level3/level3.shp"
 twgd_data <- suppressWarnings(maptools::readShapeSpatial(path))
 
 cleaned_points <- gbif_data
-nrow(cleaned_points)
+#cleaned_points <- all_cleaned_points_files
+#nrow(cleaned_points)
 cleaned_points <- subset(cleaned_points, cleaned_points$basisOfRecord == "PRESERVED_SPECIMEN")
 cleaned_points <- subset(cleaned_points, cleaned_points$scientificName!="")
 cleaned_points <- FilterWCVP_genus(cleaned_points, all_vars, twgd_data)
@@ -65,12 +67,15 @@ if(nrow(subset_reference_table)>0){
 }
 # Cleaning common problems:
 #cleaned_points <- RemoveNoDecimal(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
-#cleaned_points <- RemoveCentroids(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
-#cleaned_points <- RemoveDuplicates(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
-#cleaned_points <- RemoveOutliers(cleaned_points, species="scientificName", lon="decimalLongitude", lat="decimalLatitude")
-#cleaned_points <- RemoveZeros(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
-#cleaned_points <- RemoveSeaPoints(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
-write.csv(cleaned_points, file="gbif_life_form/preliminary_cleaned_points.csv", row.names=F)  
+cleaned_points <- RemoveCentroids(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
+cleaned_points <- RemoveDuplicates(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
+cleaned_points <- RemoveZeros(cleaned_points, lon="decimalLongitude", lat="decimalLatitude")
+
+# Too much memomy required for this one, let's split the datasets:
+cleaned_points1 <- RemoveSeaPoints(cleaned_points[1:floor(nrow(cleaned_points)/2),], lon="decimalLongitude", lat="decimalLatitude")
+cleaned_points2 <- RemoveSeaPoints(cleaned_points[ceiling(nrow(cleaned_points)/2):nrow(cleaned_points),], lon="decimalLongitude", lat="decimalLatitude")
+cleaned_points_final <- rbind(cleaned_points1, cleaned_points2)
+write.csv(cleaned_points_final, file="gbif_life_form/preliminary_cleaned_points.csv", row.names=F)  
 
 #------------------------
 all_cleaned_points_files <- read.csv("gbif_life_form/preliminary_cleaned_points.csv")

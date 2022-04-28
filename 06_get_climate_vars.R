@@ -1,3 +1,13 @@
+# rm(list=ls())
+setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
+
+library(data.table)
+library(maptools)
+library(raster)
+library(sp)
+library(rgeos)
+library(rworldmap)
+data("wrld_simpl")
 
 ###############################
 Thinning <- function(points, species="scientificName", lat = "decimalLatitude", lon="decimalLongitude", n = 1) {
@@ -116,61 +126,62 @@ GetClimateSummStats_custom <- function (points, type=c("raw","transformed")) {
   return(allclimatevars)
 }
 
+DataFromPoints <- function (points, layer) {
+  if(any(colnames(points) != c("species","lat","lon"))) {
+    stop("Columns have to be in the order of taxon, latitude and longitude and named as 'species', 'lat', and 'lon")
+  }
+  if(ncol(points)!=3) {
+    stop("Dataset should be of class data.frame and organized in three columns named as 'species', 'lat', and 'lon'")   
+  }
+  if(!is.data.frame(points)) {
+    stop("Dataset should be of class data.frame and organized in three columns named as 'species', 'lat', and 'lon'")   
+  }
+  cat("Extracting climatic information of", nrow(points), "points",  "\n")
+  colnames(points) <- c("species", "lat", "lon")
+  sp::coordinates(points) <- ~ lon + lat
+  values <- raster::extract(layer, points)
+  result <- cbind(points, values)
+  out <- as.data.frame(result)
+  if(class(layer@data@names) == "character"){
+    colnames(out)[2] <- layer@data@names
+  }
+  return(out)
+}
+
+GetClimateSummStats <- function(climate_by_point){
+  original_species_order <- unique(climate_by_point[,1])
+  summ_stats <- aggregate(climate_by_point[,2], by = list(climate_by_point[,1]), function(x) BasicSummStats(x))
+  summ_stats <- cbind(summ_stats[,1], as.data.frame(summ_stats[,-1]))
+  colnames(summ_stats) <- c("species", "n", "mean", "sd", "se")
+  summ_stats <- summ_stats[match(original_species_order, summ_stats[,1]),]
+  rownames(summ_stats) <- NULL
+  return(summ_stats)
+}
+
+BasicSummStats <- function(x){
+  x <- na.omit(x)
+  out <- c(n = length(x), 
+           mean = mean(x), 
+           sd = sd(x), 
+           se = sd(x)/sqrt(length(x)))
+  return(out)
+}
 #-------------------------------
 # Getting climate data
 #-------------------------------
 # Load cleaned points back:
-points.dir <- "./gbif_life_form"
-cleaned_point_files <- list.files(points.dir, ".csv")
-cleaned_point_files <- cleaned_point_files[grepl("cleaned", cleaned_point_files)]
-all_cleaned_points <- lapply(paste0(points.dir, "/", cleaned_point_files), fread)
-names(all_cleaned_points) <- unlist(lapply(strsplit(cleaned_point_files, "_"), "[[", 1))
+all_cleaned_points <- fread("gbif_life_form/preliminary_cleaned_points.csv")
 
-# Directory to save preliminary datasets:
-climate_data.dir <- "./final_datasets"
-# Directory where climate layers are:
-climate_layers.dir <- "./climate_layers"
-
-{; for(family_index in 1:length(all_cleaned_points)) {
   # 1. Thinning occurence data first
-  #thinned_points <- Thinning(all_cleaned_points[[family_index]], species="scientificName", lat = "decimalLatitude", lon="decimalLongitude", n = 1)
+thinned_points <- Thinning(all_cleaned_points, species="scientificName", lat = "decimalLatitude", lon="decimalLongitude", n = 1)
+
   # 2. Getting summary statistics of climatic variables for each species
-  allpoints <- ClimateFromPoint_custom(thinned_points, species="scientificName",lon="decimalLongitude", lat="decimalLatitude", layerdir = climate_layers.dir)
-  write.csv(allpoints, file=paste0(climate_data.dir, "/", names(all_cleaned_points)[family_index], "_allpoints.csv"), row.names=F)
-  summstats <- GetClimateSummStats_custom(allpoints, type="raw")
-  write.csv(summstats[[1]], file=paste0(climate_data.dir, "/", names(all_cleaned_points)[family_index], "_summstats_raw.csv"), row.names=F)
-  summstats <- GetClimateSummStats_custom(allpoints, type="transformed")
-  write.csv(summstats[[1]], file=paste0(climate_data.dir, "/", names(all_cleaned_points)[family_index], "_summstats.csv"), row.names=F)
-}
-  beepr::beep("fanfare"); } 
+colnames(thinned_points) <- c("species","lat","lon")
 
-#-------------------------------
-# Getting organized table for hOUwie
-#-------------------------------
-climate_data.dir <- "./final_datasets"
-summstats_files <- list.files(climate_data.dir, "summstats.csv")
-summstats <- lapply(paste0(climate_data.dir, "/", summstats_files), read.csv)
-names(summstats) <- unlist(lapply(strsplit(summstats_files, "_"), "[[", 1))
-
-# Trait data
-trait.dir <- "./trait_dataset"
-trait_files <- list.files(trait.dir, ".csv")
-trait_files <- trait_files[grep("Antirrhineae", trait_files)]
-traits <- lapply(paste0(trait.dir, "/", trait_files), read.csv)
-labels <- unique(unlist(lapply(strsplit(trait_files, "-"), "[[", 1)))
-names(traits) <- labels
-
-{; for(family_index in 1:length(labels)) {
-  group <- names(traits)[family_index]
-  group_traits <- traits[[group]][,1:2]
-  group_traits$species <- fix.names.taxize(group_traits$species)
-  group_summstats <- summstats[[grep(group, names(summstats))]]
-  
-  # Matching datasets
-  #group_summstats$species <- sub(" ","_", group_summstats$species)
-  merged_table <- merge(group_summstats, group_traits, by="species", all=T)
-  cleaned_table <- merged_table[,c("species","n_temp","mean_temp","se_temp","within_sp_var_temp","life_form")]
-  write.csv(cleaned_table, file=paste0(climate_data.dir,"/",group, "_niche.csv"), row.names=F)
-}
-  beepr::beep("fanfare"); } 
-
+# Bio 15 ---------- add more layers later
+layer <- raster("climate_layers/bio_15.tif")
+allpoints <- DataFromPoints(thinned_points, layer)
+write.csv(allpoints, file="climate_data/bio15_allpoints.csv", row.names=F)
+summstats <- GetClimateSummStats(allpoints)
+write.csv(summstats, file="climate_data/bio15_summstats.csv", row.names=F)
+ 
