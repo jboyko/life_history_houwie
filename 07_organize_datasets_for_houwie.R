@@ -84,19 +84,3 @@ for(group_index in 1:length(trees)) {
   }
 }
 
-
-
-
-{; for(family_index in 1:length(labels)) {
-  group <- names(traits)[family_index]
-  group_traits <- traits[[group]][,1:2]
-  group_traits$species <- fix.names.taxize(group_traits$species)
-  group_summstats <- summstats[[grep(group, names(summstats))]]
-  
-  # Matching datasets
-  #group_summstats$species <- sub(" ","_", group_summstats$species)
-  merged_table <- merge(group_summstats, group_traits, by="species", all=T)
-  cleaned_table <- merged_table[,c("species","n_temp","mean_temp","se_temp","within_sp_var_temp","life_form")]
-  write.csv(cleaned_table, file=paste0(climate_data.dir,"/",group, "_niche.csv"), row.names=F)
-}
-  beepr::beep("fanfare"); } 

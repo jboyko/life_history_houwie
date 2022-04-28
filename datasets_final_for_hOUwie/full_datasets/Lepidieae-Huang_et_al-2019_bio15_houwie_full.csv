@@ -1,7 +1,7 @@
 "species","life_form","n","mean","sd","se"
 "Cyphocardamum aretioides","perennial",NA,NA,NA,NA
 "Delpinophytum patagonicum","perennial",3,31.6666666666667,13.8684293751431,8.00694143297621
-"Lepidium aegrum de","no_life_form_on_database",NA,NA,NA,NA
+"Lepidium aegrum","no_life_form_on_database",NA,NA,NA,NA
 "Lepidium affghanum","perennial",NA,NA,NA,NA
 "Lepidium afghanicum","no_life_form_on_database",NA,NA,NA,NA
 "Lepidium africanum","annual",8,47.75,8.31092224554102,2.93835473886809
@@ -37,7 +37,7 @@
 "Lepidium coronopifolium","no_life_form_on_database",NA,NA,NA,NA
 "Lepidium coronopus","annual",66,33.7575757575758,20.6152002218383,2.53755573214354
 "Lepidium costaricense","no_life_form_on_database",25,72.16,19.5292088933474,3.90584177866948
-"Lepidium crassum de","no_life_form_on_database",NA,NA,NA,NA
+"Lepidium crassum","no_life_form_on_database",1,15,NA,NA
 "Lepidium davisii","perennial",6,33.5,4.03732584763727,1.64823137534348
 "Lepidium depressum","no_life_form_on_database",5,92,24.2280828791714,10.8351280564652
 "Lepidium desertorum","annual",17,46.3529411764706,19.7861731281929,4.79885186672337
@@ -59,7 +59,7 @@
 "Lepidium hirtum subsp. hirtum","no_life_form_on_database",15,34.4,10.7690031373117,2.78054465373757
 "Lepidium jaredii","annual",2,89,4.24264068711928,3
 "Lepidium johnstonii","annual",NA,NA,NA,NA
-"Lepidium juvencum de","no_life_form_on_database",NA,NA,NA,NA
+"Lepidium juvencum","no_life_form_on_database",1,12,NA,NA
 "Lepidium kawarau","no_life_form_on_database",NA,NA,NA,NA
 "Lepidium kirilowii","no_life_form_on_database",NA,NA,NA,NA
 "Lepidium kirkii","no_life_form_on_database",1,23,NA,NA
@@ -103,7 +103,6 @@
 "Lepidium pinnatum","perennial",4,50.5,26.1087469378878,13.0543734689439
 "Lepidium platypetalum","perennial",46,62.4565217391304,21.9734248802089,3.23980474776069
 "Lepidium pseudohyssopifolium","annual",62,28.9516129032258,15.7338805561723,1.99820482883971
-"Lepidium pseudopapillosum","no_life_form_on_database",4,24.75,3.5,1.75
 "Lepidium pseudopapillosum","annual",4,24.75,3.5,1.75
 "Lepidium pseudotasmanicum","annual",44,24.75,16.6162221100135,2.50498973509647
 "Lepidium quitense","no_life_form_on_database",1,44,NA,NA

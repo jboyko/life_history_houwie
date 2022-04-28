@@ -178,6 +178,7 @@ thinned_points <- Thinning(all_cleaned_points, species="scientificName", lat = "
   # 2. Getting summary statistics of climatic variables for each species
 colnames(thinned_points) <- c("species","lat","lon")
 
+#########################################
 # Bio 15 ---------- add more layers later
 layer <- raster("climate_layers/bio_15.tif")
 allpoints <- DataFromPoints(thinned_points, layer)
