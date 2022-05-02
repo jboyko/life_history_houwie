@@ -59,6 +59,20 @@ ab <- b %>% insert_left(a, width = 3)
 ab
 
 
-out <- hOUwie(phy, dat, 1, "ER", "OUMV", nSim = 10, diagn_msg = TRUE)
-out_2 <- hOUwie(phy, dat, 1, "ER", "BM1", nSim = 10, diagn_msg = TRUE)
+out_1 <- hOUwie(phy, dat, 1, "ER", "OUM", nSim = 25, diagn_msg = TRUE, ub_continuous_model = c(1e10, 1e10, 1e10))
+out_2 <- hOUwie(phy, dat, 1, "ER", "OU1", nSim = 25, diagn_msg = TRUE, ub_continuous_model = c(1e10, 1e10, 1e10))
+out_3 <- hOUwie(phy, dat, 1, "ER", "BM1", nSim = 25, diagn_msg = TRUE, ub_continuous_model = c(1e10, 1e10, 1e10))
+out_4 <- hOUwie(phy, dat, 2, "ER", "OUM", nSim = 25, null.model = TRUE, diagn_msg = TRUE)
+
+
+OUwie(phy, dat, "BM1")
+
+Q <- matrix(c(-1,1,1,-1)/100, 2, 2)
+map <- makeSimmap(phy, dat[,c(1,2)], Q, 1)[[1]]
+
+
+OUwie(map, dat, "OUM", simmap.tree = TRUE, starting.vals = c(1, 50), ub = c(1e10))
+
+plot(map)
+
 
