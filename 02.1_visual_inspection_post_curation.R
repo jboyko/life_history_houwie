@@ -127,6 +127,8 @@ for(i in 1:length(all_trees)) {
   write.tree(one_tree, file=paste0("trees_simplified_tips/", one_label, "_cleaned.tre")) # saving trees post-curation
 }
 
+
+
 # Make life form datasets that match the trees
 trait_data_files <- list.files("trait_dataset_pre_curation")
 labels <- gsub(paste0(c("_life_form_curated.csv","_life_form.csv"), collapse = "|"), "", trait_data_files)

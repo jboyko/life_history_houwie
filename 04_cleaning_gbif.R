@@ -40,6 +40,10 @@ reference_table <- do.call(rbind, lapply(reference_table, read.csv))
 
 # Reading gbif file
 gbif_data <- fread("gbif_life_form/all_points.csv") # load the table you downloaded from GBIF
+
+gbif_data$scientificName[grep("Odontarrhena", gbif_data$scientificName)]
+#gbif_data$scientificName[grep("Odontarrhena robertiana", gbif_data$scientificName)]
+
 all_vars <- subset(all_vars, all_vars$genus %in% unique(gbif_data$genus))
 
 # Looking at the WCVP table and TDWG to clean GBIF points
@@ -56,8 +60,6 @@ twgd_data <- suppressWarnings(maptools::readShapeSpatial(path))
 cleaned_points <- gbif_data
 #cleaned_points <- all_cleaned_points_files
 #nrow(cleaned_points)
-cleaned_points <- subset(cleaned_points, cleaned_points$basisOfRecord == "PRESERVED_SPECIMEN")
-cleaned_points <- subset(cleaned_points, cleaned_points$scientificName!="")
 cleaned_points <- FilterWCVP_genus(cleaned_points, all_vars, twgd_data)
 # testing a more "lose" cleaning
 reference_table$gbif_name <- fix.names.taxize(reference_table$gbif_name)

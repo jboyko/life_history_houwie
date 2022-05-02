@@ -1,0 +1,189 @@
+"species","life_form","n","mean","sd","se"
+"Ammosperma cinerea","no_life_form_on_database",NA,NA,NA,NA
+"Brassica aucheri","annual",NA,NA,NA,NA
+"Brassica balearica","perennial",1,99,NA,NA
+"Brassica barrelieri","annual",37,95.6486486486486,48.2085839614437,7.92544238268664
+"Brassica carinata","annual",25,168.68,21.2734576409196,4.25469152818392
+"Brassica cretica","perennial",10,100,37.2886637524656,11.7917108361952
+"Brassica deflexa","annual",3,151.333333333333,128.001302076711,73.9015862106115
+"Brassica desnottesii","perennial",NA,NA,NA,NA
+"Brassica elongata var. integrifolia","annual",NA,NA,NA,NA
+"Brassica fruticulosa","annual",24,153.625,34.090432802997,6.95868045649836
+"Brassica gravinae","perennial",5,87.6,52.9981131739612,23.7014767472409
+"Brassica incana","perennial",1,129,NA,NA
+"Brassica insularis","perennial",6,113.333333333333,25.6567080247382,10.4743071900299
+"Brassica juncea var. integrifolia","no_life_form_on_database",NA,NA,NA,NA
+"Brassica macrocarpa","perennial",NA,NA,NA,NA
+"Brassica maurorum","no_life_form_on_database",1,137,NA,NA
+"Brassica montana","perennial",7,118.428571428571,71.8907901909954,27.1721646287565
+"Brassica napus","annual",30,78.4333333333333,41.4534914575719,7.56833745288662
+"Brassica nigra","annual",NA,NA,NA,NA
+"Brassica oleracea var. capitata","no_life_form_on_database",52,138.365384615385,54.0050937489193,7.48915902492186
+"Brassica oxyrrhina","annual",22,113.727272727273,30.5492293070613,6.51311757237727
+"Brassica procumbens","perennial",NA,NA,NA,NA
+"Brassica rapa subsp. rapa","no_life_form_on_database",5,83,61.4166101311364,27.4663430401646
+"Brassica repanda","perennial",26,90.8846153846154,57.4834424321139,11.2734305642245
+"Brassica rupestris","perennial",1,56,NA,NA
+"Brassica tournefortii","no_life_form_on_database",48,137.645833333333,49.0741902886056,7.08324924334734
+"Brassica villosa","perennial",NA,NA,NA,NA
+"Cakile arabica","annual",4,150.75,50.0757759134428,25.0378879567214
+"Cakile constricta","annual",4,272.25,6.02079728939615,3.01039864469807
+"Cakile edentula subsp. edentula","annual",5,64.2,16.4833249073116,7.37156699759284
+"Cakile edentula subsp. harperi","annual",NA,NA,NA,NA
+"Cakile edentula var. lacustris","annual",37,137.621621621622,78.4422474575161,12.8958260439719
+"Cakile lanceolata","annual",46,268.5,14.7900116445,2.18066824841878
+"Cakile lanceolata subsp. pseudoconstricta","annual",1,280,NA,NA
+"Cakile lanceolata var. fusiformis","annual",NA,NA,NA,NA
+"Cakile maritima","perennial",147,122.190476190476,44.6769735263068,3.68489467028443
+"Cakile maritima f. islandica","annual",NA,NA,NA,NA
+"Carrichtera annua","annual",NA,NA,NA,NA
+"Ceratocnemum rapistroides","annual",NA,NA,NA,NA
+"Coincya longirostra","annual",7,91.1428571428571,22.0410871739468,8.33074789825125
+"Coincya monensis","annual",35,79.6571428571429,49.5051648268927,8.36790013689698
+"Coincya rupestris","annual",1,99,NA,NA
+"Cordylocarpus muricatus","annual",6,128.166666666667,15.7278945401686,6.42088605861978
+"Crambe arborea","perennial",NA,NA,NA,NA
+"Crambe aspera","perennial",11,179.818181818182,85.0997275927699,25.6585332896975
+"Crambe cordifolia","perennial",3,84.6666666666667,98.8803991361955,57.0886250588601
+"Crambe edentula","perennial",NA,NA,NA,NA
+"Crambe feuilleei","perennial",NA,NA,NA,NA
+"Crambe filiformis","perennial",24,96,38.2076705251252,7.79910808724445
+"Crambe fruticosa","perennial",NA,NA,NA,NA
+"Crambe gigantea","perennial",NA,NA,NA,NA
+"Crambe gomeraea","perennial",NA,NA,NA,NA
+"Crambe gordjaginii","perennial",NA,NA,NA,NA
+"Crambe grossheimii","perennial",NA,NA,NA,NA
+"Crambe hispanica subsp. hispanica","perennial",NA,NA,NA,NA
+"Crambe juncea","perennial",NA,NA,NA,NA
+"Crambe kilimandscharica","annual",NA,NA,NA,NA
+"Crambe koktebelica","perennial",3,89.6666666666667,81.8189057207033,47.2381672426487
+"Crambe kotschyana","perennial",21,73,92.3255111006703,20.147078247348
+"Crambe kralikii","perennial",4,136.25,69.216447948928,34.608223974464
+"Crambe laevigata","perennial",1,143,NA,NA
+"Crambe maritima","perennial",47,102.68085106383,48.0692916450819,7.01162681711969
+"Crambe microcarpa","perennial",NA,NA,NA,NA
+"Crambe orientalis","perennial",16,86.5625,58.7616300545404,14.6904075136351
+"Crambe orientalis subsp. orientalis","perennial",2,47,39.5979797464467,28
+"Crambe pritzelii","perennial",2,154,55.1543289325507,39
+"Crambe scaberrima","perennial",1,195,NA,NA
+"Crambe schugnana","perennial",NA,NA,NA,NA
+"Crambe scoparia","perennial",NA,NA,NA,NA
+"Crambe strigosa","perennial",NA,NA,NA,NA
+"Crambe sventenii","perennial",NA,NA,NA,NA
+"Crambe tamadabensis","perennial",NA,NA,NA,NA
+"Crambe tataria","perennial",36,158.666666666667,76.5062088983633,12.7510348163939
+"Crambe wildpretii","perennial",NA,NA,NA,NA
+"Crambella teretifolia","perennial",NA,NA,NA,NA
+"Didesmus aegyptius","annual",6,122.5,14.936532395439,6.0978138158961
+"Didesmus bipinnatus","annual",NA,NA,NA,NA
+"Diplotaxis acris","annual",9,131.333333333333,35.2420203734122,11.7473401244707
+"Diplotaxis antoniensis","perennial",NA,NA,NA,NA
+"Diplotaxis assurgens","no_life_form_on_database",NA,NA,NA,NA
+"Diplotaxis berthautii","no_life_form_on_database",NA,NA,NA,NA
+"Diplotaxis brachycarpa","no_life_form_on_database",NA,NA,NA,NA
+"Diplotaxis brevisiliqua","no_life_form_on_database",1,144,NA,NA
+"Diplotaxis catholica","annual",NA,NA,NA,NA
+"Diplotaxis cossoniana","no_life_form_on_database",NA,NA,NA,NA
+"Diplotaxis erucoides","annual",NA,NA,NA,NA
+"Diplotaxis gorgadensis","perennial",NA,NA,NA,NA
+"Diplotaxis gracilis","perennial",NA,NA,NA,NA
+"Diplotaxis griffithii","annual",14,251.5,113.700517555144,30.3877415278733
+"Diplotaxis harra","perennial",50,177.68,56.0777303101213,7.93058867516743
+"Diplotaxis hirta","perennial",NA,NA,NA,NA
+"Diplotaxis ibicensis","no_life_form_on_database",NA,NA,NA,NA
+"Diplotaxis ilorcitana","annual",13,165.461538461538,46.4105149447396,12.8719608733805
+"Diplotaxis muralis","annual",210,145.528571428571,50.5533177521363,3.48851034912397
+"Diplotaxis siettiana","annual",NA,NA,NA,NA
+"Diplotaxis siifolia","annual",23,125.869565217391,27.4231228707489,5.71811639700937
+"Diplotaxis simplex","annual",NA,NA,NA,NA
+"Diplotaxis sundingii","perennial",NA,NA,NA,NA
+"Diplotaxis tenuifolia","perennial",116,131,53.7145434115663,4.98727015191837
+"Diplotaxis tenuifolia subsp. cretacea","no_life_form_on_database",NA,NA,NA,NA
+"Diplotaxis tenuisiliqua","no_life_form_on_database",7,138.571428571429,15.8625044560765,5.99546313734748
+"Diplotaxis varia","perennial",NA,NA,NA,NA
+"Diplotaxis viminea","annual",54,132.166666666667,44.3003258218777,6.02851076125791
+"Diplotaxis virgata","annual",NA,NA,NA,NA
+"Douepea tortuosa","perennial",7,256.428571428571,84.1483949992653,31.8051037704696
+"Enarthrocarpus arcuatus","annual",8,115.375,23.1636260423227,8.18957852569785
+"Enarthrocarpus lyratus","annual",NA,NA,NA,NA
+"Eremophyton chevallieri","annual",NA,NA,NA,NA
+"Eruca pinnatifida","annual",NA,NA,NA,NA
+"Eruca vesicaria","annual",120,133.141666666667,66.3687554100412,6.0586107419371
+"Eruca vesicaria var. sativa","no_life_form_on_database",NA,NA,NA,NA
+"Erucaria cakiloidea","annual",NA,NA,NA,NA
+"Erucaria erucarioides","no_life_form_on_database",5,163.8,21.9248717214035,9.80510071340422
+"Erucaria hispanica","annual",NA,NA,NA,NA
+"Erucaria microcarpa","annual",3,134.333333333333,29.7377425729213,17.1690936795679
+"Erucaria ollivieri","no_life_form_on_database",NA,NA,NA,NA
+"Erucaria pinnata","annual",NA,NA,NA,NA
+"Erucastrum abyssinicum","no_life_form_on_database",NA,NA,NA,NA
+"Erucastrum austroafricanum","annual",17,193.882352941176,32.8117401872812,7.95801591485202
+"Erucastrum brevirostre","no_life_form_on_database",NA,NA,NA,NA
+"Erucastrum canariense","no_life_form_on_database",NA,NA,NA,NA
+"Erucastrum cardaminoides","no_life_form_on_database",NA,NA,NA,NA
+"Erucastrum elatum","no_life_form_on_database",5,92.4,41.0036583733696,18.3373934898066
+"Erucastrum gallicum","annual",47,139.553191489362,63.3852295613851,9.24568597106354
+"Erucastrum griquense","annual",13,215.615384615385,32.7682225678539,9.08826974417027
+"Erucastrum littoreum","no_life_form_on_database",4,121.25,24.6762368822044,12.3381184411022
+"Erucastrum meruense","perennial",NA,NA,NA,NA
+"Erucastrum nasturtiifolium","annual",57,125.263157894737,63.6602382955768,8.43200454809627
+"Erucastrum strigosum","annual",22,193.227272727273,32.7471290172812,6.98171136507394
+"Erucastrum supinum","annual",7,109.857142857143,62.1059003408119,23.4738238930785
+"Erucastrum varium","no_life_form_on_database",NA,NA,NA,NA
+"Erucastrum virgatum","no_life_form_on_database",NA,NA,NA,NA
+"Fezia pterocarpa","annual",NA,NA,NA,NA
+"Foleyola billotii","no_life_form_on_database",3,155.333333333333,32.316146634977,18.6577359588754
+"Fortuynia garcinii","perennial",4,144.75,33.3404159142224,16.6702079571112
+"Guiraoa arvensis","annual",8,186.25,24.3706497949597,8.61632586596929
+"Hemicrambe fruticulosa","perennial",1,88,NA,NA
+"Henophyton deserti","perennial",3,172,19.9248588451713,11.5036226178249
+"Hirschfeldia incana","annual",NA,NA,NA,NA
+"Kremeriella cordylocarpus","no_life_form_on_database",3,146,26.2106848441623,15.1327459504216
+"Moricandia arvensis var. robusta","no_life_form_on_database",NA,NA,NA,NA
+"Moricandia foetida","perennial",NA,NA,NA,NA
+"Moricandia foleyi","no_life_form_on_database",NA,NA,NA,NA
+"Moricandia moricandioides","perennial",26,127.653846153846,40.029931109301,7.85051537900387
+"Moricandia nitens","perennial",NA,NA,NA,NA
+"Moricandia sinaica","perennial",NA,NA,NA,NA
+"Moricandia spinosa","perennial",NA,NA,NA,NA
+"Moricandia suffruticosa","perennial",8,152.75,58.497252682742,20.6819020263749
+"Morisia monanthos","perennial",3,93.6666666666667,21.9393102292058,12.6666666666667
+"Muricaria prostrata","annual",NA,NA,NA,NA
+"Nasturtiopsis coronopifolia","annual",NA,NA,NA,NA
+"Orychophragmus diffusus","annual",NA,NA,NA,NA
+"Orychophragmus hupehensis","annual",NA,NA,NA,NA
+"Orychophragmus taibaiensis","annual",NA,NA,NA,NA
+"Orychophragmus violaceus","annual",33,247.242424242424,20.8896360413338,3.63641887584306
+"Orychophragmus ziguiensis","annual",NA,NA,NA,NA
+"Otocarpus virgatus","annual",NA,NA,NA,NA
+"Physorhynchus chamaerapistrum","perennial",NA,NA,NA,NA
+"Pseuderucaria teretifolia","annual",NA,NA,NA,NA
+"Psychine stylosa","annual",12,125.083333333333,32.340400664672,9.33586951472436
+"Raffenaldia primuloides","perennial",11,76.6363636363636,42.4176206953495,12.7893938496444
+"Raphanus raphanistrum","annual",392,138.790816326531,58.7355434014783,2.96659293113301
+"Raphanus sativus","annual",264,141.170454545455,56.3988151301211,3.47110712191718
+"Rapistrum perenne","annual",25,188.52,12.9393456815508,2.58786913631015
+"Rapistrum rugosum","annual",153,120.941176470588,47.4924142549598,3.83953412527037
+"Rytidocarpus moricandioides","annual",1,140,NA,NA
+"Savignya parviflora subsp. parviflora","annual",NA,NA,NA,NA
+"Schouwia purpurea","annual",NA,NA,NA,NA
+"Sinalliaria limprichtiana","annual",NA,NA,NA,NA
+"Sinapidendron angustifolium","perennial",NA,NA,NA,NA
+"Sinapidendron frutescens","perennial",NA,NA,NA,NA
+"Sinapis alba","annual",231,130.675324675325,58.3188629843332,3.83709947486686
+"Sinapis arvensis","annual",380,129.65,57.6276019049835,2.95623360185471
+"Sinapis pubescens subsp. pubescens","no_life_form_on_database",3,78.6666666666667,51.733290377989,29.8682291257971
+"Succowia balearica","annual",21,162.47619047619,34.8247312231108,7.59937937554272
+"Trachystoma aphanoneurum","annual",NA,NA,NA,NA
+"Trachystoma ballii","annual",1,121,NA,NA
+"Trachystoma labasii","no_life_form_on_database",6,108.666666666667,49.7781746015929,20.321854683512
+"Vella anremerica","perennial",NA,NA,NA,NA
+"Vella aspera","perennial",1,188,NA,NA
+"Vella bourgaeana","perennial",2,121,8.48528137423857,6
+"Vella castrilensis","perennial",NA,NA,NA,NA
+"Vella lucentina","perennial",1,202,NA,NA
+"Vella mairei","perennial",4,40.25,24.7706143107783,12.3853071553891
+"Vella pseudocytisus subsp. glabrata","perennial",NA,NA,NA,NA
+"Vella spinosa","perennial",10,81,40.9308359715916,12.943466820498
+"Zilla macroptera","perennial",3,118.333333333333,44.5570794973519,25.7250418420996
+"Zilla spinosa subsp. spinosa","perennial",NA,NA,NA,NA

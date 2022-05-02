@@ -25,18 +25,33 @@ fix.names.taxize <- function(focal_species_trees) {
       begin_author <- which(grepl("[()]", splitted_names))[1]
       species_name <- paste0(splitted_names[1:(begin_author-1)], collapse=" ")
       author <- splitted_names[begin_author:length(splitted_names)]
-      author <- paste(author[1:(length(author)/2)], collapse=" ")
-      focal_species_trees[name_index] <- paste0(species_name, " ", author, collapse=" ")
-    } 
+      old_authors <- author[grep("[()]", author)]
+      end_first_half <- floor(length(old_authors)/2)
+      before <- old_authors[1:end_first_half]
+      after <- old_authors[(end_first_half+1):(length(old_authors))]
+      if(paste(before,collapse = " ") == paste(after, collapse=" ")) {
+        author <- paste(author[1:(length(author)/2)], collapse=" ")
+        focal_species_trees[name_index] <- paste0(species_name, " ", author, collapse=" ")
+      } else {
+        author <- paste(author, collapse=" ")
+        focal_species_trees[name_index] <- paste0(species_name, " ", author, collapse=" ")
+      }
+    }
   }
   return(focal_species_trees)
 }
 
 # Matching with trees
-tree.dir <- "trees"
+tree.dir <- "trees_gbif_tips"
 tree_files <- list.files(tree.dir, full.names = T)
 focal_species_trees <- get.tip.names(tree_files)
+focal_species_trees <- fix.names.taxize(focal_species_trees)
 
+test <- focal_species_trees[grep("Odontarrhena", focal_species_trees)]
+test <- paste0(unlist(lapply(strsplit(test, " "), "[[", 1)), " ", unlist(lapply(strsplit(test, " "), "[[", 2)))
+final <- resolveGBIF(test)
+
+#focal_species_trees <- simplify.names.taxize(focal_species_trees)
 
 # PILOT #----------------------
 #focal_species_trees <- get.tip.names(tree_files[grep("Antirrhineae", tree_files)])
@@ -47,7 +62,7 @@ user <- "" # username
 pwd <- "" # password
 email <- "@gmail.com" # email
 
-rgbif::occ_download(rgbif::pred_in("scientificName", fix.names.taxize(focal_species_trees)),
+rgbif::occ_download(rgbif::pred_in("scientificName", focal_species_trees),
                     pred_in("basisOfRecord", 'PRESERVED_SPECIMEN'),
                     pred("hasCoordinate", TRUE),
                     format = "SIMPLE_CSV", user=user,pwd=pwd,email=email) # Sending request to GBIF

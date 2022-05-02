@@ -1,20 +1,20 @@
 "species","life_form","n","mean","sd","se"
-"Chorispora bungeana","perennial",31,64.7096774193548,19.27726389366,3.46229880387064
-"Chorispora macropoda","perennial",25,66.12,18.3242098510868,3.66484197021736
+"Chorispora bungeana","perennial",31,64.5806451612903,19.188145982261,3.44629275447784
+"Chorispora macropoda","perennial",25,65.92,18.9712941045149,3.79425882090297
 "Chorispora persica","annual",2,84,7.07106781186548,5
 "Chorispora purpurascens","annual",5,77.6,18.3657289536789,8.21340367935243
-"Chorispora sabulosa","perennial",24,53.5833333333333,9.55495167173939,1.95039634272622
+"Chorispora sabulosa","perennial",23,52.9565217391304,8.32017406324458,1.73487621965031
 "Chorispora sibirica","annual",NA,NA,NA,NA
 "Chorispora songarica","perennial",1,38,NA,NA
 "Chorispora tashkorganica","annual",NA,NA,NA,NA
-"Chorispora tenella","annual",135,42.1111111111111,26.9279488238651,2.31758882983011
-"Diptychocarpus strictus","annual",16,60.25,27.8148641317312,6.9537160329328
+"Chorispora tenella","annual",135,42.037037037037,26.8529459756885,2.31113361245442
+"Diptychocarpus strictus","annual",16,59.75,27.3897791155752,6.8474447788938
 "Litwinowia tenuissima","annual",NA,NA,NA,NA
 "Parrya ajanensis","no_life_form_on_database",NA,NA,NA,NA
 "Parrya alba","perennial",NA,NA,NA,NA
 "Parrya albida","perennial",NA,NA,NA,NA
 "Parrya angrenica","no_life_form_on_database",NA,NA,NA,NA
-"Parrya arctica","perennial",87,71.2183908045977,10.1195473832007,1.08492935964145
+"Parrya arctica","perennial",89,71.9775280898876,9.90176468212736,1.04958495713768
 "Parrya asperrima","perennial",NA,NA,NA,NA
 "Parrya australis","perennial",1,48,NA,NA
 "Parrya darvazica","perennial",NA,NA,NA,NA
@@ -25,8 +25,8 @@
 "Parrya longicarpa","perennial",NA,NA,NA,NA
 "Parrya maidantalica","perennial",1,40,NA,NA
 "Parrya minjanensis","perennial",NA,NA,NA,NA
-"Parrya nauruaq","perennial",4,61.25,3.40342964277702,1.70171482138851
-"Parrya nudicaulis","perennial",51,69.2549019607843,24.7788967771004,3.46973956611595
+"Parrya nauruaq","perennial",4,61,2.58198889747161,1.29099444873581
+"Parrya nudicaulis","perennial",51,68.7058823529412,25.3403189543045,3.548354395463
 "Parrya nuratensis","perennial",NA,NA,NA,NA
 "Parrya papillosa","annual",NA,NA,NA,NA
 "Parrya pavlovii","perennial",1,53,NA,NA
@@ -36,7 +36,7 @@
 "Parrya popovii","perennial",NA,NA,NA,NA
 "Parrya pulvinata","perennial",NA,NA,NA,NA
 "Parrya runcinata","perennial",NA,NA,NA,NA
-"Parrya rydbergii","perennial",4,23,5.8878405775519,2.94392028877595
+"Parrya rydbergii","perennial",4,23,5.35412613473634,2.67706306736817
 "Parrya saurica","perennial",1,41,NA,NA
 "Parrya saxifraga","perennial",NA,NA,NA,NA
 "Parrya schugnana","perennial",1,67,NA,NA

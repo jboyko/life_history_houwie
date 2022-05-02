@@ -179,10 +179,16 @@ thinned_points <- Thinning(all_cleaned_points, species="scientificName", lat = "
 colnames(thinned_points) <- c("species","lat","lon")
 
 #########################################
-# Bio 15 ---------- add more layers later
-layer <- raster("climate_layers/bio_15.tif")
-allpoints <- DataFromPoints(thinned_points, layer)
-write.csv(allpoints, file="climate_data/bio15_allpoints.csv", row.names=F)
-summstats <- GetClimateSummStats(allpoints)
-write.csv(summstats, file="climate_data/bio15_summstats.csv", row.names=F)
- 
+all_layers <- list.files("climate_layers", ".tif$")
+labels <- gsub(".tif$","", all_layers)
+all_layers <- lapply(paste0("climate_layers/",all_layers), raster)
+names(all_layers) <- labels
+for(i in 1:length(all_layers)){
+  one_layer <- all_layers[[i]]
+  one_label <- names(all_layers)[i]
+  allpoints <- DataFromPoints(thinned_points, one_layer)
+  write.csv(allpoints, file=paste0("climate_data/",one_label,"_allpoints.csv"), row.names=F)
+  summstats <- GetClimateSummStats(allpoints)
+  write.csv(summstats, file=paste0("climate_data/",one_label,"_summstats.csv"), row.names=F)
+}
+
