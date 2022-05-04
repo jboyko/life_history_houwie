@@ -48,7 +48,7 @@ library(ape)
 climate_data.dir <- "./climate_data"
 summstats_files <- list.files(climate_data.dir, "summstats")
 summstats <- lapply(paste0(climate_data.dir, "/", summstats_files), read.csv)
-names(summstats) <- unlist(lapply(strsplit(summstats_files, "_"), "[[", 1))
+names(summstats) <- gsub("_summstats.csv","",summstats_files)
 for(i in 1:length(summstats)) {
   one_var <- summstats[[i]] 
   one_var$species <- simplify.names.taxize(one_var$species)

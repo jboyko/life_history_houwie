@@ -33,8 +33,9 @@ organizeData <- function(clade_name, data_files, tree_files){
 
 # working directory
 setwd("2022_life-history/")
+# setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 
-data_files <- dir("datasets_final_for_hOUwie/full_datasets/", full.names = TRUE)
+data_files <- dir("datasets_final_for_hOUwie/full_datasets", full.names = TRUE)
 group_names <- unlist(lapply(strsplit(dir("datasets_final_for_hOUwie/full_datasets/"), "-"), function(x) x[[1]]))
 tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 clade_name <- group_names[11]
