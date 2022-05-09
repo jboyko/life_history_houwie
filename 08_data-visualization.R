@@ -37,7 +37,7 @@ makePlot <- function(clade_name, climatic_variable, data_files, tree_files){
   dat_list <- organizeData(clade_name, climatic_variable, data_files, tree_files)
   phy <- dat_list$phy
   dat <- dat_list$dat
-  # dat[,3] <- log(dat[,3])
+  dat[,3] <- log(dat[,3])
   a <- ggtree(phy) +
     ggtitle(clade_name)
   b <- ggplot(dat, aes(x = id, y = value, color = life_form, fill = life_form)) + 
@@ -87,12 +87,12 @@ aggregate(big_df[,c(4,5,6)], by = list(big_df$clade), mean)
 write.csv(big_df, file = "prelim/all_t-tests.csv")
 
 # pdf("figures/preim_raw_data/bio_15.pdf", onefile = TRUE)
-# for(i in 1:length(group_names)){
-#   print(makePlot(group_names[i], "bio_15", data_files, tree_files))
-# }
+for(i in 1:length(group_names)){
+  makePlot(group_names[i], "bio_5", data_files, tree_files)
+}
 # dev.off()
 
-
+organizeData(group_names[i], "bio_5", data_files, tree_files)
 hist(log(dat_list$dat[,3]))
 
 
