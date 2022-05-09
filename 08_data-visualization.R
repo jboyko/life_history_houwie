@@ -67,24 +67,17 @@ runTtest <- function(clade_name, climatic_variable, data_files, tree_files){
 }
 
 # working directory
-<<<<<<< HEAD
 setwd("~/2022_life-history/")
 
 data_files <- dir("datasets_final_for_hOUwie/full_datasets/", full.names = TRUE)
 group_names <- unique(unlist(lapply(strsplit(dir("datasets_final_for_hOUwie/full_datasets/"), "-"), function(x) x[[1]])))
-=======
-setwd("2022_life-history/")
-# setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 
-data_files <- dir("datasets_final_for_hOUwie/full_datasets", full.names = TRUE)
-group_names <- unlist(lapply(strsplit(dir("datasets_final_for_hOUwie/full_datasets/"), "-"), function(x) x[[1]]))
->>>>>>> 51a612f07a540718c79c34af0091163a928f0f1c
 tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 clade_name <- group_names[1]
 
 # sapply(group_names, function(x) makePlot(x, "bio_15", data_files, tree_files))
 
-climatic_variables <- paste0("bio_", 1:19)
+climatic_variables <- c(paste0("bio_", 1:19), "bio_ai", "bio_et0")
 
 big_df <- do.call(rbind, lapply(climatic_variables, function(y) do.call(rbind, lapply(group_names, function(x) runTtest(x, y, data_files, tree_files)))))
 
