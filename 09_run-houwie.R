@@ -27,8 +27,8 @@ organizeData <- function(clade_name, climate_variable, data_files, tree_files){
 runSingleModelSet <- function(clade_name, climate_variable, model_set, data_files, tree_files){
   focal_data <- organizeData(clade_name, climate_variable, data_files, tree_files)
   focal_data$dat[,3] <- log(focal_data$dat[,3])
-  print(paste0("Running 8 models for ", clade_name, " (", length(focal_data$phy$tip.label), " taxa)."))
-  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, 1, "ARD", x, nSim = 25, quiet = TRUE), mc.cores = 8)
+  print(paste0("Running 10 models for ", clade_name, " (", length(focal_data$phy$tip.label), " taxa)."))
+  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, 1, "ARD", x, nSim = 25, quiet = TRUE), mc.cores = 10)
   file_name <- paste0("res_files/", clade_name, "_", climate_variable, ".Rsave")
   save(model_set_res, file = file_name)
 }
@@ -48,13 +48,13 @@ clade_name <- group_names[3]
 climatic_variables <- c(paste0("bio_", 1:19), "bio_ai", "bio_et0")
 
 # continuous models
-continuous_model_names <- c("BMV", "OUA", "OUV", "OUM", "OUVA", "OUMV", "OUMA", "OUMVA")
+continuous_model_names <- c("BM1", "BMV", "OUA","OU1", "OUV", "OUM", "OUVA", "OUMV", "OUMA", "OUMVA")
 continuous_models <- lapply(continuous_model_names, function(x) getOUParamStructure(x, 2, 1))
 names(continuous_models) <- continuous_model_names
 
 # run models
 # bio5
-climate_variable <- climatic_variables[5]
+climate_variable <- climatic_variables[20]
 mclapply(group_names, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 5)
 
 
