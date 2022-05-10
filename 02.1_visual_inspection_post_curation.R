@@ -4,6 +4,7 @@ setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 library(ape)
 library(phytools)
 library(data.table)
+library(phangorn)
 
 load.trees <- function(tree.dir) {
   tree_files <- list.files(tree.dir, full.names = T)
@@ -73,6 +74,21 @@ simplify.names.taxize <- function(names) {
   return(results)
 }
 
+# drop the negative branch lengths of the others
+rm.br.length <- function(all_negbl, min_remain) {
+  phy <- phy0 <- all_negbl
+  while(min(phy$edge.length) < 0) {
+    up_node <- phy$edge[which.min(phy$edge.length),][1]
+    phy <- drop.tip(phy, Descendants(phy, up_node, type="tips")[[1]])
+  }
+  remain <- Ntip(phy) / Ntip(phy0)
+  if(remain < min_remain) {
+    return("phy should be dropped")
+  } else {
+   return(phy)
+  }
+}
+
 plot.life.form <- function(group_tree, group_traits, group) {
   to_keep <- group_tree$tip.label[group_tree$tip.label %in% group_traits$species]
   if(length(to_keep)>1) {
@@ -120,13 +136,19 @@ list_trees <- list()
 for(i in 1:length(all_trees)) {
   one_tree <- all_trees[[i]]
   one_label <- names(all_trees)[i]
-  one_tree$tip.label <- simplify.names.taxize(one_tree$tip.label)
-  one_tree <- drop.tip(one_tree, which(one_tree$tip.label=="tip_to_drop"))
-  list_trees[[i]] <- one_tree
-  names(list_trees)[i] <- one_label
-  write.tree(one_tree, file=paste0("trees_simplified_tips/", one_label, "_cleaned.tre")) # saving trees post-curation
+  if(one_label=="Poaceae-Spriggs_et_al-2014"){
+    next
+  } else {
+    one_tree$tip.label <- simplify.names.taxize(one_tree$tip.label)
+    one_tree <- drop.tip(one_tree, which(one_tree$tip.label=="tip_to_drop"))
+    if(min(one_tree$edge.length)<0){
+      one_tree <- rm.br.length(one_tree, min_remain = 0.8)
+    }
+    list_trees[[i]] <- one_tree
+    names(list_trees)[i] <- one_label
+    write.tree(one_tree, file=paste0("trees_simplified_tips/", one_label, "_cleaned.tre")) # saving trees post-curation    
+  }
 }
-
 
 
 # Make life form datasets that match the trees
