@@ -144,12 +144,12 @@ for(i in 1:length(all_trees)) {
     if(min(one_tree$edge.length)<0){
       one_tree <- rm.br.length(one_tree, min_remain = 0.8)
     }
+    one_tree <- drop.tip(one_tree, which(duplicated(one_tree$tip.label)))
     list_trees[[i]] <- one_tree
     names(list_trees)[i] <- one_label
     write.tree(one_tree, file=paste0("trees_simplified_tips/", one_label, "_cleaned.tre")) # saving trees post-curation    
   }
 }
-
 
 # Make life form datasets that match the trees
 trait_data_files <- list.files("trait_dataset_pre_curation")
