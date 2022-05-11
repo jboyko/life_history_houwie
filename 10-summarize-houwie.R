@@ -18,7 +18,11 @@ tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
 quickSum <- function(group_name){
   load(res_files[grep(group_name, res_files)])
-  out <- try(cbind(group_name, round(getModelTable(model_set_res), 3)))
+  if(all(unlist(lapply(model_set_res, class)) == "houwie")){
+    out <- model_set_res
+  }else{
+    out <- NULL
+  }
   return(out)
 }
 # out <- c()
@@ -32,8 +36,14 @@ quickSum <- function(group_name){
 #   }
 # }
 
-model_table_list <- lapply(group_names, quickSum)
-names(model_table_list) <- group_names
+all_model_fits <- lapply(group_names, quickSum)
+names(all_model_fits) <- group_names
+all_model_fits <- all_model_fits[!unlist(lapply(all_model_fits, is.null))]
+
+all_model_avg_params <- lapply(all_model_fits, function(x) getModelAvgParams(x)[1:2])
+
+
+
 
 group_name <- "Grewioideae"
 
