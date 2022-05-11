@@ -26,7 +26,7 @@ organizeData <- function(clade_name, climate_variable, data_files, tree_files){
   cat("\n", "Removed", length(which(dat$life_form == "no_life_form_on_database")), "species of", length(dat$species), "because they didn't have life history data.\n")
   dat <- dat[!dat$life_form == "no_life_form_on_database",]
   plot_data <- data.frame(id = dat$species, value = dat[,"mean"], life_form = as.factor(dat[,"life_form"]))
-  cat("\n", "Removed", length(which(apply(plot_data, 1, function(x) !any(is.na(x))))), "species of", length(dat$species), "because they didn't have climate data.\n")
+  cat("\n", "Removed", length(which(apply(plot_data, 1, function(x) any(is.na(x))))), "species of", length(dat$species), "because they didn't have climate data.\n")
   plot_data <- plot_data[apply(plot_data, 1, function(x) !any(is.na(x))),]
   pruned_phy <- keep.tip(phy, phy$tip.label[match(plot_data$id, phy$tip.label)])
   return(list(dat=plot_data[,c(1,3,2)], phy = pruned_phy))
@@ -37,7 +37,9 @@ makePlot <- function(clade_name, climatic_variable, data_files, tree_files){
   dat_list <- organizeData(clade_name, climatic_variable, data_files, tree_files)
   phy <- dat_list$phy
   dat <- dat_list$dat
-  dat[,3] <- log(dat[,3])
+  dat[,3] <- as.numeric(log(dat[,3]))
+  row.names(dat) <- NULL
+  cols_per_state <- c("#a6611a", "#018571", "#dfc27d", "#80cdc1")
   a <- ggtree(phy) +
     ggtitle(clade_name)
   b <- ggplot(dat, aes(x = id, y = value, color = life_form, fill = life_form)) + 
@@ -92,7 +94,7 @@ for(i in 1:length(group_names)){
 }
 # dev.off()
 
-organizeData(group_names[i], "bio_5", data_files, tree_files)
+dat_list <- organizeData("Hypericum", "bio_5", data_files, tree_files)
 hist(log(dat_list$dat[,3]))
 
 
