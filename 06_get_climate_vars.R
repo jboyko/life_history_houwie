@@ -40,56 +40,22 @@ Thinning <- function(points, species="scientificName", lat = "decimalLatitude", 
   return(results)
 }
 
-################################
-ClimateFromPoint_custom <- function(points, species="scientificName",lon="lon", lat="lat", layerdir = ""){
-  tmp_points = points
-  colnames(tmp_points)[which(colnames(tmp_points) == lon)] <- "lon"
-  colnames(tmp_points)[which(colnames(tmp_points) == lat)] <- "lat"
-  colnames(tmp_points)[which(colnames(tmp_points) == species)] <- "species"
-  tmp_points <- tmp_points[,c("species","lat","lon")]
-  # Load climatic layers
-  temp <- raster::raster(paste0(layerdir, "/bio_2.tif"))
-  #prec <- raster::raster(paste0(layerdir, "/current_30sec/bio_12.tif"))
-  #pet <- raster::raster(paste0(layerdir, "/et0_yr/et0_yr.tif"))
-  #aridity <- raster::raster(paste0(layerdir, "/ai_et0/ai_et0.tif"))
-  bio <- list(temp)
-  vars <- c(temp)
-  names(vars) <- c("temp")
-  final_matrix <- matrix(nrow=nrow(tmp_points), ncol=length(vars))
-  cat("Extracting climatic information of", nrow(tmp_points), "points",  "\n")
-  sp::coordinates(tmp_points) <- ~ lon + lat
-  for(var_index in 1:length(vars)) {
-    layer <- bio[[var_index]]
-    cat("\r",names(vars)[var_index])
-    cat("","\n")
-    values <- raster::extract(layer, tmp_points)
-    final_matrix[,var_index] <- values
-  }
-  colnames(final_matrix) <- names(vars)
-  result <- cbind(tmp_points, final_matrix)
-  return(as.data.frame(result))
-}
 
 ###############################
 GetClimateSummStats_custom <- function (points, type=c("raw","transformed")) {
   tmp_points <- points[,-which(colnames(points) %in% c("lon","lat"))]
-  vars <- c("temp")
-  allclimatevars <- list()
   spp <- unique(tmp_points$species)
-  for(var_index in 1:length(vars)) {
-    cat("\r",vars[var_index])
-    cat("","\n")
-    n_i <- c()
-    sigma2_wi <- c()
-    summ_stats <- matrix(nrow=length(spp), ncol=5)
+  vars <- colnames(tmp_points)[2]
+  n_i<-c()
+  sigma2_wi <- c()
+  summ_stats <- matrix(nrow=length(spp), ncol=5)
     for(species_index in 1:length(spp)){
       sp1 <- tmp_points[tmp_points$species==spp[species_index],]
-      cat("\r","Now doing species", species_index)
-      cat("","\n")
-      values <- sp1[,vars[var_index]]
+      cat("Now doing species", species_index, "\r")
+      values <- sp1[,2]
       values <- values[!is.na(values)]
       if(type=="raw") {
-        if(vars[var_index] %in% c("temp")) {
+        if(vars %in% c("bio_1","bio_4","bio_5")) {
           values <-  (values / 10) 
         }
         n_i[species_index] <- length(values) # sample size
@@ -97,7 +63,7 @@ GetClimateSummStats_custom <- function (points, type=c("raw","transformed")) {
         
       }
       if(type=="transformed") {
-        if(vars[var_index] %in% c("temp")) {
+        if(vars %in% c("bio_1","bio_4","bio_5")) {
           values <-  (values / 10) + 273.15 # transforms to Kelvin
         }
         values <- log(values) # log
@@ -114,16 +80,15 @@ GetClimateSummStats_custom <- function (points, type=c("raw","transformed")) {
       se0 <- round(sd0/ sqrt(n0), 6)
       tmp_summ_stats <- c(n0, mean0, sd0, se0)
       summ_stats[species_index,] <- c(spp[species_index], tmp_summ_stats)
-      colnames(summ_stats) <- c("species",paste0("n_",vars[var_index]), paste0("mean_",vars[var_index]),
-                                paste0("sd_",vars[var_index]), paste0("se_",vars[var_index]))
     }
-    sigma2_w <- sum(sigma2_wi*(n_i - 1)) / sum(n_i - 1)
-    within_sp_var <-  round(sigma2_w/n_i, 6)
-    summ_stats <- cbind(summ_stats, within_sp_var)
-    colnames(summ_stats)[6] <- paste0("within_sp_var_",vars[var_index])
-    allclimatevars[[var_index]] <- summ_stats
-  }
-  return(allclimatevars)
+  
+  sigma2_w <- sum(sigma2_wi*(n_i - 1)) / sum(n_i - 1)
+  within_sp_var <-  round(sigma2_w/n_i, 6)
+  summ_stats <- cbind(summ_stats, within_sp_var)
+  colnames(summ_stats)[6] <- paste0("within_sp_var_",vars)
+  colnames(summ_stats) <- c("species",paste0("n_",vars), paste0("mean_",vars),
+                            paste0("sd_",vars), paste0("se_",vars), paste0("within_sp_var_",vars))
+  return(as.data.frame(summ_stats))
 }
 
 DataFromPoints <- function (points, layer) {
@@ -148,9 +113,13 @@ DataFromPoints <- function (points, layer) {
   return(out)
 }
 
-GetClimateSummStats <- function(climate_by_point){
+GetClimateSummStats <- function(climate_by_point, convert=TRUE){
   original_species_order <- unique(climate_by_point[,1])
-  summ_stats <- aggregate(climate_by_point[,2], by = list(climate_by_point[,1]), function(x) BasicSummStats(x))
+  if(convert) {
+    summ_stats <- aggregate(climate_by_point[,2], by = list(climate_by_point[,1]), function(x) BasicSummStats.k(x))
+  } else {
+    summ_stats <- aggregate(climate_by_point[,2], by = list(climate_by_point[,1]), function(x) BasicSummStats(x))
+  }
   summ_stats <- cbind(summ_stats[,1], as.data.frame(summ_stats[,-1]))
   colnames(summ_stats) <- c("species", "n", "mean", "sd", "se")
   summ_stats <- summ_stats[match(original_species_order, summ_stats[,1]),]
@@ -158,14 +127,16 @@ GetClimateSummStats <- function(climate_by_point){
   return(summ_stats)
 }
 
-BasicSummStats <- function(x){
-  x <- na.omit(x)
-  out <- c(n = length(x), 
-           mean = mean(x), 
-           sd = sd(x), 
-           se = sd(x)/sqrt(length(x)))
-  return(out)
-}
+#BasicSummStats.old <- function(x){
+#  x <- na.omit(x)
+#  out <- c(n = length(x), 
+#           mean = mean(x), 
+#           sd = sd(x), 
+#           se = sd(x)/sqrt(length(x)))
+#  return(out)
+#}
+
+
 #-------------------------------
 # Getting climate data
 #-------------------------------
@@ -180,15 +151,18 @@ colnames(thinned_points) <- c("species","lat","lon")
 
 #########################################
 all_layers <- list.files("climate_layers", ".tif$")
+keep <- c("bio_1","bio_4","bio_5","bio_12","bio_13","bio_14","bio_ai")
+all_layers <- subset(all_layers, labels %in% keep)
 labels <- gsub(".tif$","", all_layers)
 all_layers <- lapply(paste0("climate_layers/",all_layers), raster)
 names(all_layers) <- labels
+
 for(i in 1:length(all_layers)){
   one_layer <- all_layers[[i]]
   one_label <- names(all_layers)[i]
   allpoints <- DataFromPoints(thinned_points, one_layer)
   write.csv(allpoints, file=paste0("climate_data/",one_label,"_allpoints.csv"), row.names=F)
-  summstats <- GetClimateSummStats(allpoints)
+  summstats <- GetClimateSummStats_custom(allpoints, type="transformed")
   write.csv(summstats, file=paste0("climate_data/",one_label,"_summstats.csv"), row.names=F)
 }
 
