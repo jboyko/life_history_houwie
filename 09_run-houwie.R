@@ -17,18 +17,20 @@ organizeData <- function(clade_name, climate_variable, data_files, tree_files){
   dat <- dat[match(phy$tip.label, dat$species),]
   # cat("\n", "Removed", length(which(dat$life_form == "no_life_form_on_database")), "species of", length(dat$species), "because they didn't have life history data.\n")
   dat <- dat[!dat$life_form == "no_life_form_on_database",]
-  plot_data <- data.frame(id = dat$species, value = dat[,"mean"], life_form = as.factor(dat[,"life_form"]))
+  plot_data <- data.frame(id = dat$species, 
+                          life_form = as.factor(dat[,grep("life_form", colnames(dat))]),
+                          value = dat[,grep("mean", colnames(dat))],
+                          se = dat[,grep("se", colnames(dat))])
   # cat("\n", "Removed", length(which(apply(plot_data, 1, function(x) !any(is.na(x))))), "species of", length(dat$species), "because they didn't have climate data.\n")
   plot_data <- plot_data[apply(plot_data, 1, function(x) !any(is.na(x))),]
   pruned_phy <- keep.tip(phy, phy$tip.label[match(plot_data$id, phy$tip.label)])
-  return(list(dat=plot_data[,c(1,3,2)], phy = pruned_phy))
+  return(list(dat=plot_data, phy = pruned_phy))
 }
 
 runSingleModelSet <- function(clade_name, climate_variable, model_set, data_files, tree_files){
   focal_data <- organizeData(clade_name, climate_variable, data_files, tree_files)
-  focal_data$dat[,3] <- log(focal_data$dat[,3])
   print(paste0("Running ", length(model_set), " models for ", clade_name, " (", length(focal_data$phy$tip.label), " taxa)."))
-  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(x)[2] == 2, 1, 2), "ARD", x, nSim = 50, quiet = TRUE), mc.cores = 10)
+  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(x)[2] == 2, 1, 2), "ARD", x, nSim = 50, quiet = TRUE, mserr = "known"), mc.cores = 10)
   file_name <- paste0("res_files/", clade_name, "_", climate_variable, ".Rsave")
   save(model_set_res, file = file_name)
 }
@@ -42,7 +44,9 @@ data_files <- dir("datasets_final_for_hOUwie/full_datasets/", full.names = TRUE)
 group_names <- unique(unlist(lapply(strsplit(dir("datasets_final_for_hOUwie/full_datasets/"), "-"), function(x) x[[1]])))
 
 tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
-clade_name <- group_names[3]
+clade_name <- "Gesneriaceae"
+# group_names[3]
+# runSingleModelSet(clade_name, climate_variable, continuous_models[3], data_files, tree_files)
 
 # climate variables
 climatic_variables <- c(paste0("bio_", 1:19), "bio_ai", "bio_et0")

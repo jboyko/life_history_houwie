@@ -18,17 +18,18 @@ tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
 quickSum <- function(group_name){
   load(res_files[grep(group_name, res_files)])
-  if(all(unlist(lapply(model_set_res, class)) == "houwie")){
-    out <- model_set_res
-  }else{
-    out <- NULL
-  }
+  # if(all(unlist(lapply(model_set_res, class)) == "houwie")){
+  #   out <- model_set_res
+  # }else{
+  #   out <- NULL
+  # }
+  out <- model_set_res
   return(out)
 }
 
 all_model_fits <- lapply(group_names, quickSum)
 names(all_model_fits) <- group_names
-all_model_fits <- all_model_fits[!unlist(lapply(all_model_fits, is.null))]
+# all_model_fits <- all_model_fits[!unlist(lapply(all_model_fits, is.null))]
 
 model_tables <- lapply(all_model_fits, getModelTable)
 lapply(model_tables, function(x) rownames(x)[x$AICwt > 1e-2])
