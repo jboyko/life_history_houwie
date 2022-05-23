@@ -28,7 +28,7 @@ runSingleModelSet <- function(clade_name, climate_variable, model_set, data_file
   focal_data <- organizeData(clade_name, climate_variable, data_files, tree_files)
   focal_data$dat[,3] <- log(focal_data$dat[,3])
   print(paste0("Running ", length(model_set), " models for ", clade_name, " (", length(focal_data$phy$tip.label), " taxa)."))
-  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(x)[2] == 2, 1, 2), "ARD", x, nSim = 25, quiet = TRUE, n_starts = 2), mc.cores = 10)
+  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(x)[2] == 2, 1, 2), "ARD", x, nSim = 50, quiet = TRUE), mc.cores = 10)
   file_name <- paste0("res_files/", clade_name, "_", climate_variable, ".Rsave")
   save(model_set_res, file = file_name)
 }
@@ -64,7 +64,8 @@ continuous_models <- c(CID_models, CD_models, CID2_models)
 # run models
 # bio5
 climate_variable <- climatic_variables[5]
-mclapply(group_names, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 5)
+group_names_to_run <- group_names[!group_names %in% gsub("_.*", "", dir("res_files/"))]
+mclapply(group_names_to_run, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 5)
 
 
 runSingleModelSet(group_names[3], climate_variable, continuous_models, data_files, tree_files)
