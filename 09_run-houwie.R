@@ -30,10 +30,20 @@ organizeData <- function(clade_name, climate_variable, data_files, tree_files){
 runSingleModelSet <- function(clade_name, climate_variable, model_set, data_files, tree_files){
   focal_data <- organizeData(clade_name, climate_variable, data_files, tree_files)
   print(paste0("Running ", length(model_set), " models for ", clade_name, " (", length(focal_data$phy$tip.label), " taxa)."))
-  model_set_res <- mclapply(model_set, function(x) hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(x)[2] == 2, 1, 2), "ARD", x, nSim = 50, quiet = TRUE, mserr = "known"), mc.cores = 10)
-  file_name <- paste0("res_files/", clade_name, "_", climate_variable, ".Rsave")
-  save(model_set_res, file = file_name)
+  mclapply(names(model_set), function(x) runSingleModel(focal_data, clade_name, climate_variable, x, model_set), mc.cores = 10)
 }
+
+runSingleModel <- function(focal_data, clade_name, climate_variable, model_name, model_set){
+  directory_path_a <- paste0("res_files/", climate_variable)
+  dir.create(directory_path_a, showWarnings = FALSE)
+  directory_path_b <- paste0("res_files/", climate_variable, "/", clade_name)
+  dir.create(directory_path_b, showWarnings = FALSE)
+  cont_model <- model_set[[match(model_name, names(model_set))]]
+  res <- hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(cont_model)[2] == 2, 1, 2), "ARD", cont_model, nSim = 50, quiet = TRUE, mserr = "known")
+  file_name <- paste0(directory_path_b, "/", model_name, "_", clade_name, "_", climate_variable, ".Rsave")
+  save(res, file = file_name)
+}
+
 
 # run
 
@@ -50,7 +60,7 @@ clade_name <- "Gesneriaceae"
 
 # climate variables
 climatic_variables <- c(paste0("bio_", 1:19), "bio_ai", "bio_et0")
-
+climate_variable <- "bio_5"
 # continuous models
 CID_model_names <- c("BM1", "OU1")
 CD_model_names <- c("BMV", "OUA", "OUV", "OUM", "OUVA", "OUMV", "OUMA", "OUMVA")
@@ -65,15 +75,53 @@ names(CID2_models) <- paste0("CID_", CID2_model_names)
 
 continuous_models <- c(CID_models, CD_models, CID2_models)
 
-# run models
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # run intial models # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # bio5
-climate_variable <- climatic_variables[5]
-group_names_to_run <- group_names[!group_names %in% gsub("_.*", "", dir("res_files/"))]
-mclapply(group_names_to_run, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 5)
+climate_variable <- "bio_14"
+# group_names_to_run <- group_names[!group_names %in% gsub("_.*", "", dir("res_files/"))]
+mclapply(group_names, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 5)
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # rerun  models didn't complete # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
 
-runSingleModelSet(group_names[3], climate_variable, continuous_models, data_files, tree_files)
-hOUwie(focal_data$phy, focal_data$dat, 2, "ARD", continuous_models[[18]], nSim = 25, quiet = TRUE, diagn_msg = TRUE)
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # for running a missing clade # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# climate_variable <- "bio_ai"
+# group_names_to_run <- group_names[!group_names %in% gsub("_.*", "", dir(paste0("res_files/",climate_variable)))]
+# runSingleModelSet(group_names_to_run, climate_variable, continuous_models, data_files, tree_files)
+
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # for unzipping the compiled models # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# climate_variable <- "bio_ai"
+# some_files <- dir("res_files/compiled_models/", full.names = TRUE)
+# some_files <- some_files[grep(paste0(climate_variable, ".Rsave"), some_files)]
+# directory_path_a <- paste0("res_files/", climate_variable)
+# dir.create(directory_path_a, showWarnings = FALSE)
+# 
+# for(i in 1:length(some_files)){
+#   some_file <- some_files[i]
+#   load(some_file)
+#   print(some_file)
+#   good_runs <- which(unlist(lapply(model_set_res, class)) == "houwie")
+#   clade_name <- gsub("_.*", "", gsub(".*/", "", some_file))
+#   directory_path_b <- paste0("res_files/", climate_variable, "/", clade_name)
+#   dir.create(directory_path_b, showWarnings = FALSE)
+#   for(j in good_runs){
+#     model_name <- names(model_set_res)[j]
+#     file_name <- paste0(directory_path_b, "/", model_name, "_", clade_name, "_", climate_variable, ".Rsave")
+#     res <- model_set_res[[j]]
+#     save(res, file = file_name)
+#   }
+# }
+
+
 
 
 

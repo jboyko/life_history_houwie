@@ -17,6 +17,7 @@ tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
 
 quickSum <- function(group_name){
+  print(group_name)
   load(res_files[grep(group_name, res_files)])
   # if(all(unlist(lapply(model_set_res, class)) == "houwie")){
   #   out <- model_set_res
@@ -31,8 +32,21 @@ all_model_fits <- lapply(group_names, quickSum)
 names(all_model_fits) <- group_names
 # all_model_fits <- all_model_fits[!unlist(lapply(all_model_fits, is.null))]
 
-model_tables <- lapply(all_model_fits, getModelTable)
-lapply(model_tables, function(x) rownames(x)[x$AICwt > 1e-2])
+model_tables <- lapply(all_model_fits, function(x) try(getModelTable(x)))
+# lapply(model_tables, function(x) rownames(x)[x$AICwt > 1e-2])
+
+
+group_names
+
+model_tables[[5]]
+test <- getModelAvgParams(all_model_fits[[8]])
+aggregate(test[,1:4], by = list(test$tip_state), mean)
+
+
+getModelTable(model.list)
+
+
+
 
 all_model_avg_params <- lapply(all_model_fits, function(x) getModelAvgParams(x[1:8])[1:2])
 
