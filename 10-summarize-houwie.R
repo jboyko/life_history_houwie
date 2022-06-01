@@ -4,166 +4,111 @@ require(parallel)
 require(phytools)
 require(expm)
 require(data.table)
+require(ggplot2)
+require(reshape2)
 
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # function # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+get_mod_avg_param_table <- function(climatic_variable, clade_name){
+  print(clade_name)
+  focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
+  focal_file <- focal_files[grep(clade_name, focal_files)]
+  load(focal_file)
+  mod_avg_param_table <- getModelAvgParams(complete_list, force = FALSE)
+  return(mod_avg_param_table)
+}
+
+get_mod_table <- function(climatic_variable, clade_name){
+  print(clade_name)
+  focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
+  focal_file <- focal_files[grep(clade_name, focal_files)]
+  load(focal_file)
+  mod_avg_param_table <- getModelTable(complete_list)
+  return(mod_avg_param_table)
+}
+
+getVariableName <- function(climatic_variable){
+  bioclim <- c("BIO1 = Annual Mean Temperature",
+               "BIO2 = Mean Diurnal Range (Mean of monthly (max temp - min temp))",
+               "BIO3 = Isothermality (BIO2/BIO7) (×100)",
+               "BIO4 = Temperature Seasonality (standard deviation ×100)",
+               "BIO5 = Max Temperature of Warmest Month",
+               "BIO6 = Min Temperature of Coldest Month",
+               "BIO7 = Temperature Annual Range (BIO5-BIO6)",
+               "BIO8 = Mean Temperature of Wettest Quarter",
+               "BIO9 = Mean Temperature of Driest Quarter",
+               "BIO10 = Mean Temperature of Warmest Quarter",
+               "BIO11 = Mean Temperature of Coldest Quarter",
+               "BIO12 = Annual Precipitation",
+               "BIO13 = Precipitation of Wettest Month",
+               "BIO14 = Precipitation of Driest Month",
+               "BIO15 = Precipitation Seasonality (Coefficient of Variation)",
+               "BIO16 = Precipitation of Wettest Quarter",
+               "BIO17 = Precipitation of Driest Quarter",
+               "BIO18 = Precipitation of Warmest Quarter",
+               "BIO19 = Precipitation of Coldest Quarter",
+               "BIOAI = Aridity Index")
+  names(bioclim) <- c(paste0("bio_", 1:19), "bio_ai")
+  return(bioclim[grep(climatic_variable, names(bioclim))])
+}
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # setup # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
 setwd("~/2022_life-history/")
 
-res_files <- dir("res_files/", full.names = TRUE)
-group_names <- gsub("_bio.*", "", dir("res_files/"))
+res_folders <- dir("res_files/compiled_models/", full.names = TRUE)
+group_names <- unique(unlist(lapply(strsplit(dir("datasets_final_for_hOUwie/full_datasets/"), "-"), function(x) x[[1]])))
 
 data_files <- dir("datasets_final_for_hOUwie/full_datasets/", full.names = TRUE)
 
 tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # run  # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
-quickSum <- function(group_name){
-  print(group_name)
-  load(res_files[grep(group_name, res_files)])
-  # if(all(unlist(lapply(model_set_res, class)) == "houwie")){
-  #   out <- model_set_res
-  # }else{
-  #   out <- NULL
-  # }
-  out <- model_set_res
-  return(out)
+climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_14", "bio_ai")
+
+for(i in 1:length(climatic_variables)){
+  climatic_variable <- climatic_variables[i]
+  print("loading")
+  mod_avg_param_list <- lapply(group_names, function(x) get_mod_avg_param_table(climatic_variable, x))
+  names(mod_avg_param_list) <- group_names
+  
+  # get_mod_table("bio_4", "Balsamiaceae")
+  
+  # test <- mod_avg_param_list[[1]]
+  # aggregate(test[,1:4], by = list(test$tip_state), mean)
+  plot_data <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+  plot_data$clade <- gsub("\\..*", "", rownames(plot_data))
+  plot_data <- melt(plot_data, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
+  
+  head(plot_data)
+  
+  title <- getVariableName(climatic_variable)
+  print("plotting")
+  ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+    ylab("") +
+    xlab("Life history strategy") +
+    ggtitle(title) +
+    geom_line(color = "black") +
+    geom_point(shape = 19) +
+    facet_wrap(~variable, scales = "free") + 
+    theme_bw()
+  
+  file_name <- paste0("figures/prelim_results/", climatic_variable, ".pdf")
+  ggsave(file_name, height = 8, width = 14, units = "in")
 }
 
-all_model_fits <- lapply(group_names, quickSum)
-names(all_model_fits) <- group_names
-# all_model_fits <- all_model_fits[!unlist(lapply(all_model_fits, is.null))]
-
-model_tables <- lapply(all_model_fits, function(x) try(getModelTable(x)))
-# lapply(model_tables, function(x) rownames(x)[x$AICwt > 1e-2])
-
-
-group_names
-
-model_tables[[5]]
-test <- getModelAvgParams(all_model_fits[[8]])
-aggregate(test[,1:4], by = list(test$tip_state), mean)
-
-
-getModelTable(model.list)
-
-
-
-
-all_model_avg_params <- lapply(all_model_fits, function(x) getModelAvgParams(x[1:8])[1:2])
-
-model_set <- all_model_fits$Lupinus
-
-
-odd_ball <- quickSum(group_names[4])
-
-# Draba streptobrachia
-# Draba brachystylis
-odd_ball$CID_OUMA$data
-require(phytools)
-plotSimmap(OUwie:::correct_map_edges(odd_ball$CID_OUMA$simmaps[[5]]), fsize = 0.1)
-
-pars <- odd_ball$CID_OUMA$p
-mod <- odd_ball$CD_OUM
-# hOUwie(phy = mod$phy, data = mod$data, rate.cat = 2, discrete_model = mod$index.disc, continuous_model = mod$index.cont, nSim = 25, p = pars)
-
-getModelTable(odd_ball)
-
-all_model_fits <- lapply(group_names, quickSum)
-names(all_model_fits) <- group_names
-all_model_fits <- all_model_fits[!unlist(lapply(all_model_fits, is.null))]
-
-lapply(all_model_fits, getModelTable)
-
-all_model_avg_params <- lapply(all_model_fits, function(x) getModelAvgParams(x)[1:2])
-
-
-lapply(odd_ball, "[[", "simmaps")
-all_maps <- lapply(odd_ball, "[[", "simmaps")
-cd_maps <- all_maps[1:10]
-cd_maps <- c(cd_maps[[1]], cd_maps[[2]], cd_maps[[3]], cd_maps[[4]], cd_maps[[5]],
-             cd_maps[[6]], cd_maps[[7]], cd_maps[[8]], cd_maps[[9]], cd_maps[[10]])
-cid_maps <- all_maps[11:18]
-cid_maps <- c(cid_maps[[1]], cid_maps[[2]], cid_maps[[3]], cid_maps[[4]],
-              cid_maps[[5]], cid_maps[[6]], cid_maps[[7]], cid_maps[[8]])
-
-models <- c("BMV", "OUA", "OUV", "OUM", "OUMV", "OUMA", "OUVA", "OUMVA")
-
-houwie_obj <- model_set[[1]]
-
-new_maps <- lapply(model_set[1:8], "[[", "simmaps")
-unlist(new_maps)
-
-
-new_model_list <- mclapply(models, function(x) quickFunc(x), mc.cores = 8)
-
-
-pars <- new_model_list$OUVA$p[c(1:11, 11)]
-cont_model <- getOUParamStructure(model, 2, 2, TRUE)
-res <- hOUwie.fixed(simmaps = cid_maps, data = odd_ball$CD_OUM$data, rate.cat = 2, discrete_model = odd_ball$CID_OUM$index.disc, continuous_model = "OUMVA", adaptive_sampling = FALSE, make_numeric = FALSE, diagn_msg = TRUE, p = pars)
-
-
-
-group_name <- "Grewioideae"
-
-dat_list <- organizeData(group_name, "bio_5", data_files, tree_files)
-min(dat_list$phy$edge.length)
-
-load("~/Desktop/weird-maps.Rsave")
-new_maps <- lapply(simmaps, OUwie:::correct_map_edges)
-pars <- odd_ball$CID_OUMA$p
-mod <- odd_ball$CID_OUMA
-map <- new_maps[[26]]
-map_dat <- unlist(lapply(map$maps[map$edge[,2] <= Ntip(mod$phy)], function(x) as.numeric(names(x))[length(x)]))
-map_sps <- mod$phy$tip.label[map$edge[,2][map$edge[,2] <= Ntip(mod$phy)]]
-map_con <- mod$data[,3][match(map_sps, mod$data[,1])]
-new_dat <- data.frame(sp = map_sps, reg = map_dat, x = map_con)
-
-plotSimmap(new_maps[[26]], fsize = 0.1)
-
-OUwie.fixed(phy = new_maps[[26]], data = new_dat, model = "OUMVA", simmap.tree = TRUE, 
-            alpha = mod$solution.cont[1,], sigma.sq = mod$solution.cont[2,], theta = mod$solution.cont[3,])
-
-adpt <- hOUwie(phy = mod$phy, data = mod$data, rate.cat = 2, discrete_model = mod$index.disc, continuous_model = mod$index.cont, nSim = 25, p = mod$p, adaptive_sampling = TRUE)
-
-non_adpt <- hOUwie(phy = mod$phy, data = mod$data, rate.cat = 2, discrete_model = mod$index.disc, continuous_model = mod$index.cont, nSim = 25, p = mod$p, adaptive_sampling = FALSE)
-
-
-adpt$expected_vals[names(adpt$expected_vals) == new_dat[,1][new_dat[,2] == 2]]
-adpt$expected_vals[names(adpt$expected_vals) == new_dat[,1][new_dat[,2] == 1]]
-
-
-mod$data
-
-
-init_model_table <- getModelTable(odd_ball)
-
-data.frame(TotlLik = init_model_table$lnLik, dTotlLik = init_model_table$lnLik - max(init_model_table$lnLik),
-           DiscLik = init_model_table$DiscLik, dDiscLik = init_model_table$DiscLik - max(init_model_table$DiscLik),
-           ContLik = init_model_table$ContLik, dContLik = init_model_table$ContLik - max(init_model_table$ContLik),
-           row.names = rownames(init_model_table))
-
-pars <- mod$p
-pars[length(pars)-1] <- 5.5
-
-
-good_maps <- new_maps[26:50]
-for(i in 1:length(good_maps)){
-  focal_map <- good_maps[[i]]$maps
-  for(j in 1:length(focal_map)){
-    names(focal_map[[j]])
-  }
-}
-
-
-# pars[]
-pars <- odd_ball$CID_OUMA$p[-8]
-cid_oum_new <- hOUwie.fixed(simmaps = good_maps, data = mod$data, rate.cat = 2, discrete_model = odd_ball$CID_OUM$index.disc, continuous_model = odd_ball$CID_OUM$index.cont, ip = pars, adaptive_sampling = FALSE, make_numeric = FALSE, diagn_msg = TRUE)
-
-pars <- odd_ball$CID_OUMA$p[c(1:6, 7, 8, 9, 9, 10, 11)]
-cid_oumva_new <- hOUwie.fixed(simmaps = good_maps, data = mod$data, rate.cat = 2, discrete_model = odd_ball$CID_OUMVA$index.disc, continuous_model = odd_ball$CID_OUMVA$index.cont, ip = pars, adaptive_sampling = FALSE, make_numeric = FALSE, diagn_msg = TRUE)
-
-
-mod$index.disc
-
+# climatic_variable <- "bio_ai"
+# clade_name <- "Solanaceae"
+# focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
+# focal_file <- focal_files[grep(clade_name, focal_files)]
+# load(focal_file)
+# getModelTable(complete_list)
 
 
 
