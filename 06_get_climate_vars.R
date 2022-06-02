@@ -151,7 +151,7 @@ colnames(thinned_points) <- c("species","lat","lon")
 
 #########################################
 all_layers <- list.files("climate_layers", ".tif$")
-keep <- c("bio_1","bio_4","bio_5","bio_12","bio_13","bio_14","bio_ai")
+keep <- c("bio_1","bio_4","bio_5","bio_12","bio_13","bio_14","bio_15","bio_ai")
 all_layers <- subset(all_layers, labels %in% keep)
 labels <- gsub(".tif$","", all_layers)
 all_layers <- lapply(paste0("climate_layers/",all_layers), raster)

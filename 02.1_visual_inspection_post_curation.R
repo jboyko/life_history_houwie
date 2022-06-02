@@ -203,3 +203,17 @@ for(i in 1:length(list_traits)) {
 write.csv(results_table, file="data_description/summary_table_life_form.csv", row.names = F)
 
 
+#all_trees <- lapply(list.files("trees_simplified_tips", full.names = T), read.tree)
+#names(all_trees) <- list.files("trees_simplified_tips")
+
+#for(i in 1:length(all_trees)){
+#  one_tree <- all_trees[[i]]
+#  print(names(all_trees)[i])
+#  print(Ntip(one_tree))
+#  print(Nnode(one_tree))
+#  print(min(one_tree$edge.length))
+#}
+
+
+
+
