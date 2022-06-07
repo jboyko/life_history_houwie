@@ -53,6 +53,10 @@ getVariableName <- function(climatic_variable){
   return(bioclim[grep(climatic_variable, names(bioclim))])
 }
 
+get_stderr <- function(vec){
+  return(sd(vec)/sqrt(length(vec)))
+}
+
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # setup # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
@@ -70,7 +74,7 @@ tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 # # # # # run  # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
-climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_14", "bio_ai")
+climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_12", "bio_14", "bio_15", "bio_ai")
 
 for(i in 1:length(climatic_variables)){
   climatic_variable <- climatic_variables[i]
@@ -83,10 +87,9 @@ for(i in 1:length(climatic_variables)){
   # test <- mod_avg_param_list[[1]]
   # aggregate(test[,1:4], by = list(test$tip_state), mean)
   plot_data <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+  data_se <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), get_stderr)))
   plot_data$clade <- gsub("\\..*", "", rownames(plot_data))
   plot_data <- melt(plot_data, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
-  
-  head(plot_data)
   
   title <- getVariableName(climatic_variable)
   print("plotting")
@@ -109,6 +112,16 @@ for(i in 1:length(climatic_variables)){
 # focal_file <- focal_files[grep(clade_name, focal_files)]
 # load(focal_file)
 # getModelTable(complete_list)
+
+annual_data <- plot_data[plot_data$Group.1 == "annual" & plot_data$variable == "theta",]
+annual_vec <- annual_data$value
+names(annual_vec) <- annual_data$clade
+perrenial_data <- plot_data[plot_data$Group.1 == "perennial" & plot_data$variable == "theta",]
+perrenial_vec <- perrenial_data$value
+names(perrenial_vec) <- perrenial_data$clade
+
+?phylANOVA
+
 
 
 

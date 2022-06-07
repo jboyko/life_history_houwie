@@ -40,9 +40,11 @@ runSingleModel <- function(clade_name, climate_variable, model_name, model_set, 
   directory_path_b <- paste0("res_files/", climate_variable, "/", clade_name)
   dir.create(directory_path_b, showWarnings = FALSE)
   cont_model <- model_set[[match(model_name, names(model_set))]]
-  res <- hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(cont_model)[2] == 2, 1, 2), "ARD", cont_model, nSim = 50, quiet = TRUE, mserr = "known")
+  res <- hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(cont_model)[2] == 2, 1, 2), "ARD", cont_model, nSim = 50, quiet = TRUE, mserr = "known", diagn_msg = TRUE, ub_continuous_model = c(10,10,100))
   file_name <- paste0(directory_path_b, "/", model_name, "_", clade_name, "_", climate_variable, ".Rsave")
-  if(!is.null(res)){
+  if(is.null(res)){
+    return(NULL)
+  }else{
     save(res, file = file_name)
   }
 }
@@ -53,7 +55,7 @@ check_reruns <- function(climate_variable, clade_name, continuous_models){
   focal_folder <- dir(paste0("res_files/", climate_variable), full.names = TRUE)[grep(clade_name, dir(paste0("res_files/", climate_variable), full.names = TRUE))]
   failed_vector <- sapply(model_names, function(x) length(grep(paste0(x, "_"), dir(focal_folder))))
   if(any(failed_vector == 0)){
-    df_rerun <- data.frame(clade = clade_name, model_rerun = names(failed_vector)[failed_vector == 0])
+    df_rerun <- data.frame(clade = clade_name, variable = climate_variable, model = names(failed_vector)[failed_vector == 0])
   }else{
     df_rerun <- c()
   }
@@ -112,54 +114,27 @@ names(CID2_models) <- paste0("CID_", CID2_model_names)
 
 continuous_models <- c(CID_models, CD_models, CID2_models)
 
+# removing variable alpha models from the set
+continuous_models <- continuous_models[-grep("A$", names(continuous_models))]
+
 model_set <- continuous_models
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # run intial models # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-climate_variable <- "bio_1"
-# clade_name <- "Alysseae"
+climatic_variables <- c("bio_1", "bio_12", "bio_4", "bio_15", "bio_5", "bio_14", "bio_ai")
+# done: bio_5, bio_14, bio_ai, bio_4, bio_1, bio_12, bio_15
+climate_variable <- "bio_ai"
+# clade_name <- "Alysseae",bio_12
 models_to_run <- do.call(rbind, lapply(group_names, function(x) check_reruns(climate_variable, x, continuous_models)))
 models_to_run <- do.call(c, apply(models_to_run, 1, list))
-mclapply(models_to_run[1:10], function(x) runSingleModel(x[1], climate_variable, x[2], continuous_models, data_files, tree_files), mc.cores = 10)
+mclapply(models_to_run, function(x) runSingleModel(x[1], x[2], x[3], continuous_models, data_files, tree_files), mc.cores = 5)
+
+
+runSingleModel(models_to_run[[1]][1], models_to_run[[1]][2], models_to_run[[1]][3], continuous_models, data_files, tree_files)
 
 # mclapply(group_names, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 4)
 
 # group_names_to_run <- group_names[!group_names %in% gsub("_.*", "", dir("res_files/"))]
-
-# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-# # # # # rerun  models didn't complete # # # # #
-# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-climate_variable <- "bio_4"
-models_to_rerun <- do.call(rbind, lapply(group_names, function(x) check_reruns(climate_variable, x, continuous_models)))
-# models_to_rerun <- models_to_rerun[!models_to_rerun[,1] == group_names_to_run[1],]
-# models_to_rerun <- models_to_rerun[!models_to_rerun[,1] == group_names_to_run[2],]
-# models_to_rerun <- models_to_rerun[!models_to_rerun[,1] == group_names_to_run[3],]
-# models_to_rerun <- models_to_rerun[!models_to_rerun[,1] == group_names_to_run[4],]
-models_to_rerun <- do.call(c, apply(models_to_rerun, 1, list))
-
-mclapply(models_to_rerun, function(x) runSingleModel(x[1], climate_variable, x[2], continuous_models, data_files, tree_files), mc.cores = 6)
-
-# runSingleModel(models_to_rerun[[1]][1], climate_variable, models_to_rerun[[1]][2], continuous_models, data_files, tree_files)
-
-
-# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-# # # # # for running a missing clade # # # # #
-# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-climate_variable <- "bio_5"
-group_names_to_run <- group_names[!group_names %in% gsub("_.*", "", dir(paste0("res_files/",climate_variable)))]
-models_to_rerun <- models_to_rerun[  models_to_rerun[,1] == group_names_to_run[1] |
-                                     models_to_rerun[,1] == group_names_to_run[2] |
-                                     models_to_rerun[,1] == group_names_to_run[3] |
-                                     models_to_rerun[,1] == group_names_to_run[4],]
-models_to_rerun <- do.call(c, apply(models_to_rerun, 1, list))
-
-mclapply(models_to_rerun, function(x) runSingleModel(x[1], climate_variable, x[2], continuous_models, data_files, tree_files), mc.cores = 18)
-
-# models_to_rerun <- models_to_rerun[models_to_rerun[,1] == group_names_to_run[2],]
-# models_to_rerun <- models_to_rerun[models_to_rerun[,1] == group_names_to_run[3],]
-# models_to_rerun <- models_to_rerun[models_to_rerun[,1] == group_names_to_run[4],]
-# runSingleModelSet(group_names_to_run, climate_variable, continuous_models, data_files, tree_files)
-
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # for unzipping the compiled models # # # # #
@@ -190,9 +165,11 @@ mclapply(models_to_rerun, function(x) runSingleModel(x[1], climate_variable, x[2
 # # # # # for zipping the uncompiled models # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # bio_1  bio_14  bio_4  bio_ai bio_15 / bio_5 bio_12
-climate_variable <- "bio_5"
+# 1, 15, 4, 5
+# 12, 14, ai
 # focal_clade <- "Lepidieae"
 model_names <- names(continuous_models)
+climate_variable <- "bio_ai"
 # complile_model_list(climate_variable, focal_clade, model_names)
 
 lapply(group_names, function(x) complile_model_list(climate_variable, x, model_names))
