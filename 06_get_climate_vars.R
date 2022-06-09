@@ -166,3 +166,5 @@ for(i in 1:length(all_layers)){
   write.csv(summstats, file=paste0("climate_data/",one_label,"_summstats.csv"), row.names=F)
 }
 
+
+

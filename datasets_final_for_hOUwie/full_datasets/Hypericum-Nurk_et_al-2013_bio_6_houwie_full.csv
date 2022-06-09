@@ -1,0 +1,99 @@
+"species","life_form","n_bio_6","mean_bio_6","sd_bio_6","se_bio_6","within_sp_var_bio_6"
+"Hypericum aciculare","perennial",8,5.633429,0.015823,0.005594,6.4e-05
+"Hypericum adpressum","perennial",15,5.595773,0.011801,0.003047,3.4e-05
+"Hypericum andinum","perennial",10,5.629761,0.018806,0.005947,5.1e-05
+"Hypericum apocynifolium","perennial",3,5.616709,0.002192,0.001266,0.000169
+"Hypericum arbuscula","perennial",NA,NA,NA,NA,NA
+"Hypericum brachyphyllum","perennial",37,5.638153,0.012181,0.002003,1.4e-05
+"Hypericum brasiliense","perennial",78,5.645106,0.010153,0.00115,7e-06
+"Hypericum brevistylum","annual",23,5.619103,0.015015,0.003131,2.2e-05
+"Hypericum bryoides","perennial",NA,NA,NA,NA,NA
+"Hypericum buckleyi","perennial",NA,NA,NA,NA,NA
+"Hypericum callacallanum","perennial",NA,NA,NA,NA,NA
+"Hypericum campestre subsp. campestre","no_life_form_on_database",4,5.646393,0.008137,0.004069,0.000127
+"Hypericum canadense","annual",141,5.580686,0.026346,0.002219,4e-06
+"Hypericum cardonae","perennial",10,5.62632,0.009528,0.003013,5.1e-05
+"Hypericum chapmanii","perennial",4,5.639328,0.003541,0.00177,0.000127
+"Hypericum cistifolium","perennial",46,5.637583,0.013049,0.001924,1.1e-05
+"Hypericum connatum","perennial",55,5.637083,0.01262,0.001702,9e-06
+"Hypericum costaricense","perennial",1,5.626361,NA,NA,0.000508
+"Hypericum crux-andreae","no_life_form_on_database",NA,NA,NA,NA,NA
+"Hypericum cuatrecasii","perennial",2,5.636349,0.013616,0.009628,0.000254
+"Hypericum cymobrathys","perennial",NA,NA,NA,NA,NA
+"Hypericum decandrum","perennial",7,5.629119,0.019889,0.007517,7.3e-05
+"Hypericum densiflorum","perennial",38,5.610093,0.01441,0.002338,1.3e-05
+"Hypericum denticulatum","perennial",20,5.61467,0.009623,0.002152,2.5e-05
+"Hypericum dichotomum","perennial",NA,NA,NA,NA,NA
+"Hypericum dolabriforme","perennial",4,5.603865,0.003815,0.001907,0.000127
+"Hypericum drummondii","annual",NA,NA,NA,NA,NA
+"Hypericum fasciculatum","perennial",40,5.643482,0.018114,0.002864,1.3e-05
+"Hypericum fauriei","perennial",NA,NA,NA,NA,NA
+"Hypericum fraseri","perennial",40,5.550971,0.021384,0.003381,1.3e-05
+"Hypericum frondosum","perennial",21,5.615787,0.009137,0.001994,2.4e-05
+"Hypericum galioides","perennial",46,5.63145,0.010854,0.0016,1.1e-05
+"Hypericum garciae","perennial",5,5.638142,0.016192,0.007241,0.000102
+"Hypericum gentianoides","annual",180,5.608751,0.022442,0.001673,3e-06
+"Hypericum gleasonii","perennial",3,5.63377,0.019506,0.011262,0.000169
+"Hypericum gnidioides","perennial",10,5.649223,0.01519,0.004803,5.1e-05
+"Hypericum goyanesii","perennial",5,5.630886,0.002794,0.00125,0.000102
+"Hypericum gramineum","annual",305,5.641132,0.018002,0.001031,2e-06
+"Hypericum harlingii","perennial",1,5.634611,NA,NA,0.000508
+"Hypericum hartwegii","perennial",NA,NA,NA,NA,NA
+"Hypericum humboldtianum","perennial",8,5.644988,0.015521,0.005488,6.4e-05
+"Hypericum hypericoides subsp. hypericoides","perennial",42,5.6285,0.02344,0.003617,1.2e-05
+"Hypericum irazuense","perennial",1,5.629598,NA,NA,0.000508
+"Hypericum japonicum","annual",184,5.637001,0.027069,0.001996,3e-06
+"Hypericum juniperinum","perennial",21,5.641072,0.020502,0.004474,2.4e-05
+"Hypericum kalmianum","perennial",37,5.57477,0.010911,0.001794,1.4e-05
+"Hypericum lancifolium","perennial",4,5.652784,0.019587,0.009794,0.000127
+"Hypericum lancioides","perennial",24,5.632318,0.01995,0.004072,2.1e-05
+"Hypericum lancioides subsp. congestiflorum","perennial",7,5.637869,0.026745,0.010109,7.3e-05
+"Hypericum laricifolium","perennial",41,5.639293,0.020291,0.003169,1.2e-05
+"Hypericum linoides","no_life_form_on_database",7,5.638247,0.013912,0.005258,7.3e-05
+"Hypericum lissophloeus","perennial",2,5.640124,0.005777,0.004085,0.000254
+"Hypericum llanganaticum","perennial",NA,NA,NA,NA,NA
+"Hypericum lloydii","perennial",8,5.615628,0.003609,0.001276,6.4e-05
+"Hypericum lobocarpum","perennial",10,5.611952,0.004063,0.001285,5.1e-05
+"Hypericum loxense subsp. loxense","perennial",NA,NA,NA,NA,NA
+"Hypericum lycopodioides","perennial",5,5.643673,0.025018,0.011188,0.000102
+"Hypericum magniflorum","perennial",NA,NA,NA,NA,NA
+"Hypericum maguirei","perennial",NA,NA,NA,NA,NA
+"Hypericum marahuacanum subsp. chimantaicum","perennial",1,5.648798,NA,NA,0.000508
+"Hypericum mexicanum","perennial",12,5.646581,0.023217,0.006702,4.2e-05
+"Hypericum microsepalum","perennial",5,5.634242,0.005477,0.002449,0.000102
+"Hypericum myricariifolium","perennial",7,5.646408,0.031395,0.011866,7.3e-05
+"Hypericum myrtifolium","perennial",23,5.641396,0.01083,0.002258,2.2e-05
+"Hypericum nitidum","perennial",15,5.642568,0.019435,0.005018,3.4e-05
+"Hypericum nudiflorum","perennial",20,5.61852,0.008168,0.001826,2.5e-05
+"Hypericum philonotis","annual",19,5.628088,0.005735,0.001316,2.7e-05
+"Hypericum pimeleoides","perennial",3,5.629696,0.007966,0.004599,0.000169
+"Hypericum polyanthemum","perennial",NA,NA,NA,NA,NA
+"Hypericum pratense","annual",21,5.658715,0.01638,0.003574,2.4e-05
+"Hypericum prolificum","perennial",114,5.598362,0.014802,0.001386,4e-06
+"Hypericum prostratum","perennial",5,5.628193,0.009917,0.004435,0.000102
+"Hypericum quitense","perennial",1,5.631749,NA,NA,0.000508
+"Hypericum quitense","perennial",1,5.631749,NA,NA,0.000508
+"Hypericum rigidum subsp. rigidum","no_life_form_on_database",NA,NA,NA,NA,NA
+"Hypericum ruscoides","perennial",12,5.635617,0.021492,0.006204,4.2e-05
+"Hypericum selaginella","perennial",4,5.635327,0.026548,0.013274,0.000127
+"Hypericum silenoides","annual",82,5.636039,0.021401,0.002363,6e-06
+"Hypericum silenoides","annual",82,5.636039,0.021401,0.002363,6e-06
+"Hypericum simonsii","perennial",NA,NA,NA,NA,NA
+"Hypericum sphaerocarpum","perennial",65,5.597153,0.014469,0.001795,8e-06
+"Hypericum sprucei","perennial",8,5.632113,0.024312,0.008596,6.4e-05
+"Hypericum strictum","perennial",NA,NA,NA,NA,NA
+"Hypericum strictum subsp. compactum","no_life_form_on_database",1,5.640665,NA,NA,0.000508
+"Hypericum struthiolifolium","perennial",5,5.635926,0.021382,0.009562,0.000102
+"Hypericum suffruticosum","perennial",15,5.634722,0.008281,0.002138,3.4e-05
+"Hypericum tenuifolium","perennial",20,5.642563,0.014992,0.003352,2.5e-05
+"Hypericum ternum","perennial",12,5.644509,0.010839,0.003129,4.2e-05
+"Hypericum terrae-firmae","perennial",1,5.685109,NA,NA,0.000508
+"Hypericum tetrapetalum","perennial",24,5.643605,0.012351,0.002521,2.1e-05
+"Hypericum tetrastichum","perennial",2,5.632284,0.003291,0.002327,0.000254
+"Hypericum thesiifolium","annual",19,5.657779,0.016816,0.003858,2.7e-05
+"Hypericum thuyoides","perennial",7,5.645312,0.016003,0.006049,7.3e-05
+"Hypericum tubulosum","perennial",NA,NA,NA,NA,NA
+"Hypericum virginicum","perennial",73,5.584686,0.043466,0.005087,7e-06
+"Hypericum virginicum var. fraseri","no_life_form_on_database",7,5.556402,0.023352,0.008826,7.3e-05
+"Hypericum walteri","perennial",NA,NA,NA,NA,NA
+"Hypericum woodianum","perennial",NA,NA,NA,NA,NA
