@@ -104,9 +104,10 @@ tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 # # # # # run  # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
-climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_12", "bio_14", "bio_15", "bio_ai")
+climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
+# climatic_variables <- c("bio_6")
 big_list <- list()
-print <- FALSE
+print <- TRUE
 
 for(i in 1:length(climatic_variables)){
   climatic_variable <- climatic_variables[i]
@@ -143,11 +144,17 @@ for(i in 1:length(climatic_variables)){
 names(big_list) <- climatic_variables
 
 for(i in 1:length(big_list)){
+  print(i)
   focal_list <- big_list[[i]]
+  tmp_table <- do.call(rbind, lapply(focal_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+  tmp_table <- cbind(clade=gsub("\\..*", "", rownames(tmp_table)), tmp_table)
+  rownames(tmp_table) <- NULL
+  file_name <- paste0("tables/climate_variable/", climatic_variables[i], ".csv")
+  write.csv(tmp_table, file = file_name, row.names = FALSE)
   for(j in 1:length(focal_list)){
     focal_thing <- focal_list[[j]]
     file_name <- paste0("tables/tip_rates/", names(big_list)[i], "-", names(focal_list)[j], ".csv")
-    write.csv(focal_thing, file = file_name)
+    write.csv(focal_thing, file = file_name, row.names = FALSE)
   }
 }
 
