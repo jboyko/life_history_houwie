@@ -121,13 +121,13 @@ model_set <- continuous_models
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # run intial models # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-climatic_variables <- c("bio_1", "bio_12", "bio_4", "bio_15", "bio_5", "bio_14", "bio_ai")
+climatic_variables <- c("bio_1", "bio_12", "bio_4", "bio_15", "bio_5", "bio_14", "bio_ai", "bio_6")
 # done: bio_5, bio_14, bio_ai, bio_4, bio_1, bio_12, bio_15
-climate_variable <- "bio_ai"
+climate_variable <- "bio_6"
 # clade_name <- "Alysseae",bio_12
 models_to_run <- do.call(rbind, lapply(group_names, function(x) check_reruns(climate_variable, x, continuous_models)))
 models_to_run <- do.call(c, apply(models_to_run, 1, list))
-mclapply(models_to_run, function(x) runSingleModel(x[1], x[2], x[3], continuous_models, data_files, tree_files), mc.cores = 5)
+mclapply(models_to_run, function(x) runSingleModel(x[1], x[2], x[3], continuous_models, data_files, tree_files), mc.cores = 80)
 
 
 runSingleModel(models_to_run[[1]][1], models_to_run[[1]][2], models_to_run[[1]][3], continuous_models, data_files, tree_files)
@@ -169,7 +169,7 @@ runSingleModel(models_to_run[[1]][1], models_to_run[[1]][2], models_to_run[[1]][
 # 12, 14, ai
 # focal_clade <- "Lepidieae"
 model_names <- names(continuous_models)
-climate_variable <- "bio_ai"
+climate_variable <- "bio_6"
 # complile_model_list(climate_variable, focal_clade, model_names)
 
 lapply(group_names, function(x) complile_model_list(climate_variable, x, model_names))
