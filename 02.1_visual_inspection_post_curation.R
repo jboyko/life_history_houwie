@@ -131,6 +131,10 @@ plot.life.form <- function(group_tree, group_traits, group) {
 # Load trees
 all_trees <- load.trees(tree.dir="trees_gbif_tips")
 
+lapply(all_trees, Ntip)
+length(all_trees)
+
+
 list_trees <- list()
 # Create trees with simplified names
 for(i in 1:length(all_trees)) {
@@ -150,6 +154,7 @@ for(i in 1:length(all_trees)) {
     write.tree(one_tree, file=paste0("trees_simplified_tips/", one_label, "_cleaned.tre")) # saving trees post-curation    
   }
 }
+
 
 # Make life form datasets that match the trees
 trait_data_files <- list.files("trait_dataset_pre_curation")
@@ -203,8 +208,16 @@ for(i in 1:length(list_traits)) {
 write.csv(results_table, file="data_description/summary_table_life_form.csv", row.names = F)
 
 
-#all_trees <- lapply(list.files("trees_simplified_tips", full.names = T), read.tree)
-#names(all_trees) <- list.files("trees_simplified_tips")
+all_trees <- lapply(list.files("trees_simplified_tips", full.names = T), read.tree)
+names(all_trees) <- list.files("trees_simplified_tips")
+
+ces_tips <- all_trees$`CES-Salariato_et_al-2016_cleaned.tre`$tip.label
+
+for(i in 1:length(all_trees)){
+  if(length(intersect(all_trees[[i]]$tip.label, ces_tips)) >0 ) {
+    print(names(all_trees)[i])
+  }
+}
 
 #for(i in 1:length(all_trees)){
 #  one_tree <- all_trees[[i]]

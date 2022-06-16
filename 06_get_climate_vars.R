@@ -55,7 +55,7 @@ GetClimateSummStats_custom <- function (points, type=c("raw","transformed")) {
       values <- sp1[,2]
       values <- values[!is.na(values)]
       if(type=="raw") {
-        if(vars %in% c("bio_1","bio_4","bio_5")) {
+        if(vars %in% c("bio_1","bio_4","bio_5","bio_6")) {
           values <-  (values / 10) 
         }
         n_i[species_index] <- length(values) # sample size
@@ -63,7 +63,7 @@ GetClimateSummStats_custom <- function (points, type=c("raw","transformed")) {
         
       }
       if(type=="transformed") {
-        if(vars %in% c("bio_1","bio_4","bio_5")) {
+        if(vars %in% c("bio_1","bio_4","bio_5","bio_6")) {
           values <-  (values / 10) + 273.15 # transforms to Kelvin
         }
         values <- log(values) # log
@@ -151,7 +151,9 @@ colnames(thinned_points) <- c("species","lat","lon")
 
 #########################################
 all_layers <- list.files("climate_layers", ".tif$")
+labels <- gsub(".tif$","", all_layers)
 keep <- c("bio_1","bio_4","bio_5","bio_12","bio_13","bio_14","bio_15","bio_ai")
+keep <- "bio_6"
 all_layers <- subset(all_layers, labels %in% keep)
 labels <- gsub(".tif$","", all_layers)
 all_layers <- lapply(paste0("climate_layers/",all_layers), raster)
