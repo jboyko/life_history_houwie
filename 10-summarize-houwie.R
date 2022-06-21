@@ -6,6 +6,10 @@ require(expm)
 require(data.table)
 require(ggplot2)
 require(reshape2)
+require(ggplotify)
+require(gridExtra)
+require(ggtree)
+require(aplot)
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # function # # # # #
@@ -16,6 +20,7 @@ get_mod_avg_param_table <- function(climatic_variable, clade_name){
   focal_file <- focal_files[grep(clade_name, focal_files)]
   load(focal_file)
   mod_avg_param_table <- getModelAvgParams(complete_list, force = FALSE)
+  mod_avg_param_table$waiting_times <- 1/mod_avg_param_table$waiting_times
   return(mod_avg_param_table)
 }
 
@@ -106,42 +111,93 @@ tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
 climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
 # climatic_variables <- c("bio_6")
-big_list <- list()
-print <- TRUE
+# big_list <- list()
+# print <- FALSE
+# 
+# for(i in 1:length(climatic_variables)){
+#   climatic_variable <- climatic_variables[i]
+#   print("loading")
+#   mod_avg_param_list <- lapply(group_names, function(x) get_mod_avg_param_table(climatic_variable, x))
+#   # mod_avg_param_list <- lapply(group_names, function(x) get_mod_table(climatic_variable, x))
+#   names(mod_avg_param_list) <- group_names
+#   big_list[[i]] <- mod_avg_param_list
+#   # get_mod_table("bio_4", "Balsamiaceae")
+# 
+#   # test <- mod_avg_param_list[[1]]
+#   # aggregate(test[,1:4], by = list(test$tip_state), mean)
+#   if(print){
+#     plot_data <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+#     data_se <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), get_stderr)))
+#     plot_data$clade <- gsub("\\..*", "", rownames(plot_data))
+#     plot_data <- melt(plot_data, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
+# 
+#     title <- getVariableName(climatic_variable)
+#     print("plotting")
+#     ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+#       ylab("") +
+#       xlab("Life history strategy") +
+#       ggtitle(title) +
+#       geom_line(color = "black") +
+#       geom_point(shape = 19) +
+#       facet_wrap(~variable, scales = "free") +
+#       theme_bw()
+# 
+#     file_name <- paste0("figures/prelim_results/", climatic_variable, ".pdf")
+#     ggsave(file_name, height = 8, width = 14, units = "in")
+#   }
+# }
+# 
+# names(big_list) <- climatic_variables
+# all_model_tables <- big_list
+# save(all_model_tables, file = "all_model_tables.Rsave")
 
-for(i in 1:length(climatic_variables)){
-  climatic_variable <- climatic_variables[i]
-  print("loading")
-  mod_avg_param_list <- lapply(group_names, function(x) get_mod_avg_param_table(climatic_variable, x))
-  names(mod_avg_param_list) <- group_names
-  big_list[[i]] <- mod_avg_param_list
-  # get_mod_table("bio_4", "Balsamiaceae")
-  
-  # test <- mod_avg_param_list[[1]]
-  # aggregate(test[,1:4], by = list(test$tip_state), mean)
-  if(print){
-    plot_data <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
-    data_se <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), get_stderr)))
-    plot_data$clade <- gsub("\\..*", "", rownames(plot_data))
-    plot_data <- melt(plot_data, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
-    
-    title <- getVariableName(climatic_variable)
-    print("plotting")
-    ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
-      ylab("") +
-      xlab("Life history strategy") +
-      ggtitle(title) +
-      geom_line(color = "black") +
-      geom_point(shape = 19) +
-      facet_wrap(~variable, scales = "free") + 
-      theme_bw()
-    
-    file_name <- paste0("figures/prelim_results/", climatic_variable, ".pdf")
-    ggsave(file_name, height = 8, width = 14, units = "in")
-  }
-}
+# summ_tables <- do.call(rbind, lapply(climatic_variables, function(x) getSummTable(big_list, x)))
+# write.csv(summ_tables, file = "tables/summ_table.csv")
 
-names(big_list) <- climatic_variables
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # phylogenetic model support heat map!  # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+
+load("all_model_tables.Rsave")
+phy <- read.tree("backbone_tree.tre")
+phy$tip.label <- gsub("-.*", "", phy$tip.label)
+climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
+
+# data organization
+big_table <- do.call(cbind, lapply(lapply(all_model_tables, function(x) do.call(rbind, x)), function(x) round(x, 2)))
+aicwt_table <- melt(cbind(rownames(big_table), big_table[,grep("AICwt", colnames(big_table))]))
+tmp1 <- do.call(rbind, strsplit(aicwt_table[,1], "\\."))
+tmp2 <- cbind(tmp1[,1], do.call(rbind, strsplit(tmp1[,2], "_")))
+aicwt_table[,2] <- gsub("\\..*", "", aicwt_table[,2])
+tmp3 <- data.frame(id = tmp2[,1], model_class = tmp2[,2], model_type = tmp2[,3], aicwt_table[,c(2,3)])
+cd_support_table <- aggregate(tmp3$value, by = list(tmp3$id, tmp3$variable, tmp3$model_class), sum)
+cd_support_table <- cd_support_table[cd_support_table$Group.3 == "CD",]
+colnames(cd_support_table) <- c("id", "climate_variable", "model_class", "AICwt")
+cd_support_table$climate_variable <- factor(cd_support_table$climate_variable, levels = c("bio_1", "bio_12", "bio_ai", "bio_4", "bio_15", "bio_5", "bio_6", "bio_14"))
+
+# plotting
+# ggplot(cd_support_table, aes(x = climate_variable, y =  id, fill = AICwt)) +
+#   geom_tile()
+
+a <- ggtree(phy) +
+  geom_tiplab() +
+  coord_cartesian(xlim = c(0, 160)) +
+  ggtitle("a) Backbone Phylogeny")
+
+b <- ggplot(cd_support_table, aes(x = climate_variable, y = id, fill = AICwt)) +
+  ggtitle("b) Support for character dependence") +
+  geom_tile() + 
+  scale_fill_viridis_c() +
+  theme_tree2()
+
+ab <- b %>% insert_left(a, width = 3)  
+ggsave(filename = "figures/support_for_cd.pdf", plot = ab, height = 10, width = 15, units = "in")
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # some tip rate stuff  # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+load("all_model_avg_res.Rsave")
+big_list <- all_model_avg_res
 
 for(i in 1:length(big_list)){
   print(i)
@@ -171,6 +227,10 @@ for(i in 1:length(big_list)){
 # perrenial_data <- plot_data[plot_data$Group.1 == "perennial" & plot_data$variable == "theta",]
 # perrenial_vec <- perrenial_data$value
 # names(perrenial_vec) <- perrenial_data$clade
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # stuff that summarizes other stuff  # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
 phy <- read.tree("backbone_tree.tre")
 phy$tip.label <- gsub("-.*", "", phy$tip.label)
