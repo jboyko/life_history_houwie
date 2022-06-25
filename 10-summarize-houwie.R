@@ -163,6 +163,13 @@ phy <- read.tree("backbone_tree.tre")
 phy$tip.label <- gsub("-.*", "", phy$tip.label)
 climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
 
+# make a table for modeling results
+for(i in 1:length(all_model_tables)){
+  focal_tbl <- do.call(rbind, all_model_tables[[i]])
+  write.csv(focal_tbl, file = paste0("tables/model_tables/model_table-", names(all_model_tables)[i], ".csv"))
+}
+
+
 # data organization
 big_table <- do.call(cbind, lapply(lapply(all_model_tables, function(x) do.call(rbind, x)), function(x) round(x, 2)))
 aicwt_table <- melt(cbind(rownames(big_table), big_table[,grep("AICwt", colnames(big_table))]))
@@ -213,6 +220,26 @@ for(i in 1:length(big_list)){
     write.csv(focal_thing, file = file_name, row.names = FALSE)
   }
 }
+
+i = 1
+print(i)
+focal_list <- big_list[[i]]
+tmp_table <- do.call(rbind, lapply(focal_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+tmp_table <- cbind(clade=gsub("\\..*", "", rownames(tmp_table)), tmp_table)
+rownames(tmp_table) <- NULL
+plot_data <- melt(tmp_table, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
+
+title <- getVariableName(names(big_list)[i])
+ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+  ylab("") +
+  xlab("Life history strategy") +
+  ggtitle(title) +
+  geom_line(color = "black") +
+  geom_point(shape = 19) +
+  facet_wrap(~variable, scales = "free") +
+  theme_bw()
+
+
 
 # climatic_variable <- "bio_ai"
 # clade_name <- "Solanaceae"
