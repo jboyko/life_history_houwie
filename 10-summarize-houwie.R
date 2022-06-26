@@ -236,8 +236,9 @@ ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
   ggtitle(title) +
   geom_line(color = "black") +
   geom_point(shape = 19) +
-  facet_wrap(~variable, scales = "free") +
   theme_bw()
+
+
 
 
 
