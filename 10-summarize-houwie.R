@@ -34,26 +34,46 @@ get_mod_table <- function(climatic_variable, clade_name){
 }
 
 getVariableName <- function(climatic_variable){
-  bioclim <- c("BIO1 = Annual Mean Temperature",
-               "BIO2 = Mean Diurnal Range (Mean of monthly (max temp - min temp))",
-               "BIO3 = Isothermality (BIO2/BIO7) (×100)",
-               "BIO4 = Temperature Seasonality (standard deviation ×100)",
-               "BIO5 = Max Temperature of Warmest Month",
-               "BIO6 = Min Temperature of Coldest Month",
-               "BIO7 = Temperature Annual Range (BIO5-BIO6)",
-               "BIO8 = Mean Temperature of Wettest Quarter",
-               "BIO9 = Mean Temperature of Driest Quarter",
-               "BIO10 = Mean Temperature of Warmest Quarter",
-               "BIO11 = Mean Temperature of Coldest Quarter",
-               "BIO12 = Annual Precipitation",
-               "BIO13 = Precipitation of Wettest Month",
-               "BIO14 = Precipitation of Driest Month",
-               "BIO15 = Precipitation Seasonality (Coefficient of Variation)",
-               "BIO16 = Precipitation of Wettest Quarter",
-               "BIO17 = Precipitation of Driest Quarter",
-               "BIO18 = Precipitation of Warmest Quarter",
-               "BIO19 = Precipitation of Coldest Quarter",
-               "BIOAI = Aridity Index")
+  # bioclim <- c("BIO1 = Annual Mean Temperature",
+  #              "BIO2 = Mean Diurnal Range (Mean of monthly (max temp - min temp))",
+  #              "BIO3 = Isothermality (BIO2/BIO7) (×100)",
+  #              "BIO4 = Temperature Seasonality (standard deviation ×100)",
+  #              "BIO5 = Max Temperature of Warmest Month",
+  #              "BIO6 = Min Temperature of Coldest Month",
+  #              "BIO7 = Temperature Annual Range (BIO5-BIO6)",
+  #              "BIO8 = Mean Temperature of Wettest Quarter",
+  #              "BIO9 = Mean Temperature of Driest Quarter",
+  #              "BIO10 = Mean Temperature of Warmest Quarter",
+  #              "BIO11 = Mean Temperature of Coldest Quarter",
+  #              "BIO12 = Annual Precipitation",
+  #              "BIO13 = Precipitation of Wettest Month",
+  #              "BIO14 = Precipitation of Driest Month",
+  #              "BIO15 = Precipitation Seasonality (Coefficient of Variation)",
+  #              "BIO16 = Precipitation of Wettest Quarter",
+  #              "BIO17 = Precipitation of Driest Quarter",
+  #              "BIO18 = Precipitation of Warmest Quarter",
+  #              "BIO19 = Precipitation of Coldest Quarter",
+  #              "BIOAI = Aridity Index")
+  bioclim <- c("Annual Mean Temperature",
+               "Mean Diurnal Range",
+               "Isothermality (BIO2/BIO7) (×100)",
+               "Temperature Seasonality",
+               "Max Temperature of Warmest Month",
+               "Min Temperature of Coldest Month",
+               "Temperature Annual Range (BIO5-BIO6)",
+               "Mean Temperature of Wettest Quarter",
+               "Mean Temperature of Driest Quarter",
+               "Mean Temperature of Warmest Quarter",
+               "Mean Temperature of Coldest Quarter",
+               "Annual Precipitation",
+               "Precipitation of Wettest Month",
+               "Precipitation of Driest Month",
+               "Precipitation Seasonality",
+               "Precipitation of Wettest Quarter",
+               "Precipitation of Driest Quarter",
+               "Precipitation of Warmest Quarter",
+               "Precipitation of Coldest Quarter",
+               "Aridity Index")
   names(bioclim) <- c(paste0("bio_", 1:19), "bio_ai")
   return(bioclim[grep(climatic_variable, names(bioclim))])
 }
@@ -221,26 +241,77 @@ for(i in 1:length(big_list)){
   }
 }
 
-i = 1
-print(i)
-focal_list <- big_list[[i]]
-tmp_table <- do.call(rbind, lapply(focal_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
-tmp_table <- cbind(clade=gsub("\\..*", "", rownames(tmp_table)), tmp_table)
-rownames(tmp_table) <- NULL
-plot_data <- melt(tmp_table, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
-
-title <- getVariableName(names(big_list)[i])
-ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
-  ylab("") +
-  xlab("Life history strategy") +
-  ggtitle(title) +
-  geom_line(color = "black") +
-  geom_point(shape = 19) +
-  theme_bw()
+phy <- read.tree("backbone_tree.tre")
+phy$tip.label <- gsub("-.*", "", phy$tip.label)
+cols <- c("#8c510a", "#5ab4ac")
 
 
+plot_list <- list()
+for(i in 1:8){
+  print(i)
+  focal_list <- big_list[[i]]
+  tmp_table <- do.call(rbind, lapply(focal_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+  tmp_table <- cbind(clade=gsub("\\..*", "", rownames(tmp_table)), tmp_table)
+  # problems <- c("Gesneriaceae", "Balsamiaceae")
+  # tmp_table <- tmp_table[-grep(problems[1], rownames(tmp_table)),]
+  # tmp_table <- tmp_table[-grep(problems[2], rownames(tmp_table)),]
+  rownames(tmp_table) <- NULL
+  names(big_list)[i]
+  diff_table <- aggregate(tmp_table[,3:6], by = list(tmp_table$clade), function(x) diff(exp(x)))
+  diff_table[order(diff_table[,5]),]
+  plot_data <- melt(tmp_table, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
+  
+  title <- getVariableName(names(big_list)[i])
+  
+  # t_trates <- runTtest(phy, plot_data, 'waiting_times')
+  # p_trates <- ggplot(subset(plot_data, plot_data$variable == 'waiting_times'), aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+  #   ylab("") +
+  #   xlab("") +
+  #   ggtitle("a) Transition rate") +
+  #   geom_line(color = "light grey") +
+  #   geom_point(shape = 19, color = "light grey") +
+  #   theme_bw() +
+  #   stat_summary(fun=mean,geom="point",aes(group=1, size = 2), color = cols) +  
+  #   stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
+  #   labs(caption = paste0("p=",round(t_trates$P.dbar, 3))) + 
+  #   theme(legend.position="none")
+  
+  t_sigma <- runTtest(phy, plot_data, 'sigma.sq')
+  p_sigma <- ggplot(subset(plot_data, plot_data$variable == 'sigma.sq'), 
+                    aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+    ylab(title) +
+    xlab("") +
+    ggtitle("", subtitle = paste0("p = ", round(t_sigma$P.dbar, 3))) +
+    geom_line(color = "light grey") +
+    geom_point(shape = 19, color = "light grey") +
+    theme_bw() +
+    stat_summary(fun=mean,geom="point",aes(group=1, size = 2), color = cols) +  
+    stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
+    # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
+    theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
+  
+  t_theta <- runTtest(phy, plot_data, 'theta')
+  p_theta <- ggplot(subset(plot_data, plot_data$variable == 'theta'), 
+                    aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+    ylab("") +
+    xlab("") +
+    ggtitle("", subtitle = paste0("p = ", round(t_theta$P.dbar, 3))) +
+    geom_line(color = "light grey") +
+    geom_point(shape = 19, color = "light grey") +
+    stat_summary(fun=mean,geom="point",aes(group=1, size = 2), color = cols) +
+    stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
+    theme_bw() +
+    # labs(caption = paste0("p = ", round(t_theta$P.dbar, 3))) +
+    theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
+  
+  
+  plot_list[[i]] <- grid.arrange(p_sigma, p_theta, nrow=1)
+}
 
+poop <- grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]],
+             plot_list[[5]], plot_list[[6]], plot_list[[7]], plot_list[[8]], ncol = 1)
 
+ggsave(filename = "figures/ttest-plots.pdf",  plot = poop, height = 30, width = 10, units = "in")
 
 # climatic_variable <- "bio_ai"
 # clade_name <- "Solanaceae"
@@ -257,8 +328,15 @@ ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
 # names(perrenial_vec) <- perrenial_data$clade
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # stuff that summarizes clade specific stuff  # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+
+
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # stuff that summarizes other stuff  # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+
 
 phy <- read.tree("backbone_tree.tre")
 phy$tip.label <- gsub("-.*", "", phy$tip.label)
