@@ -17,7 +17,7 @@
 "Ivania cremnophila","perennial",1,5.586312,NA,NA,0.000508
 "Ivania juncalensis","no_life_form_on_database",NA,NA,NA,NA,NA
 "Mostacillastrum andinum","perennial",7,5.584639,0.016591,0.006271,7.3e-05
-"Mostacillastrum commune","annual",12,5.598136,0.012361,0.003568,4.2e-05
+"Mostacillastrum commune","perennial",12,5.598136,0.012361,0.003568,4.2e-05
 "Mostacillastrum gracile","perennial",3,5.602045,0.00619,0.003574,0.000169
 "Mostacillastrum leptocarpum","perennial",5,5.596318,0.018674,0.008351,0.000102
 "Mostacillastrum orbignyanum","perennial",25,5.603263,0.019144,0.003829,2e-05
@@ -62,7 +62,7 @@
 "Streptanthus barbiger","annual",3,5.620803,0.007787,0.004496,0.000169
 "Streptanthus batrachopus","annual",1,5.620944,NA,NA,0.000508
 "Streptanthus bernardinus","perennial",4,5.609166,0.009042,0.004521,0.000127
-"Streptanthus brachiatus","annual",1,5.610387,NA,NA,0.000508
+"Streptanthus brachiatus","perennial",1,5.610387,NA,NA,0.000508
 "Streptanthus bracteatus","annual",3,5.627077,0.003437,0.001984,0.000169
 "Streptanthus breweri","annual",9,5.61068,0.012884,0.004295,5.6e-05
 "Streptanthus californicus","annual",NA,NA,NA,NA,NA
@@ -97,22 +97,22 @@
 "Streptanthus longisiliquus","perennial",5,5.610293,0.007247,0.003241,0.000102
 "Streptanthus maculatus","annual",NA,NA,NA,NA,NA
 "Streptanthus major","annual",NA,NA,NA,NA,NA
-"Streptanthus morrisonii","annual",1,5.618043,NA,NA,0.000508
+"Streptanthus morrisonii","perennial",1,5.618043,NA,NA,0.000508
 "Streptanthus petiolaris","annual",NA,NA,NA,NA,NA
-"Streptanthus pilosus","annual",NA,NA,NA,NA,NA
+"Streptanthus pilosus","perennial",NA,NA,NA,NA,NA
 "Streptanthus platycarpus","annual",11,5.617379,0.008942,0.002696,4.6e-05
 "Streptanthus polygaloides","annual",7,5.613456,0.012169,0.004599,7.3e-05
 "Streptanthus simulans","annual",NA,NA,NA,NA,NA
-"Streptanthus tortuosus","annual",26,5.595639,0.018912,0.003709,2e-05
+"Streptanthus tortuosus","perennial",26,5.595639,0.018912,0.003709,2e-05
 "Streptanthus vernalis","annual",1,5.61185,NA,NA,0.000508
 "Thelypodiopsis ambigua","annual",7,5.610261,0.013138,0.004966,7.3e-05
 "Thelypodiopsis elegans","annual",26,5.577074,0.009164,0.001797,2e-05
-"Thelypodium crispum","annual",9,5.58819,0.008943,0.002981,5.6e-05
+"Thelypodium crispum","perennial",9,5.58819,0.008943,0.002981,5.6e-05
 "Thelypodium flexuosum","perennial",34,5.588627,0.008016,0.001375,1.5e-05
-"Thelypodium integrifolium","annual",32,5.58265,0.011009,0.001946,1.6e-05
+"Thelypodium integrifolium","perennial",32,5.58265,0.011009,0.001946,1.6e-05
 "Thelypodium laciniatum","annual",43,5.594776,0.010302,0.001571,1.2e-05
-"Thelypodium sagittatum","annual",13,5.575797,0.010396,0.002883,3.9e-05
-"Thelypodium wrightii","annual",48,5.600235,0.018067,0.002608,1.1e-05
+"Thelypodium sagittatum","perennial",13,5.575797,0.010396,0.002883,3.9e-05
+"Thelypodium wrightii","perennial",48,5.600235,0.018067,0.002608,1.1e-05
 "Thysanocarpus conchuliferus","no_life_form_on_database",2,5.637576,0.016369,0.011575,0.000254
 "Thysanocarpus curvipes var. curvipes","no_life_form_on_database",38,5.610773,0.015984,0.002593,1.3e-05
 "Thysanocarpus erectus","no_life_form_on_database",9,5.639435,0.010146,0.003382,5.6e-05

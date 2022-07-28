@@ -38,9 +38,9 @@
 "Cakile maritima f. islandica","annual",NA,NA,NA,NA,NA
 "Carrichtera annua","annual",NA,NA,NA,NA,NA
 "Ceratocnemum rapistroides","annual",NA,NA,NA,NA,NA
-"Coincya longirostra","annual",7,3.96334,0.168965,0.063863,0.031453
+"Coincya longirostra","perennial",7,3.96334,0.168965,0.063863,0.031453
 "Coincya monensis","annual",35,3.630411,0.414743,0.070104,0.006291
-"Coincya rupestris","annual",1,3.367296,NA,NA,0.220168
+"Coincya rupestris","perennial",1,3.367296,NA,NA,0.220168
 "Cordylocarpus muricatus","annual",6,4.116358,0.115129,0.047001,0.036695
 "Crambe arborea","perennial",NA,NA,NA,NA,NA
 "Crambe aspera","perennial",11,3.032261,0.256196,0.077246,0.020015
@@ -150,11 +150,11 @@
 "Morisia monanthos","perennial",3,3.882485,0.087356,0.050435,0.073389
 "Muricaria prostrata","annual",NA,NA,NA,NA,NA
 "Nasturtiopsis coronopifolia","annual",NA,NA,NA,NA,NA
-"Orychophragmus diffusus","annual",NA,NA,NA,NA,NA
-"Orychophragmus hupehensis","annual",NA,NA,NA,NA,NA
-"Orychophragmus taibaiensis","annual",NA,NA,NA,NA,NA
+"Orychophragmus diffusus","perennial",NA,NA,NA,NA,NA
+"Orychophragmus hupehensis","perennial",NA,NA,NA,NA,NA
+"Orychophragmus taibaiensis","perennial",NA,NA,NA,NA,NA
 "Orychophragmus violaceus","annual",33,4.278275,0.346602,0.060336,0.006672
-"Orychophragmus ziguiensis","annual",NA,NA,NA,NA,NA
+"Orychophragmus ziguiensis","perennial",NA,NA,NA,NA,NA
 "Otocarpus virgatus","annual",NA,NA,NA,NA,NA
 "Physorhynchus chamaerapistrum","perennial",NA,NA,NA,NA,NA
 "Pseuderucaria teretifolia","annual",NA,NA,NA,NA,NA
@@ -162,7 +162,7 @@
 "Raffenaldia primuloides","perennial",11,3.961435,0.240823,0.072611,0.020015
 "Raphanus raphanistrum","annual",392,3.509451,0.464614,0.023467,0.000562
 "Raphanus sativus","annual",262,3.528575,0.519431,0.032091,0.00084
-"Rapistrum perenne","annual",25,3.261244,0.2844,0.05688,0.008807
+"Rapistrum perenne","perennial",25,3.261244,0.2844,0.05688,0.008807
 "Rapistrum rugosum","annual",153,3.697344,0.502616,0.040634,0.001439
 "Rytidocarpus moricandioides","annual",1,4.189655,NA,NA,0.220168
 "Savignya parviflora subsp. parviflora","annual",NA,NA,NA,NA,NA

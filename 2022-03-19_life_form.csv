@@ -1,10 +1,10 @@
 all_life_forms,Freq,scoring1
 Annual bamboo,15,annual
 Bamboo,3472,perennial
-Biennial,10336,perennial
-Biennial or chamaephyte,696,perennial
-Biennial or hemicryptophyte,8208,perennial
-Biennial or nanophanerophyte,12,perennial
+Biennial,10336,biennial
+Biennial or chamaephyte,696,biennial
+Biennial or hemicryptophyte,8208,biennial
+Biennial or nanophanerophyte,12,biennial
 Bulbous geophyte,16958,perennial
 Bulbous geophyte or epiphyte,1,perennial
 Bulbous geophyte or helophyte,137,perennial
@@ -130,8 +130,8 @@ Hemimycotrophic rhizomatous geophyte,23,perennial
 Hemimycotrophic therophyte,24,annual
 Hemimycotrophic tuberous geophyte,8,perennial
 Hemiparasite,90,perennial
-Hemiparasitic biennial,123,perennial
-Hemiparasitic biennial or hemicryptophyte,50,perennial
+Hemiparasitic biennial,123,biennial
+Hemiparasitic biennial or hemicryptophyte,50,biennial
 Hemiparasitic chamaephyte,99,perennial
 Hemiparasitic chamaephyte or nanophanerophyte,58,perennial
 Hemiparasitic climber,13,perennial
@@ -282,7 +282,7 @@ Sometimes tuberous chamaephyte or nanophanerophyte,5,perennial
 Sometimes tuberous hemicryptophyte,25,perennial
 Sometimes tuberous nanophanerophyte,1,perennial
 Succulent,13,perennial
-Succulent biennial,66,perennial
+Succulent biennial,66,biennial
 Succulent biennial or chamaephyte,39,perennial
 Succulent bulbous geophyte,10,perennial
 Succulent chamaephyte,10123,perennial

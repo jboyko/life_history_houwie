@@ -1,8 +1,8 @@
 "species","life_form","n_bio_6","mean_bio_6","sd_bio_6","se_bio_6","within_sp_var_bio_6"
 "Androsace adfinis","perennial",1,5.569298,NA,NA,0.000508
-"Androsace albana","annual",8,5.562903,0.008975,0.003173,6.4e-05
+"Androsace albana","perennial",8,5.562903,0.008975,0.003173,6.4e-05
 "Androsace alpina","perennial",17,5.563022,0.020616,0.005,3e-05
-"Androsace armeniaca","annual",NA,NA,NA,NA,NA
+"Androsace armeniaca","perennial",NA,NA,NA,NA,NA
 "Androsace axillaris","perennial",16,5.61079,0.017678,0.004419,3.2e-05
 "Androsace barbulata","no_life_form_on_database",2,5.583501,0.03854,0.027252,0.000254
 "Androsace brevis","perennial",1,5.590054,NA,NA,0.000508
@@ -126,7 +126,7 @@
 "Primula cicutariifolia","perennial",3,5.61294,0.004141,0.002391,0.000169
 "Primula clarkei","perennial",NA,NA,NA,NA,NA
 "Primula clusiana","perennial",5,5.575791,0.0105,0.004696,0.000102
-"Primula cockburniana","annual",5,5.590574,0.01948,0.008712,0.000102
+"Primula cockburniana","perennial",5,5.590574,0.01948,0.008712,0.000102
 "Primula cortusoides","perennial",57,5.532574,0.012508,0.001657,9e-06
 "Primula cuneifolia subsp. cuneifolia","no_life_form_on_database",6,5.579935,0.026711,0.010905,8.5e-05
 "Primula cuneifolia var. saxifragifolia","perennial",3,5.538934,0.010925,0.006308,0.000169

@@ -1,14 +1,14 @@
 "species","life_form","n_bio_15","mean_bio_15","sd_bio_15","se_bio_15","within_sp_var_bio_15"
 "Acanthorrhinum ramosissimum","perennial",NA,NA,NA,NA,NA
 "Albraunia foveopilosa","annual",NA,NA,NA,NA,NA
-"Anarrhinum bellidifolium","annual",NA,NA,NA,NA,NA
+"Anarrhinum bellidifolium","perennial",NA,NA,NA,NA,NA
 "Anarrhinum corsicum","perennial",1,3.89182,NA,NA,0.220168
-"Anarrhinum duriminium","annual",5,3.844207,0.064693,0.028932,0.044034
+"Anarrhinum duriminium","perennial",5,3.844207,0.064693,0.028932,0.044034
 "Anarrhinum forskaohlii","perennial",NA,NA,NA,NA,NA
 "Anarrhinum fruticosum","perennial",NA,NA,NA,NA,NA
-"Anarrhinum laxiflorum","annual",15,3.969191,0.247249,0.063839,0.014678
-"Anarrhinum longipedicellatum","annual",1,3.931826,NA,NA,0.220168
-"Anarrhinum pedatum","annual",11,4.229586,0.083583,0.025201,0.020015
+"Anarrhinum laxiflorum","perennial",15,3.969191,0.247249,0.063839,0.014678
+"Anarrhinum longipedicellatum","perennial",1,3.931826,NA,NA,0.220168
+"Anarrhinum pedatum","perennial",11,4.229586,0.083583,0.025201,0.020015
 "Antirrhinum australe","perennial",15,4.021832,0.239513,0.061842,0.014678
 "Antirrhinum charidemi","perennial",3,3.868684,0.271357,0.156668,0.073389
 "Antirrhinum cirrhigerum","perennial",NA,NA,NA,NA,NA

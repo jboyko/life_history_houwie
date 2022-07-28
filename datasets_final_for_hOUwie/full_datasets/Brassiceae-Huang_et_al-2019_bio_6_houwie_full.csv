@@ -38,9 +38,9 @@
 "Cakile maritima f. islandica","annual",NA,NA,NA,NA,NA
 "Carrichtera annua","annual",NA,NA,NA,NA,NA
 "Ceratocnemum rapistroides","annual",NA,NA,NA,NA,NA
-"Coincya longirostra","annual",7,5.621748,0.007338,0.002774,7.3e-05
+"Coincya longirostra","perennial",7,5.621748,0.007338,0.002774,7.3e-05
 "Coincya monensis","annual",35,5.61272,0.014418,0.002437,1.5e-05
-"Coincya rupestris","annual",1,5.607455,NA,NA,0.000508
+"Coincya rupestris","perennial",1,5.607455,NA,NA,0.000508
 "Cordylocarpus muricatus","annual",6,5.637249,0.009447,0.003857,8.5e-05
 "Crambe arborea","perennial",NA,NA,NA,NA,NA
 "Crambe aspera","perennial",11,5.57402,0.016183,0.004879,4.6e-05
@@ -150,11 +150,11 @@
 "Morisia monanthos","perennial",3,5.631362,0.00939,0.005421,0.000169
 "Muricaria prostrata","annual",NA,NA,NA,NA,NA
 "Nasturtiopsis coronopifolia","annual",NA,NA,NA,NA,NA
-"Orychophragmus diffusus","annual",NA,NA,NA,NA,NA
-"Orychophragmus hupehensis","annual",NA,NA,NA,NA,NA
-"Orychophragmus taibaiensis","annual",NA,NA,NA,NA,NA
+"Orychophragmus diffusus","perennial",NA,NA,NA,NA,NA
+"Orychophragmus hupehensis","perennial",NA,NA,NA,NA,NA
+"Orychophragmus taibaiensis","perennial",NA,NA,NA,NA,NA
 "Orychophragmus violaceus","annual",33,5.595468,0.016878,0.002938,1.5e-05
-"Orychophragmus ziguiensis","annual",NA,NA,NA,NA,NA
+"Orychophragmus ziguiensis","perennial",NA,NA,NA,NA,NA
 "Otocarpus virgatus","annual",NA,NA,NA,NA,NA
 "Physorhynchus chamaerapistrum","perennial",NA,NA,NA,NA,NA
 "Pseuderucaria teretifolia","annual",NA,NA,NA,NA,NA
@@ -162,7 +162,7 @@
 "Raffenaldia primuloides","perennial",11,5.604282,0.008313,0.002506,4.6e-05
 "Raphanus raphanistrum","annual",393,5.597441,0.025674,0.001295,1e-06
 "Raphanus sativus","annual",264,5.600039,0.024105,0.001484,2e-06
-"Rapistrum perenne","annual",25,5.58982,0.013304,0.002661,2e-05
+"Rapistrum perenne","perennial",25,5.58982,0.013304,0.002661,2e-05
 "Rapistrum rugosum","annual",153,5.621846,0.015421,0.001247,3e-06
 "Rytidocarpus moricandioides","annual",1,5.633896,NA,NA,0.000508
 "Savignya parviflora subsp. parviflora","annual",NA,NA,NA,NA,NA

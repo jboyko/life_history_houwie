@@ -7,7 +7,7 @@
 "Salvia aegyptiaca","perennial",19,5.643101,0.017131,0.00393,2.7e-05
 "Salvia aequidistans","no_life_form_on_database",NA,NA,NA,NA,NA
 "Salvia aerea","perennial",4,5.59516,0.01712,0.00856,0.000127
-"Salvia aethiopis","annual",76,5.599097,0.013467,0.001545,7e-06
+"Salvia aethiopis","perennial",76,5.599097,0.013467,0.001545,7e-06
 "Salvia africana","perennial",NA,NA,NA,NA,NA
 "Salvia africana-lutea","no_life_form_on_database",15,5.639919,0.011323,0.002924,3.4e-05
 "Salvia agnes","perennial",8,5.625692,0.017162,0.006068,6.4e-05
@@ -31,7 +31,7 @@
 "Salvia arbuscula","no_life_form_on_database",13,5.641873,0.025156,0.006977,3.9e-05
 "Salvia areolata","perennial",1,5.628161,NA,NA,0.000508
 "Salvia areysiana","perennial",NA,NA,NA,NA,NA
-"Salvia argentea","annual",55,5.613711,0.018979,0.002559,9e-06
+"Salvia argentea","perennial",55,5.613711,0.018979,0.002559,9e-06
 "Salvia ariana","perennial",NA,NA,NA,NA,NA
 "Salvia arisanensis","no_life_form_on_database",3,5.618608,0.021955,0.012676,0.000169
 "Salvia aristata","perennial",3,5.590167,0.005724,0.003305,0.000169
@@ -372,7 +372,7 @@
 "Salvia purpusii","perennial",4,5.625893,0.006982,0.003491,0.000127
 "Salvia pusilla","perennial",6,5.646323,0.003964,0.001618,8.5e-05
 "Salvia pygmaea","perennial",2,5.666246,0.005384,0.003807,0.000254
-"Salvia qimenensis","annual",NA,NA,NA,NA,NA
+"Salvia qimenensis","perennial",NA,NA,NA,NA,NA
 "Salvia quercetorum","no_life_form_on_database",3,5.637205,0.008216,0.004744,0.000169
 "Salvia quezelii","perennial",NA,NA,NA,NA,NA
 "Salvia radula","no_life_form_on_database",NA,NA,NA,NA,NA
@@ -421,7 +421,7 @@
 "Salvia schimperi","perennial",5,5.632711,0.010111,0.004522,0.000102
 "Salvia schizochila","perennial",1,5.606721,NA,NA,0.000508
 "Salvia schlechteri","no_life_form_on_database",NA,NA,NA,NA,NA
-"Salvia sclarea","annual",103,5.607658,0.014266,0.001406,5e-06
+"Salvia sclarea","perennial",103,5.607658,0.014266,0.001406,5e-06
 "Salvia sclareoides","perennial",10,5.632288,0.017793,0.005627,5.1e-05
 "Salvia scrophulariifolia","perennial",NA,NA,NA,NA,NA
 "Salvia scutellarioides","perennial",35,5.65121,0.01702,0.002877,1.5e-05

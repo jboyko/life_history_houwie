@@ -1,106 +1,106 @@
 "species","life_form","n_bio_14","mean_bio_14","sd_bio_14","se_bio_14","within_sp_var_bio_14"
-"Chamaecrista absus","annual",169,1.491325,1.185573,0.091198,0.001393
-"Chamaecrista altoana","perennial",2,1.589027,0.693551,0.490415,0.149712
-"Chamaecrista amorimii","perennial",3,4.618224,0.379177,0.218918,0.099808
-"Chamaecrista anamariae","perennial",1,2.995732,NA,NA,0.299425
+"Chamaecrista absus","annual",166,1.529576,1.158188,0.089893,0.00138
+"Chamaecrista altoana","perennial",2,1.84444,0.332343,0.235002,0.148297
+"Chamaecrista amorimii","perennial",3,4.765747,0.435668,0.251533,0.098865
+"Chamaecrista anamariae","perennial",1,2.995732,NA,NA,0.296594
 "Chamaecrista anceps","perennial",NA,NA,NA,NA,NA
-"Chamaecrista aristata","perennial",1,1.94591,NA,NA,0.299425
-"Chamaecrista azulana","perennial",3,1.814139,0.659588,0.380813,0.099808
-"Chamaecrista belemii","perennial",23,2.06919,1.206485,0.25157,0.012476
-"Chamaecrista belladonna","no_life_form_on_database",2,1.700599,0.128921,0.091161,0.149712
-"Chamaecrista benthamiana","perennial",5,2.113647,0.1965,0.087877,0.059885
+"Chamaecrista aristata","perennial",1,1.609438,NA,NA,0.296594
+"Chamaecrista azulana","perennial",3,1.814139,0.659588,0.380813,0.098865
+"Chamaecrista belemii","perennial",23,2.137507,1.277995,0.26648,0.012358
+"Chamaecrista belladonna","no_life_form_on_database",2,1.700599,0.128921,0.091161,0.148297
+"Chamaecrista benthamiana","perennial",5,2.032554,0.233557,0.10445,0.059319
 "Chamaecrista blanchetii","perennial",NA,NA,NA,NA,NA
-"Chamaecrista botryoides","perennial",2,2.079442,0.980258,0.693147,0.149712
+"Chamaecrista botryoides","perennial",2,2.079442,0.980258,0.693147,0.148297
 "Chamaecrista brachyblepharis","perennial",NA,NA,NA,NA,NA
-"Chamaecrista brachyrachis","perennial",13,1.85882,0.373731,0.103654,0.023033
-"Chamaecrista brachystachya","perennial",22,2.878977,1.40076,0.298643,0.01361
-"Chamaecrista brevicalyx","perennial",17,1.345163,1.080534,0.262068,0.017613
-"Chamaecrista burchellii","perennial",2,1.098612,0,0,0.149712
-"Chamaecrista calycioides","perennial",55,2.203726,1.15231,0.155377,0.005444
-"Chamaecrista campestris","perennial",26,2.807573,0.819304,0.160679,0.011516
-"Chamaecrista campicola","perennial",7,1.553467,0.573144,0.216628,0.042775
-"Chamaecrista cardiostegia","perennial",10,2.534176,0.870851,0.275387,0.029942
+"Chamaecrista brachyrachis","perennial",13,1.866924,0.382715,0.106146,0.022815
+"Chamaecrista brachystachya","perennial",22,2.837775,1.367489,0.29155,0.013482
+"Chamaecrista brevicalyx","perennial",17,1.316436,1.033943,0.250768,0.017447
+"Chamaecrista burchellii","perennial",2,1.098612,0,0,0.148297
+"Chamaecrista calycioides","perennial",55,2.188376,1.176516,0.158641,0.005393
+"Chamaecrista campestris","perennial",26,2.81547,0.825753,0.161943,0.011407
+"Chamaecrista campicola","perennial",7,1.751509,0.453306,0.171334,0.042371
+"Chamaecrista cardiostegia","perennial",10,2.488703,0.916854,0.289935,0.029659
 "Chamaecrista caribaea","perennial",NA,NA,NA,NA,NA
-"Chamaecrista cathartica","perennial",49,2.668511,0.914753,0.130679,0.006111
-"Chamaecrista choriophylla","perennial",4,2.451524,0.453131,0.226566,0.074856
-"Chamaecrista ciliolata var. ciliolata","no_life_form_on_database",1,1.386294,NA,NA,0.299425
-"Chamaecrista ciliolata var. pulchella","perennial",2,1.903331,1.138044,0.804719,0.149712
-"Chamaecrista cinerascens","perennial",2,2.359249,0.395708,0.279808,0.149712
-"Chamaecrista cipoana","no_life_form_on_database",4,2.041554,0.45677,0.228385,0.074856
-"Chamaecrista claussenii var. claussenii","no_life_form_on_database",12,1.814914,0.548448,0.158323,0.024952
-"Chamaecrista confertiformis","perennial",2,2.238668,0.225181,0.159227,0.149712
-"Chamaecrista coradinii","perennial",12,0.639822,0.886448,0.255895,0.024952
-"Chamaecrista coriacea","perennial",1,2.397895,NA,NA,0.299425
-"Chamaecrista cytisoides","perennial",25,2.571222,1.368898,0.27378,0.011977
-"Chamaecrista dalbergiifolia","perennial",16,2.044596,0.83619,0.209047,0.018714
+"Chamaecrista cathartica","perennial",49,2.71258,0.96116,0.137309,0.006053
+"Chamaecrista choriophylla","perennial",4,2.451524,0.453131,0.226566,0.074148
+"Chamaecrista ciliolata var. ciliolata","no_life_form_on_database",1,1.386294,NA,NA,0.296594
+"Chamaecrista ciliolata var. pulchella","perennial",2,1.791759,0.980258,0.693147,0.148297
+"Chamaecrista cinerascens","perennial",2,2.481422,0.118125,0.083527,0.148297
+"Chamaecrista cipoana","no_life_form_on_database",4,1.991386,0.413563,0.206782,0.074148
+"Chamaecrista claussenii var. claussenii","no_life_form_on_database",12,1.83654,0.523329,0.151072,0.024716
+"Chamaecrista confertiformis","perennial",2,2.772589,0,0,0.148297
+"Chamaecrista coradinii","perennial",12,0.639822,0.886448,0.255895,0.024716
+"Chamaecrista coriacea","perennial",1,2.397895,NA,NA,0.296594
+"Chamaecrista cytisoides","perennial",25,2.617925,1.35012,0.270024,0.011864
+"Chamaecrista dalbergiifolia","perennial",16,2.042835,0.872958,0.21824,0.018537
 "Chamaecrista dawsonii","perennial",NA,NA,NA,NA,NA
-"Chamaecrista decora","perennial",3,1.843143,0.088999,0.051384,0.099808
-"Chamaecrista decumbens","perennial",4,1.84444,0.271357,0.135679,0.074856
-"Chamaecrista densifolia","perennial",4,1.839389,0.308552,0.154276,0.074856
-"Chamaecrista depauperata","perennial",1,2.833213,NA,NA,0.299425
-"Chamaecrista desvauxii var. mollissima","perennial",121,2.935369,1.317646,0.119786,0.002434
-"Chamaecrista diphylla","annual",224,2.779142,1.146124,0.076579,0.001337
-"Chamaecrista distichoclada","perennial",1,2.197225,NA,NA,0.299425
+"Chamaecrista decora","perennial",3,2.022809,0.208581,0.120424,0.098865
+"Chamaecrista decumbens","perennial",4,1.961941,0.235002,0.117501,0.074148
+"Chamaecrista densifolia","perennial",4,1.872772,0.330371,0.165186,0.074148
+"Chamaecrista depauperata","perennial",1,2.833213,NA,NA,0.296594
+"Chamaecrista desvauxii var. mollissima","perennial",121,2.942335,1.315311,0.119574,0.002411
+"Chamaecrista diphylla","annual",224,2.74667,1.160606,0.077546,0.001324
+"Chamaecrista distichoclada","perennial",1,1.94591,NA,NA,0.296594
 "Chamaecrista elata","no_life_form_on_database",NA,NA,NA,NA,NA
-"Chamaecrista fagonioides","perennial",73,2.202081,1.248525,0.146129,0.003992
-"Chamaecrista feliciana","perennial",7,0.891189,0.659314,0.249197,0.042775
-"Chamaecrista filicifolia","perennial",22,1.940699,1.081161,0.230504,0.01361
-"Chamaecrista flexuosa","perennial",279,2.77065,1.232078,0.073763,0.001058
-"Chamaecrista floribunda","no_life_form_on_database",1,1.386294,NA,NA,0.299425
-"Chamaecrista glaucofilix","perennial",2,2.754694,0.26834,0.189745,0.149712
+"Chamaecrista fagonioides","perennial",73,2.227005,1.212217,0.141879,0.003955
+"Chamaecrista feliciana","perennial",7,0.891189,0.659314,0.249197,0.042371
+"Chamaecrista filicifolia","perennial",22,1.940699,1.055799,0.225097,0.013482
+"Chamaecrista flexuosa","perennial",280,2.766721,1.241514,0.074195,0.001048
+"Chamaecrista floribunda","no_life_form_on_database",1,1.609438,NA,NA,0.296594
+"Chamaecrista glaucofilix","perennial",2,2.917405,0.038231,0.027033,0.148297
 "Chamaecrista gymnothyrsa","perennial",NA,NA,NA,NA,NA
-"Chamaecrista hispidula","perennial",146,2.369081,1.26392,0.104603,0.002037
+"Chamaecrista hispidula","perennial",145,2.323409,1.263907,0.104962,0.002031
 "Chamaecrista irwiniana","no_life_form_on_database",NA,NA,NA,NA,NA
-"Chamaecrista isidorea","perennial",14,1.612995,0.465064,0.124294,0.021387
-"Chamaecrista jacobinea","perennial",10,2.289767,1.167333,0.369143,0.029942
-"Chamaecrista lagotois","perennial",1,1.94591,NA,NA,0.299425
-"Chamaecrista latifolia","perennial",4,2.331631,0.230648,0.115324,0.074856
-"Chamaecrista lineata","perennial",13,3.563041,0.389644,0.108068,0.023033
-"Chamaecrista macedoi","perennial",3,1.059351,0.348237,0.201055,0.099808
-"Chamaecrista mollicaulis","perennial",1,2.079442,NA,NA,0.299425
-"Chamaecrista mucronata","perennial",8,2.784441,0.412787,0.145942,0.037428
-"Chamaecrista multipennis","perennial",5,2.271955,0.383054,0.171307,0.059885
-"Chamaecrista multiseta","perennial",19,1.858288,0.591276,0.135648,0.015759
-"Chamaecrista nanodes","perennial",3,1.635092,0.549755,0.317401,0.099808
-"Chamaecrista neesiana","perennial",25,2.038585,0.451937,0.090387,0.011977
-"Chamaecrista nictitans subsp. brachypoda","annual",54,2.270948,0.970579,0.132079,0.005444
-"Chamaecrista nictitans subsp. disadena","annual",62,3.045639,1.197561,0.15209,0.004829
-"Chamaecrista nictitans var. ramosa","no_life_form_on_database",54,3.510259,1.067241,0.145233,0.005545
-"Chamaecrista nummulariifolia","perennial",4,1.632719,0.626381,0.31319,0.074856
+"Chamaecrista isidorea","perennial",14,1.677002,0.440785,0.117805,0.021185
+"Chamaecrista jacobinea","perennial",10,2.434776,1.292314,0.408666,0.029659
+"Chamaecrista lagotois","perennial",1,1.94591,NA,NA,0.296594
+"Chamaecrista latifolia","perennial",4,2.28605,0.207071,0.103536,0.074148
+"Chamaecrista lineata","perennial",13,3.563041,0.389644,0.108068,0.022815
+"Chamaecrista macedoi","perennial",3,1.155245,0.400189,0.231049,0.098865
+"Chamaecrista mollicaulis","perennial",1,1.609438,NA,NA,0.296594
+"Chamaecrista mucronata","perennial",8,2.775178,0.417322,0.147546,0.037074
+"Chamaecrista multipennis","perennial",5,2.130745,0.345757,0.154627,0.059319
+"Chamaecrista multiseta","perennial",19,1.863833,0.577135,0.132404,0.01561
+"Chamaecrista nanodes","perennial",3,1.635092,0.549755,0.317401,0.098865
+"Chamaecrista neesiana","perennial",25,2.001933,0.484034,0.096807,0.011864
+"Chamaecrista nictitans subsp. brachypoda","annual",54,2.264664,0.982372,0.133684,0.005393
+"Chamaecrista nictitans subsp. disadena","annual",62,3.021572,1.195705,0.151855,0.004784
+"Chamaecrista nictitans var. ramosa","no_life_form_on_database",54,3.53468,1.046299,0.142383,0.005492
+"Chamaecrista nummulariifolia","perennial",4,1.671153,0.291811,0.145905,0.074148
 "Chamaecrista obolaria","no_life_form_on_database",NA,NA,NA,NA,NA
-"Chamaecrista olesiphylla","perennial",4,2.001592,0.355438,0.177719,0.074856
-"Chamaecrista onusta","perennial",4,4.629526,0.352942,0.176471,0.074856
-"Chamaecrista pachyclada","perennial",3,1.647214,0.281714,0.162648,0.099808
-"Chamaecrista papillata","no_life_form_on_database",6,2.311666,0.880178,0.359331,0.049904
-"Chamaecrista pascuorum","perennial",40,1.94918,1.498865,0.236991,0.006963
-"Chamaecrista philippii","perennial",4,2.57923,0.349653,0.174826,0.074856
-"Chamaecrista pilosa","perennial",24,2.276929,1.240021,0.253118,0.012476
-"Chamaecrista planaltoana","perennial",9,2.048513,0.435845,0.145282,0.033269
-"Chamaecrista polita","perennial",8,1.935601,0.401146,0.141827,0.037428
-"Chamaecrista potentilla","perennial",5,1.789795,0.6878,0.307594,0.059885
-"Chamaecrista repens","perennial",86,3.01468,1.504041,0.162185,0.003364
-"Chamaecrista roraimae","perennial",20,2.417469,1.678535,0.375332,0.014971
-"Chamaecrista rossicorum","no_life_form_on_database",6,2.031454,0.41632,0.169962,0.049904
+"Chamaecrista olesiphylla","perennial",4,2.442089,0.441984,0.220992,0.074148
+"Chamaecrista onusta","perennial",4,4.644889,0.372667,0.186334,0.074148
+"Chamaecrista pachyclada","perennial",3,1.766106,0.271357,0.156668,0.098865
+"Chamaecrista papillata","no_life_form_on_database",6,2.314252,0.910712,0.371797,0.049432
+"Chamaecrista pascuorum","perennial",41,1.890374,1.492207,0.233044,0.006898
+"Chamaecrista philippii","perennial",4,2.571983,0.522368,0.261184,0.074148
+"Chamaecrista pilosa","perennial",24,2.27148,1.257615,0.25671,0.012358
+"Chamaecrista planaltoana","perennial",9,2.088144,0.475964,0.158655,0.032955
+"Chamaecrista polita","perennial",8,1.862736,0.43451,0.153622,0.037074
+"Chamaecrista potentilla","perennial",5,1.86113,0.725502,0.324454,0.059319
+"Chamaecrista repens","perennial",86,3.004773,1.508589,0.162675,0.003333
+"Chamaecrista roraimae","perennial",20,2.398625,1.686766,0.377172,0.01483
+"Chamaecrista rossicorum","no_life_form_on_database",6,1.932976,0.377721,0.154204,0.049432
 "Chamaecrista rotundata var. grandistipula","no_life_form_on_database",NA,NA,NA,NA,NA
-"Chamaecrista rotundata var. interstes","perennial",4,1.833256,0.909639,0.45482,0.074856
-"Chamaecrista rotundata var. rotundata","no_life_form_on_database",6,2.348493,0.397517,0.162286,0.049904
-"Chamaecrista rotundifolia var. grandiflora","perennial",41,3.09094,1.071096,0.167277,0.007129
-"Chamaecrista rupestrium","perennial",4,1.31825,1.068499,0.53425,0.074856
-"Chamaecrista scabra","perennial",11,2.010495,0.322736,0.097309,0.02722
-"Chamaecrista setosa","perennial",39,1.790159,0.891261,0.142716,0.007678
-"Chamaecrista setosa var. detonsa","no_life_form_on_database",18,1.52511,0.583081,0.137434,0.016635
+"Chamaecrista rotundata var. interstes","perennial",4,1.859596,0.925086,0.462543,0.074148
+"Chamaecrista rotundata var. rotundata","no_life_form_on_database",6,2.348493,0.397517,0.162286,0.049432
+"Chamaecrista rotundifolia var. grandiflora","perennial",41,3.074917,1.038866,0.162244,0.007062
+"Chamaecrista rupestrium","perennial",4,1.336777,1.097569,0.548784,0.074148
+"Chamaecrista scabra","perennial",11,1.987648,0.393402,0.118615,0.026963
+"Chamaecrista setosa","perennial",39,1.7881,0.898853,0.143932,0.007605
+"Chamaecrista setosa var. detonsa","no_life_form_on_database",18,1.509128,0.610524,0.143902,0.016477
 "Chamaecrista simplex","perennial",NA,NA,NA,NA,NA
-"Chamaecrista simplifacta","perennial",2,1.791759,0.573414,0.405465,0.149712
-"Chamaecrista sincorana","perennial",2,2.975321,0.286707,0.202732,0.149712
+"Chamaecrista simplifacta","perennial",2,1.994492,0.286707,0.202732,0.148297
+"Chamaecrista sincorana","perennial",2,3.086893,0.128921,0.091161,0.148297
 "Chamaecrista sparsifolia","no_life_form_on_database",NA,NA,NA,NA,NA
 "Chamaecrista speciosa","perennial",NA,NA,NA,NA,NA
-"Chamaecrista strictula","perennial",1,2.079442,NA,NA,0.299425
-"Chamaecrista swainsonii","perennial",22,2.511222,1.292558,0.275574,0.01361
-"Chamaecrista tenuicaulis","no_life_form_on_database",1,1.098612,NA,NA,0.299425
-"Chamaecrista tragacanthoides var. rasa","perennial",5,1.271222,0.406635,0.181853,0.059885
-"Chamaecrista tragacanthoides var. tragacanthoides","no_life_form_on_database",3,1.707988,0.28906,0.166889,0.099808
-"Chamaecrista ulmea","perennial",1,1.791759,NA,NA,0.299425
-"Chamaecrista unijuga","perennial",2,3.826985,0.305564,0.216066,0.149712
-"Chamaecrista urophyllidia","perennial",7,1.755857,0.898485,0.339595,0.042775
-"Chamaecrista venulosa","perennial",10,2.304052,0.778456,0.246169,0.029942
-"Chamaecrista viscosa var. paraguayensis","perennial",6,3.031841,1.643668,0.671025,0.049904
+"Chamaecrista strictula","perennial",1,2.079442,NA,NA,0.296594
+"Chamaecrista swainsonii","perennial",22,2.525754,1.34206,0.286128,0.013482
+"Chamaecrista tenuicaulis","no_life_form_on_database",1,1.098612,NA,NA,0.296594
+"Chamaecrista tragacanthoides var. rasa","perennial",5,1.336922,0.376779,0.168501,0.059319
+"Chamaecrista tragacanthoides var. tragacanthoides","no_life_form_on_database",3,1.647214,0.281714,0.162648,0.098865
+"Chamaecrista ulmea","perennial",1,1.609438,NA,NA,0.296594
+"Chamaecrista unijuga","perennial",2,3.826985,0.305564,0.216066,0.148297
+"Chamaecrista urophyllidia","perennial",7,1.684053,0.830843,0.314029,0.042371
+"Chamaecrista venulosa","perennial",10,2.375898,0.752067,0.237824,0.029659
+"Chamaecrista viscosa var. paraguayensis","perennial",6,3.034844,1.645822,0.671904,0.049432
