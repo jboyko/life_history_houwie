@@ -78,6 +78,9 @@ plot.life.form <- function(group_tree, group_traits, group) {
     if(any("perennial" %in% order)) {
       colors_states[which(order=="perennial")] <- "goldenrod"
     }
+    if(any("biennial" %in% order)) {
+      colors_states[which(order=="perennial")] <- "red"
+    }
     if(any("no_life_form_on_database" %in% order)) {
       colors_states[which(order=="no_life_form_on_database")] <- "grey"
     }
@@ -123,6 +126,14 @@ all_vars <- merge(dist_sample, names_sample, by="plant_name_id")
 ###################################
 # Load trees
 all_trees <- load.trees(tree.dir="trees_gbif_tips")
+
+# pdf("plots.pdf", height=30, width=30)
+# par(mfrow=c(10,3))
+# for(i in 1:length(all_trees)) {
+#   plot(all_trees[[i]], type="fan",show.tip.label=F)
+# }
+# dev.off()
+
 focal_species_trees <- unname(unlist(lapply(all_trees, "[[", "tip.label")))
 # Load taxize reference tables back
 reference_table <- list.files("/Users/thaisvasconcelos/Desktop/WCVP_special_issue/WCVPtools/taxized_reference_tables", full.names = T)
