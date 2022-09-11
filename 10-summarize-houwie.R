@@ -14,23 +14,66 @@ require(aplot)
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # function # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-get_mod_avg_param_table <- function(climatic_variable, clade_name){
+get_mod_avg_param_table <- function(climatic_variable, clade_name, type){
   print(clade_name)
   focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
   focal_file <- focal_files[grep(clade_name, focal_files)]
   load(focal_file)
-  mod_avg_param_table <- getModelAvgParams(complete_list, force = FALSE)
-  mod_avg_param_table$waiting_times <- 1/mod_avg_param_table$waiting_times
+  mod_table <- get_mod_table(climatic_variable, clade_name, type=type)
+  new_list <- complete_list
+  # new_list <- complete_list[mod_table[,6] < 4]
+  # if(length(new_list) == 1){
+  #   dummy_model <- complete_list[[which.max(mod_table[,6])]]
+  #   dummy_model$AIC <- dummy_model$AICc <- dummy_model$BIC <- Inf
+  #   new_list <- c(new_list, list(dummy_model))
+  # }
+  mod_avg_param_table <- getModelAvgParams(new_list, type=type, force = TRUE)
   return(mod_avg_param_table)
 }
 
-get_mod_table <- function(climatic_variable, clade_name){
+load_file <- function(climatic_variable, clade_name){
   print(clade_name)
   focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
   focal_file <- focal_files[grep(clade_name, focal_files)]
   load(focal_file)
-  mod_avg_param_table <- getModelTable(complete_list)
+  return(complete_list)
+}
+
+
+get_mod_table <- function(climatic_variable, clade_name, type=type){
+  print(clade_name)
+  focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
+  focal_file <- focal_files[grep(clade_name, focal_files)]
+  load(focal_file)
+  mod_avg_param_table <- getModelTable(complete_list, type=type)
   return(mod_avg_param_table)
+}
+
+convertVariable <- function(climatic_variable, exp_vector){
+  if(climatic_variable == 'bio_1'){
+    return(exp(exp_vector) - 273.15)
+  }
+  if(climatic_variable == 'bio_4'){
+    return(exp(exp_vector))
+  }
+  if(climatic_variable == 'bio_5'){
+    return(exp(exp_vector) - 273.15)
+  }
+  if(climatic_variable == 'bio_6'){
+    return(exp(exp_vector) - 273.15)
+  }
+  if(climatic_variable == 'bio_12'){
+    return(exp(exp_vector))
+  }
+  if(climatic_variable == 'bio_14'){
+    return(exp(exp_vector))
+  }
+  if(climatic_variable == 'bio_15'){
+    return(exp(exp_vector))
+  }
+  if(climatic_variable == 'bio_ai'){
+    return(exp(exp_vector) * 0.0001)
+  }
 }
 
 getVariableName <- function(climatic_variable){
@@ -54,41 +97,42 @@ getVariableName <- function(climatic_variable){
   #              "BIO18 = Precipitation of Warmest Quarter",
   #              "BIO19 = Precipitation of Coldest Quarter",
   #              "BIOAI = Aridity Index")
-  bioclim <- c("Annual Mean Temperature",
+  bioclim <- c("Annual Mean Temperature (°C)",
                "Mean Diurnal Range",
                "Isothermality (BIO2/BIO7) (×100)",
-               "Temperature Seasonality",
-               "Max Temperature of Warmest Month",
-               "Min Temperature of Coldest Month",
+               "Temperature Seasonality (SD x 100)",
+               "Max Temperature of Warmest Month (°C)",
+               "Min Temperature of Coldest Month (°C)",
                "Temperature Annual Range (BIO5-BIO6)",
                "Mean Temperature of Wettest Quarter",
                "Mean Temperature of Driest Quarter",
                "Mean Temperature of Warmest Quarter",
                "Mean Temperature of Coldest Quarter",
-               "Annual Precipitation",
-               "Precipitation of Wettest Month",
-               "Precipitation of Driest Month",
-               "Precipitation Seasonality",
+               "Annual Precipitation (mm)",
+               "Precipitation of Wettest Month (mm)",
+               "Precipitation of Driest Month (mm)",
+               "Precipitation Seasonality (Coefficient of Variation)",
                "Precipitation of Wettest Quarter",
                "Precipitation of Driest Quarter",
                "Precipitation of Warmest Quarter",
                "Precipitation of Coldest Quarter",
-               "Aridity Index")
+               "Aridity Index (P/PET)")
   names(bioclim) <- c(paste0("bio_", 1:19), "bio_ai")
-  return(bioclim[grep(climatic_variable, names(bioclim))])
+  
+  return(bioclim[match(climatic_variable, names(bioclim))])
 }
 
 get_stderr <- function(vec){
   return(sd(vec)/sqrt(length(vec)))
 }
 
-runTtest <- function(phy, plot_data, variable){
-  annual_data <- plot_data[plot_data$Group.1 == "annual" & plot_data$variable == variable,]
-  annual_vec <- annual_data$value
-  names(annual_vec) <- annual_data$clade
-  perrenial_data <- plot_data[plot_data$Group.1 == "perennial" & plot_data$variable == variable,]
-  perrenial_vec <- perrenial_data$value
-  names(perrenial_vec) <- perrenial_data$clade
+runTtest <- function(phy, plot_data, variable=3){
+  annual_data <- plot_data[plot_data$Group.2 == "annual",]
+  annual_vec <- annual_data[,variable]
+  names(annual_vec) <- annual_data$Group.1
+  perrenial_data <- plot_data[plot_data$Group.2 == "perennial",]
+  perrenial_vec <- perrenial_data[,variable]
+  names(perrenial_vec) <- perrenial_data$Group.1
   
   test <- phyl.pairedttest(phy, annual_vec, perrenial_vec, lambda = 1)
   return(test)
@@ -112,6 +156,61 @@ getSummTable <- function(big_list, climatic_variable){
   return(out)
 }
 
+makePlot <- function(variable, letter, mu){
+  climate_variable <- getVariableName(variable)
+  
+  focal_list <- all_model_tables[[variable]]
+  focal_dat <- do.call(rbind, focal_list)
+  taxon_names <- unlist(lapply(focal_list, function(x) rownames(x)))
+  clade_names <- gsub("\\..*", "", rownames(focal_dat))
+  rownames(focal_dat) <- NULL
+  focal_dat$taxon <- taxon_names
+  focal_dat$clade <- clade_names
+  # head(focal_dat)
+  summ_data <- aggregate(focal_dat[,c(5,6)], by = list(focal_dat$clade, focal_dat$tip_state), mean)
+  if(mu == "mean" | mu == "both"){
+    n_annual <- length(which(summ_data[summ_data$Group.2 == "annual", 3] - summ_data[summ_data$Group.2 == "perennial", 3] > 0))
+    ttest_res <- runTtest(phy, summ_data, 3)
+    if(ttest_res$dbar < 0){
+      n_annual <- 33 - n_annual
+    }
+    summ_data[,3] <- convertVariable(variable, summ_data[,3])
+    a <- ggplot(summ_data, aes(x = Group.2, y = expected_mean, group = Group.1, color = Group.2)) +
+      xlab("") +
+      ylab("Expected mean") +
+      geom_line(color = "light grey") +
+      geom_point(shape = 19, color = "light grey") +
+      ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3), " (", n_annual, " out of 33 clades)" )) +
+      theme_bw() +
+      stat_summary(fun=mean, geom="point",aes(group=1, size = 2), color = cols) +  
+      stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
+      # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
+      theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
+    out <- a
+  }
+  if(mu == "var" | mu == "both"){
+    n_annual <- length(which(summ_data[summ_data$Group.2 == "annual", 4] - summ_data[summ_data$Group.2 == "perennial", 4] > 0))
+    ttest_res <- runTtest(phy, summ_data, 4)
+    if(ttest_res$dbar < 0){
+      n_annual <- 33 - n_annual
+    }
+    b <- ggplot(summ_data, aes(x = Group.2, y = expected_var, group = Group.1, color = Group.2)) +
+      xlab("") +
+      ylab("Expected mean") +
+      ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3), " (", n_annual, " out of 33 clades)" )) +
+      geom_line(color = "light grey") +
+      geom_point(shape = 19, color = "light grey") +
+      theme_bw() +
+      stat_summary(fun=mean, geom="point",aes(group=1, size = 2), color = cols) +  
+      stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
+      # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
+      theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
+    out <- b
+  }
+  return(out)
+}
+
+
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # setup # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
@@ -126,47 +225,98 @@ data_files <- dir("datasets_final_for_hOUwie/full_datasets/", full.names = TRUE)
 tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-# # # # # run  # # # # #
+# # # # # run  1 # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
 climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
 # climatic_variables <- c("bio_6")
-# big_list <- list()
-# print <- FALSE
-# 
+big_list <- list()
+print <- FALSE
+
 # for(i in 1:length(climatic_variables)){
 #   climatic_variable <- climatic_variables[i]
 #   print("loading")
-#   mod_avg_param_list <- lapply(group_names, function(x) get_mod_avg_param_table(climatic_variable, x))
+#   mod_avg_param_list <- lapply(group_names, function(x) get_mod_avg_param_table(climatic_variable, x, type="AICc"))
+#   # test <- load_file(climatic_variable, "Balsamiaceae")
 #   # mod_avg_param_list <- lapply(group_names, function(x) get_mod_table(climatic_variable, x))
 #   names(mod_avg_param_list) <- group_names
 #   big_list[[i]] <- mod_avg_param_list
-#   # get_mod_table("bio_4", "Balsamiaceae")
-# 
+#   # get_mod_table(climatic_variable, "CES")
 #   # test <- mod_avg_param_list[[1]]
+#   # mod_avg_param_list <- big_list[[i]]
 #   # aggregate(test[,1:4], by = list(test$tip_state), mean)
-#   if(print){
-#     plot_data <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
-#     data_se <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), get_stderr)))
-#     plot_data$clade <- gsub("\\..*", "", rownames(plot_data))
-#     plot_data <- melt(plot_data, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
-# 
-#     title <- getVariableName(climatic_variable)
-#     print("plotting")
-#     ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
-#       ylab("") +
-#       xlab("Life history strategy") +
-#       ggtitle(title) +
-#       geom_line(color = "black") +
-#       geom_point(shape = 19) +
-#       facet_wrap(~variable, scales = "free") +
-#       theme_bw()
-# 
-#     file_name <- paste0("figures/prelim_results/", climatic_variable, ".pdf")
-#     ggsave(file_name, height = 8, width = 14, units = "in")
-#   }
+#   # if(print){
+#   #   plot_data <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), mean)))
+#   #   data_se <- do.call(rbind, lapply(mod_avg_param_list, function(x) aggregate(x[,1:4], by = list(x$tip_state), get_stderr)))
+#   #   plot_data$clade <- gsub("\\..*", "", rownames(plot_data))
+#   #   title <- getVariableName(climatic_variable)
+#   #   
+#   #   # discrete rate
+#   #   plot_data_1 <- plot_data[,c(1,2,6)]
+#   #   ranges <- c(mean(plot_data_1[,2]) - (sd(plot_data_1[,2])), mean(plot_data_1[,2]) + (sd(plot_data_1[,2])))
+#   #   p1 <- ggplot(melt(plot_data_1), aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+#   #     ylab("") +
+#   #     xlab("Life history strategy") +
+#   #     ggtitle("Discrete rate") +
+#   #     geom_line(color = "black") +
+#   #     geom_point(shape = 19) +
+#   #     coord_cartesian(ylim=ranges) +
+#   #     theme_bw()
+#   #   
+#   #   # alpha
+#   #   plot_data_1 <- plot_data[,c(1,3,6)]
+#   #   ranges <- c(mean(plot_data_1[,2]) - (sd(plot_data_1[,2])), mean(plot_data_1[,2]) + (sd(plot_data_1[,2])))
+#   #   p2 <- ggplot(melt(plot_data_1), aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+#   #     ylab("") +
+#   #     xlab("Life history strategy") +
+#   #     ggtitle("Alpha") +
+#   #     geom_line(color = "black") +
+#   #     geom_point(shape = 19) +
+#   #     coord_cartesian(ylim=ranges) +
+#   #     theme_bw()
+#   #   
+#   #   # sigma.sq
+#   #   plot_data_1 <- plot_data[,c(1,4,6)]
+#   #   ranges <- c(mean(plot_data_1[,2]) - (sd(plot_data_1[,2])), mean(plot_data_1[,2]) + (sd(plot_data_1[,2])))
+#   #   p3 <- ggplot(melt(plot_data_1), aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+#   #     ylab("") +
+#   #     xlab("Life history strategy") +
+#   #     ggtitle("Sigma Squared") +
+#   #     geom_line(color = "black") +
+#   #     geom_point(shape = 19) +
+#   #     coord_cartesian(ylim=ranges) +
+#   #     theme_bw()
+#   #   
+#   #   # sigma.sq
+#   #   plot_data_1 <- plot_data[,c(1,5,6)]
+#   #   ranges <- c(mean(plot_data_1[,2]) - (sd(plot_data_1[,2])), mean(plot_data_1[,2]) + (sd(plot_data_1[,2])))
+#   #   p4 <- ggplot(melt(plot_data_1), aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+#   #     ylab("") +
+#   #     xlab("Life history strategy") +
+#   #     ggtitle("Theta") +
+#   #     geom_line(color = "black") +
+#   #     geom_point(shape = 19) +
+#   #     coord_cartesian(ylim=ranges) +
+#   #     theme_bw()
+#   #   
+#   #   # plot_data <- melt(plot_data, by = list("waiting_times", "alpha", "sigma.sq", "theta"))
+#   # 
+#   #   title <- getVariableName(climatic_variable)
+#   #   print("plotting")
+#   #   ggplot(plot_data, aes(x = Group.1, y = value, group = clade, color = Group.1)) +
+#   #     ylab("") +
+#   #     xlab("Life history strategy") +
+#   #     ggtitle(title) +
+#   #     geom_line(color = "black") +
+#   #     geom_point(shape = 19) +
+#   #     facet_wrap(~variable, scales = "free") +
+#   #     theme_bw()
+#   # 
+#   #   file_name <- paste0("figures/prelim_results/", climatic_variable, ".pdf")
+#   #   ggsave(file_name, height = 8, width = 14, units = "in")
+#   # }
 # }
-# 
+
 # names(big_list) <- climatic_variables
 # all_model_tables <- big_list
 # save(all_model_tables, file = "all_model_tables.Rsave")
@@ -175,7 +325,7 @@ climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", 
 # write.csv(summ_tables, file = "tables/summ_table.csv")
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-# # # # # phylogenetic model support heat map!  # # # # #
+# # # # # run  2 # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
 load("all_model_tables.Rsave")
@@ -183,15 +333,13 @@ phy <- read.tree("backbone_tree.tre")
 phy$tip.label <- gsub("-.*", "", phy$tip.label)
 climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
 
-# make a table for modeling results
 for(i in 1:length(all_model_tables)){
   focal_tbl <- do.call(rbind, all_model_tables[[i]])
   write.csv(focal_tbl, file = paste0("tables/model_tables/model_table-", names(all_model_tables)[i], ".csv"))
 }
 
-
 # data organization
-big_table <- do.call(cbind, lapply(lapply(all_model_tables, function(x) do.call(rbind, x)), function(x) round(x, 2)))
+big_table <- do.call(cbind, lapply(lapply(all_model_tables, function(x) do.call(rbind, x)), function(y) round(y, 2)))
 aicwt_table <- melt(cbind(rownames(big_table), big_table[,grep("AICwt", colnames(big_table))]))
 tmp1 <- do.call(rbind, strsplit(aicwt_table[,1], "\\."))
 tmp2 <- cbind(tmp1[,1], do.call(rbind, strsplit(tmp1[,2], "_")))
@@ -219,6 +367,24 @@ b <- ggplot(cd_support_table, aes(x = climate_variable, y = id, fill = AICwt)) +
 
 ab <- b %>% insert_left(a, width = 3)  
 ggsave(filename = "figures/support_for_cd.pdf", plot = ab, height = 10, width = 15, units = "in")
+
+
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+# # # # # individual plots # # # # #
+# # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
+cols <- c("#8c510a", "#5ab4ac")
+# variable <- climatic_variables[1]
+a <- makePlot(climatic_variables[1], "a", "var")
+b <- makePlot(climatic_variables[2], "b", "var")
+c <- makePlot(climatic_variables[3], "c", "var")
+d <- makePlot(climatic_variables[4], "d", "var")
+e <- makePlot(climatic_variables[5], "e", "var")
+f <- makePlot(climatic_variables[6], "f", "var")
+g <- makePlot(climatic_variables[7], "g", "var")
+h <- makePlot(climatic_variables[8], "h", "var")
+
+final_plot <- grid.arrange(a, b, c, d, e, f, g, h, nrow=4)
+ggsave("~/2022_life-history/figures/vars-ttests.pdf", final_plot, height = 10, width = 13, units = "in")
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # some tip rate stuff  # # # # #
@@ -308,10 +474,17 @@ for(i in 1:8){
   plot_list[[i]] <- grid.arrange(p_sigma, p_theta, nrow=1)
 }
 
-poop <- grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]],
-             plot_list[[5]], plot_list[[6]], plot_list[[7]], plot_list[[8]], ncol = 1)
+poop1 <- grid.arrange(plot_list[[1]], plot_list[[5]], plot_list[[8]], ncol = 1)
 
-ggsave(filename = "figures/ttest-plots.pdf",  plot = poop, height = 30, width = 10, units = "in")
+poop2 <- grid.arrange(plot_list[[2]], plot_list[[7]], ncol = 1)
+
+poop3 <- grid.arrange(plot_list[[3]], plot_list[[4]], plot_list[[6]], ncol = 1)
+
+
+ggsave(filename = "figures/ttest-plots-mean.pdf",  plot = poop1, height = 15, width = 10, units = "in")
+ggsave(filename = "figures/ttest-plots-vars.pdf",  plot = poop2, height = 10, width = 10, units = "in")
+ggsave(filename = "figures/ttest-plots-extr.pdf",  plot = poop3, height = 15, width = 10, units = "in")
+
 
 # climatic_variable <- "bio_ai"
 # clade_name <- "Solanaceae"

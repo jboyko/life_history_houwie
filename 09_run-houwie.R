@@ -40,7 +40,7 @@ runSingleModel <- function(clade_name, climate_variable, model_name, model_set, 
   directory_path_b <- paste0("res_files/", climate_variable, "/", clade_name)
   dir.create(directory_path_b, showWarnings = FALSE)
   cont_model <- model_set[[match(model_name, names(model_set))]]
-  res <- hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(cont_model)[2] == 2, 1, 2), "ARD", cont_model, nSim = 50, quiet = TRUE, mserr = "known", diagn_msg = TRUE, ub_continuous_model = c(10,10,100))
+  res <- hOUwie(focal_data$phy, focal_data$dat, ifelse(dim(cont_model)[2] == 2, 1, 2), "ARD", cont_model, nSim = 100, quiet = TRUE, mserr = "known", diagn_msg = TRUE, ub_continuous_model = c(15,15,150))
   file_name <- paste0(directory_path_b, "/", model_name, "_", clade_name, "_", climate_variable, ".Rsave")
   if(is.null(res)){
     return(NULL)
@@ -107,7 +107,9 @@ CID2_model_names <- c("BMV", "OUA", "OUV", "OUM", "OUVA", "OUMV", "OUMA", "OUMVA
 CID_models <- lapply(CID_model_names, function(x) getOUParamStructure(x, 2, 1))
 CD_models <- lapply(CD_model_names, function(x) getOUParamStructure(x, 2, 1))
 CID2_models <- lapply(CID2_model_names, function(x) getOUParamStructure(x, 2, 2, TRUE))
+HYB_models <- lapply(c("BMV", "OUV", "OUM", "OUMV"), function(x) getOUParamStructure(x, 2, 2, FALSE))
 
+names(HYB_models) <- paste0("HYB_", c("BMV", "OUV", "OUM", "OUMV"))
 names(CID_models) <- paste0("CID_", CID_model_names)
 names(CD_models) <- paste0("CD_", CD_model_names)
 names(CID2_models) <- paste0("CID_", CID2_model_names)
@@ -117,20 +119,30 @@ continuous_models <- c(CID_models, CD_models, CID2_models)
 # removing variable alpha models from the set
 continuous_models <- continuous_models[-grep("A$", names(continuous_models))]
 
-model_set <- continuous_models
+model_set <- c(continuous_models, HYB_models)
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # run intial models # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 climatic_variables <- c("bio_1", "bio_12", "bio_4", "bio_15", "bio_5", "bio_14", "bio_ai", "bio_6")
-# done: bio_5, bio_14, bio_ai, bio_4, bio_1, bio_12, bio_15
-climate_variable <- "bio_6"
+# done: bio_1, bio_12, bio_4
+climate_variable <- "bio_15"
 # clade_name <- "Alysseae",bio_12
-models_to_run <- do.call(rbind, lapply(group_names, function(x) check_reruns(climate_variable, x, continuous_models)))
-models_to_run <- do.call(c, apply(models_to_run, 1, list))
-mclapply(models_to_run, function(x) runSingleModel(x[1], x[2], x[3], continuous_models, data_files, tree_files), mc.cores = 80)
+all_models_to_run <- list()
+for(i in 1:length(climatic_variables)){
+  climate_variable <- climatic_variables[i]
+  models_to_run <- do.call(rbind, lapply(group_names, function(x) check_reruns(climate_variable, x, model_set)))
+  models_to_run <- do.call(c, apply(models_to_run, 1, list))
+  all_models_to_run <- c(all_models_to_run, models_to_run)
+}
+# models_to_run <- do.call(rbind, lapply(group_names, function(x) check_reruns(climate_variable, x, model_set)))
+# models_to_run <- do.call(c, apply(models_to_run, 1, list))
+mclapply(all_models_to_run, function(x) runSingleModel(x[1], x[2], x[3], model_set, data_files, tree_files), mc.cores = 4)
 
 
-runSingleModel(models_to_run[[1]][1], models_to_run[[1]][2], models_to_run[[1]][3], continuous_models, data_files, tree_files)
+runSingleModel(all_models_to_run[[462]][1], all_models_to_run[[462]][2], all_models_to_run[[462]][3], model_set, data_files, tree_files)
+
+
+runSingleModel("Apioideae", "bio_1", "CID_BM1", model_set, data_files, tree_files)
 
 # mclapply(group_names, function(x) runSingleModelSet(x, climate_variable, continuous_models, data_files, tree_files), mc.cores = 4)
 
@@ -168,11 +180,17 @@ runSingleModel(models_to_run[[1]][1], models_to_run[[1]][2], models_to_run[[1]][
 # 1, 15, 4, 5
 # 12, 14, ai
 # focal_clade <- "Lepidieae"
-model_names <- names(continuous_models)
+model_names <- names(model_set)
 climate_variable <- "bio_6"
 # complile_model_list(climate_variable, focal_clade, model_names)
+climatic_variables <- c("bio_1", "bio_12", "bio_4", "bio_15", "bio_5", "bio_14", "bio_ai", "bio_6")
+for(i in 1:length(climatic_variables)){
+  # print(i)
+  climate_variable <- climatic_variables[i]
+  lapply(group_names, function(x) complile_model_list(climate_variable, x, model_names))
+}
 
-lapply(group_names, function(x) complile_model_list(climate_variable, x, model_names))
+# lapply(group_names, function(x) complile_model_list(climate_variable, x, model_names))
 
 
 
