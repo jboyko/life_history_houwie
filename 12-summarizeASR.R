@@ -18,12 +18,14 @@ get_mod_avg_recon <- function(climatic_variable, clade_name){
   focal_files <- dir(res_folders[grep(paste0(climatic_variable, "$"), res_folders)], full.names = TRUE)
   focal_file <- focal_files[grep(clade_name, focal_files)]
   load(focal_file)
-  mod_avg_param_table <- getModelTable(complete_list)
+  mod_avg_param_table <- getModelTable(complete_list, "AICc")
+  complete_list <- complete_list[!is.na(names(complete_list))] # remove failed
   root_p_list <- lapply(complete_list, getRootFromModel)
-  cd_roots <- do.call(rbind, root_p_list[1:6])
-  cid_roots <- do.call(rbind, root_p_list[7:10])[,c(1,2)] + do.call(rbind, root_p_list[7:10])[,c(3,4)]
+  cd_index <- unlist(lapply(root_p_list, function(x) length(x) == 2))
+  cd_roots <- do.call(rbind, root_p_list[cd_index])
+  cid_roots <- do.call(rbind, root_p_list[!cd_index])[,c(1,2)] + do.call(rbind, root_p_list[!cd_index])[,c(3,4)]
   root_probs <- rbind(cd_roots, cid_roots)
-  weighted_root_state <- colSums(root_probs * mod_avg_param_table$AICwt)
+  weighted_root_state <- colSums(root_probs * mod_avg_param_table[,7])
   weighted_root_state <- weighted_root_state/sum(weighted_root_state)
   return(weighted_root_state)
 }
@@ -87,8 +89,9 @@ names(asr_list) <- group_names
 
 all_asrs <- do.call(rbind, lapply(asr_list, function(x) colMeans(x)/sum(colMeans(x))))
 p_annual <- data.frame(clade = rownames(all_asrs), p_ann = all_asrs[,1], p_min = do.call(rbind, lapply(asr_list, function(x) range(x[,1])))[,1], p_max = do.call(rbind, lapply(asr_list, function(x) range(x[,1])))[,2])
+p_annual <- p_annual[!p_annual$clade == "Chorisporeae",]
 
-ggplot(p_annual, aes(x = reorder(clade, p_ann), y = p_ann)) +
+p <- ggplot(p_annual, aes(x = reorder(clade, p_ann), y = p_ann)) +
   geom_point() +
   geom_errorbar(aes(ymin=p_min, ymax=p_max), width=.2) +
   xlab("Clade") +
@@ -97,8 +100,10 @@ ggplot(p_annual, aes(x = reorder(clade, p_ann), y = p_ann)) +
   coord_flip(ylim=c(0,1)) +
   theme_bw()
 
+ggsave("figures/asr-plot.pdf", p, height = 10, width = 12, units = "in")
 
-asr_list$Apioideae
+
+# asr_list$Apioideae
 bio_5 <- get_complete_list("bio_5", "Apioideae")
 bio_12 <- get_complete_list("bio_12", "Apioideae")
 
