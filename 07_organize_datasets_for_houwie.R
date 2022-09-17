@@ -62,6 +62,15 @@ traits <- lapply(paste0(trait.dir, "/", trait_files), read.csv)
 labels <- gsub("_life_form_cleaned.csv","",trait_files)
 names(traits) <- labels
 
+# all_annuals <- c()
+# all_perennials <- c()
+# for(i in 1:length(traits)) {
+#   one_table <- traits[[i]]
+#   all_annuals <- c(all_annuals, table(one_table$life_form)[which(names(table(one_table$life_form))=="annual")])
+#   all_perennials <- c(all_perennials, table(one_table$life_form)[which(names(table(one_table$life_form))=="perennial")])
+# }
+# sum(all_annuals) / sum(all_perennials)
+
 # Load simplified trees
 tree.dir <- "./trees_simplified_tips/"
 tree_files <- list.files(tree.dir, ".tre")
