@@ -43,7 +43,7 @@ simplify.names.taxize <- function(names) {
 # rm(list=ls())
 setwd("~/Desktop/WCVP_special_issue/James_perennial_annual/life_history_houwie")
 library(ape)
-
+setwd("2022_life-history/")
 # Climate data
 climate_data.dir <- "./climate_data"
 summstats_files <- list.files(climate_data.dir, "summstats")
