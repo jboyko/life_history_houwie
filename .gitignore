@@ -44,3 +44,7 @@ res_files/
 rasters/
 doc/
 old_docs/
+.DS_Store
+datasets_final_for_hOUwie/.DS_Store
+figures/.DS_Store
+tables/.DS_Store
