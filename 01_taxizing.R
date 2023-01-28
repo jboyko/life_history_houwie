@@ -1,5 +1,7 @@
 # Taxizing data
 library(taxize)
+library(rgbif)
+#sessionInfo()
 
 #' Taxize GBIF
 #' @param name A character vector with species names.
