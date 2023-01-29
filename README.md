@@ -22,6 +22,10 @@ Tables describing sampling fractions, number of tips and proportions of annuals 
 
 Datasets of climatic variables and life history strategies for each analyzed clade in the preferred input format for hOUwie.
 
+- **distribution_maps/**
+
+Maps by genus showing all filtered distribution points used in climatic characterizations for climatic evolution analyses.
+
 - **tables/** 
 
 Tables containing all final results from hOUwie analyses.
