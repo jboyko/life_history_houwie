@@ -1,0 +1,102 @@
+
+The following text is copied "as is" from https://powo.science.kew.org/about-wcvp#lifeforms.
+
+#####
+
+Life-forms
+
+The terminology for life-forms, definitions of which follow, is based on the system of Raunkiær (1934, especially chapters 1 and 2) with modifications derived from Flora van België, het Groothertogdom Luxemburg, Noord-Frankrijk en aangrenzende gebieden (De Langhe et al. 1983: pp. xvii-xviii, 869 (fig. 16)). Many plant families have their own particular lifeforms. It is therefore only attempted to give a very broad and general lifeform, mainly to aid global searches over different groups. On the POWO website, only the English forms are shown.
+
+Main Categories:
+
+phanerophyte (phan.) tree
+stems: woody and persisting for several years
+buds: normally above 3 m
+e.g.: small and large trees
+
+herbaceous phanerophyte (herb. phan.) herbaceous tree
+stems: herbaceous and persisting for several years
+buds: above soil-level
+e.g.: Musa balbisiana
+
+nanophanerophyte (nanophan.) shrub
+stems: woody and persisting for several years
+buds: above soil level but normally below 3 m
+e.g.: shrubs
+
+chamaephyte (cham.) subshrub
+stems: herbaceous and/or woody and persisting for several years
+buds: on or just above soil level, never above 50 cm
+e.g.: Alyssum, Acaena, Acantholimon, Saxifraga
+
+hemicryptophyte (hemicr.) perennial
+stems: herbaceous, often dying back after the growing season, with shoots
+at soil level surviving
+buds: just on or below soil level
+e.g.: Aster, Viola odorata
+
+geophyte; plants with underground storage organs
+hemicryptophytes that survive unfavourable seasons in the form of a rhizome, bulb, tuber or rootbud.
+The term tuber is used here in a broad sense and includes every storage organ that is not a rhizome, bulb or rootbud.
+
+helophyte (hel.) perennial marsh plant
+hemicryptophytes that grow in soil saturated with water or in water. leaf and flower
+bearing shoots rise above water
+e.g.: Typha, Echinodorus
+
+hydrophyte; aquatic plants
+stems: vegetative shoots sunk in water
+buds: permanently or temporarily on the bottom of the water
+
+hydrohemicryptophyte (hydrohemicr.)
+e.g. Stratioides
+
+hydrogeophyte
+e.g. Nymphaea, Nuphar
+
+hydrotherophyte (hydrother.)
+e.g. Lemna, Utricularia vulgaris
+
+therophyte (ther.) annual
+plants that survive unfavourable seasons in the form of seeds and complete their life-history during the favorable season.
+e.g. annuals
+
+Others
+
+bamboo
+biennial
+pseudobulb
+pachycaul
+cereiform
+cauduciform
+
+Additional information
+
+climbing (cl.)
+e.g.: cl. phan.: Hedera helix
+cl. nanophan.: Clematis florida
+cl. hemicr.: Vicia cracca
+cl. tuber geophyte: Tropaeolum tuberosum
+cl. ther.: Pisum sativum
+(cl.) nanophan: for plants that are sometimes climbing
+succulent (succ.)
+e.g.: succ. nanophan.: Opuntia ficus-indica
+succ. cham.: Lophophora williamsii
+succ. ther.: Sedum azureum
+cl. succ. nanophan.: Cissus quadrangula
+
+epiphytic and lithophytic
+Growing on trees or rocks, without extracting nutrition from the host.
+
+parasitic (par.)
+hemiparasitic (hemipar.)
+parasitic plants that are still able to photosynthesise
+e.g. Viscum album is a hemipar. nanophan.
+holoparasitic (holopar.)
+parasitic plants that are fully dependent on their host
+e.g. Orobanche ramosa is a holopar. ther.
+
+holomycotroph (often incorrectly called saprophyte)
+e.g. Neottia nidus-avis is holomycotroph.
+
+####
