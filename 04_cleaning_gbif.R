@@ -83,17 +83,18 @@ write.csv(cleaned_points_final, file="gbif_life_form/preliminary_cleaned_points.
 all_cleaned_points_files <- read.csv("gbif_life_form/preliminary_cleaned_points.csv")
 
 # Plotting to inspect distributions
-species <- unique(all_cleaned_points_files$scientificName)
+species <- unique(all_cleaned_points_files$genus)
 species <- subset(species, species!="")
-pdf("checking_points.pdf")
-  for(spp_index in 1:length(species)){
-    tmp_subset <- as.data.frame(all_cleaned_points_files[all_cleaned_points_files$scientificName==species[spp_index],])
+for(spp_index in 1:length(species)){
+    tmp_subset <- as.data.frame(all_cleaned_points_files[all_cleaned_points_files$genus==species[spp_index],])
+    pdf(paste0("distribution_maps/",species[spp_index],"_",unique(tmp_subset$family)[1],".pdf"))
     coord <- tmp_subset[,c("decimalLongitude","decimalLatitude")]
     coordinates(coord) <- ~ decimalLongitude + decimalLatitude
     plot(wrld_simpl)
     plot(coord, col="red", add=T)
     title(species[spp_index])
-    print(spp_index)
+    cat(spp_index, "\r")
+    dev.off()
   }
-dev.off()
+
 
