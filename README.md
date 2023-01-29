@@ -102,6 +102,13 @@ Creates a backbone tree where each tip is one of the analyzed clades based on th
 Summarizes results from ancestral state reconstructions from hOUwie.
 
 ----
+Other files:
+
+> WCVP_life_form_description.txt
+
+Description of life forms as presented by the WCVP website (https://powo.science.kew.org/about-wcvp#lifeforms).
+
+----
 Distribution data used in niche analyses comes from:
 
 GBIF.org (29 April 2022) GBIF Occurrence Download https://doi.org/10.15468/dl.vt49kn
