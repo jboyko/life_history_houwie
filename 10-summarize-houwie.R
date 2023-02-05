@@ -173,38 +173,32 @@ makePlot <- function(variable, letter, mu){
   summ_data <- summ_data[!summ_data$Group.1 == "Chorisporeae",] # remove Chorisporeae
   write.csv(summ_data, paste0("tables/parameter_tables/", variable, ".csv"))
   if(mu == "mean" | mu == "both"){
-    n_annual <- length(which(summ_data[summ_data$Group.2 == "annual", 3] - summ_data[summ_data$Group.2 == "perennial", 3] > 0))
     ttest_res <- runTtest(phy, summ_data, 7)
-    if(ttest_res$dbar < 0){
-      n_annual <- 33 - n_annual
-    }
-    a <- ggplot(summ_data, aes(x = Group.2, y = expected_mean, group = Group.1, color = Group.2)) +
+    a <- ggplot(summ_data %>% group_by(Group.1) %>% mutate(slope = (expected_mean[Group.2=="annual"] - expected_mean[Group.2=="perennial"])/(2-1)), 
+    aes(x = Group.2, y = expected_mean, group = Group.1, color = slope > 0)) +
       xlab("") +
       ylab("Expected mean") +
-      geom_line(color = "light grey") +
-      geom_point(shape = 19, color = "light grey") +
-      ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3), " (", n_annual, " out of 32 clades)" )) +
+      geom_line() +
+      geom_point(shape = 19) +
+      ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3))) +
       theme_bw() +
-      stat_summary(fun=mean, geom="point",aes(group=1, size = 2), color = cols) +  
+      stat_summary(fun=mean, geom="point",aes(group=1, size = 2)) +  
       stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
       # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
       theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
     out <- a
   }
   if(mu == "var" | mu == "both"){
-    n_annual <- length(which(summ_data[summ_data$Group.2 == "annual", 4] - summ_data[summ_data$Group.2 == "perennial", 4] > 0))
     ttest_res <- runTtest(phy, summ_data, 8)
-    if(ttest_res$dbar < 0){
-      n_annual <- 33 - n_annual
-    }
-    b <- ggplot(summ_data, aes(x = Group.2, y = expected_var, group = Group.1, color = Group.2)) +
+    b <- ggplot(summ_data %>% group_by(Group.1) %>% mutate(slope = (expected_var[Group.2=="annual"] - expected_var[Group.2=="perennial"])/(2-1)), 
+    aes(x = Group.2, y = expected_var, group = Group.1, color = slope > 0)) +
       xlab("") +
       ylab("Expected variance") +
-      ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3), " (", n_annual, " out of 32 clades)" )) +
-      geom_line(color = "light grey") +
-      geom_point(shape = 19, color = "light grey") +
+      geom_line() +
+      geom_point(shape = 19) +
+      ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3))) +
       theme_bw() +
-      stat_summary(fun=mean, geom="point",aes(group=1, size = 2), color = cols) +  
+      stat_summary(fun=mean, geom="point",aes(group=1, size = 2)) +  
       stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
       # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
       theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
@@ -384,6 +378,15 @@ ggsave(filename = "figures/support_for_cd.pdf", plot = ab, height = 10, width = 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 cols <- c("#8c510a", "#5ab4ac")
 # variable <- climatic_variables[1]
+a <- makePlot(climatic_variables[1], "a", "mean")
+b <- makePlot(climatic_variables[2], "b", "mean")
+c <- makePlot(climatic_variables[3], "c", "mean")
+d <- makePlot(climatic_variables[4], "d", "mean")
+e <- makePlot(climatic_variables[5], "e", "mean")
+f <- makePlot(climatic_variables[6], "f", "mean")
+g <- makePlot(climatic_variables[7], "g", "mean")
+h <- makePlot(climatic_variables[8], "h", "mean")
+
 a <- makePlot(climatic_variables[1], "a", "var")
 b <- makePlot(climatic_variables[2], "b", "var")
 c <- makePlot(climatic_variables[3], "c", "var")
@@ -394,7 +397,7 @@ g <- makePlot(climatic_variables[7], "g", "var")
 h <- makePlot(climatic_variables[8], "h", "var")
 
 final_plot <- grid.arrange(a, b, c, d, e, f, g, h, nrow=4)
-ggsave("~/2022_life-history/figures/var-ttests.pdf", final_plot, height = 10, width = 13, units = 
+ggsave("~/2022_life-history/figures/mean-ttests.pdf", final_plot, height = 10, width = 13, units = 
          "in")
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
