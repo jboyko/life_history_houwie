@@ -1,3 +1,5 @@
+# rm(list=ls())
+
 require(OUwie)
 require(corHMM)
 require(parallel)
@@ -192,7 +194,11 @@ makePlot <- function(variable, letter, mu, TABLE = FALSE){
       stat_summary(fun=mean, geom="point",aes(group=1, size = 2)) +  
       stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
       # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
-      theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
+      theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10)) +
+      theme(plot.title=element_text(size=10)) +
+      theme(plot.subtitle=element_text(size=10)) +
+      theme(axis.title=element_text(size=10)) +
+      theme(axis.text=element_text(size=10)) 
     out <- a
   }
   if(mu == "var" | mu == "both"){
@@ -204,11 +210,16 @@ makePlot <- function(variable, letter, mu, TABLE = FALSE){
       geom_line() +
       geom_point(shape = 19) +
       ggtitle(paste0(letter, ") ", climate_variable), subtitle = paste0("p = ", round(ttest_res$P.dbar, 3))) +
+      theme(plot.title = element_text(size = 0.2)) +
       theme_bw() +
       stat_summary(fun=mean, geom="point",aes(group=1, size = 2)) +  
       stat_summary(fun.data = "mean_se", geom = "errorbar", aes(group=1), width = 0.15, color = "black") +
       # labs(caption = paste0("p = ", round(t_sigma$P.dbar, 3))) +
-      theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10))
+      theme(legend.position="none", text = element_text(size = 15), axis.text.y = element_text(size = 10)) +
+      theme(plot.title=element_text(size=10)) +
+      theme(plot.subtitle=element_text(size=10)) +
+      theme(axis.title=element_text(size=10)) +
+      theme(axis.text=element_text(size=10)) 
     out <- b
   }
   return(out)
@@ -229,7 +240,7 @@ data_files <- dir("datasets_final_for_hOUwie/full_datasets/", full.names = TRUE)
 tree_files <- dir("trees_simplified_tips/", full.names = TRUE)
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
-# # # # # initial sumarization # # # # #
+# # # # # initial summarization # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 
 climatic_variables <- c("bio_1", "bio_4", "bio_5", "bio_6", "bio_12", "bio_14", "bio_15", "bio_ai")
@@ -379,7 +390,7 @@ b <- ggplot(plot_data, aes(x = climate_variable, y = id, fill = percent_cd)) +
 ab <- b %>% insert_left(a, width = 3)  
 ggsave(filename = "figures/support_for_cd.pdf", plot = ab, height = 10, width = 15, units = "in")
 
-
+library(dplyr)
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # individual plots # # # # #
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
@@ -409,10 +420,25 @@ h <- makePlot(climatic_variables[8], "h", "var", TRUE)
 ttest_table <- rbind(a, b, c, d, e, f, g, h)
 write.csv(ttest_table, "tables/var_ttest_table.csv")
 
+<<<<<<< HEAD
+=======
+final_plot <- grid.arrange(a, b, c, d, e, f, g, h, nrow=4)
+ggsave("figures/mean-ttests.pdf", final_plot, height = 11, width = 8, units ="in")
+
+a <- makePlot(climatic_variables[1], "a", "var")
+b <- makePlot(climatic_variables[2], "b", "var")
+c <- makePlot(climatic_variables[3], "c", "var")
+d <- makePlot(climatic_variables[4], "d", "var")
+e <- makePlot(climatic_variables[5], "e", "var")
+f <- makePlot(climatic_variables[6], "f", "var")
+g <- makePlot(climatic_variables[7], "g", "var")
+h <- makePlot(climatic_variables[8], "h", "var")
+>>>>>>> 5d09be531e8f7e605fce241453d05159017ccf10
 
 final_plot <- grid.arrange(a, b, c, d, e, f, g, h, nrow=4)
 ggsave("~/2022_life-history/figures/mean-ttests.pdf", final_plot, height = 10, width = 13, units = 
          "in")
+ggsave("figures/var-ttests.pdf", final_plot, height = 11, width = 8, units ="in")
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # individial analysis # # # # #
