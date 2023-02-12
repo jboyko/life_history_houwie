@@ -1,0 +1,41 @@
+,climate_variable,model_variable,phylo_mean,se,pvalue
+1,Annual Mean Temperature (°C),rate,0.028160144,0.0094217,0.005654086
+2,Annual Mean Temperature (°C),sigma.sq,-0.000187793,0.000138565,0.185794656
+3,Annual Mean Temperature (°C),theta,57.69413174,46.14273412,0.221170538
+4,Annual Mean Temperature (°C),expected_mean,1.260401676,0.446817648,0.008553736
+5,Annual Mean Temperature (°C),expected_variance,-1.82E-05,4.50E-05,0.688767778
+6,Temperature Seasonality (SD x 100),rate,0.054643098,0.027859997,0.059503211
+7,Temperature Seasonality (SD x 100),sigma.sq,-0.008123468,0.005820515,0.173411694
+8,Temperature Seasonality (SD x 100),theta,17754.23066,25490.65072,0.491661357
+9,Temperature Seasonality (SD x 100),expected_mean,69.04594908,42.3133777,0.113540294
+10,Temperature Seasonality (SD x 100),expected_variance,0.013302545,0.031753849,0.678356177
+11,Max Temperature of Warmest Month (°C),rate,0.024924171,0.008738036,0.007920053
+12,Max Temperature of Warmest Month (°C),sigma.sq,0.00058995,0.000685518,0.396522877
+13,Max Temperature of Warmest Month (°C),theta,7.055450978,4.562688076,0.13286774
+14,Max Temperature of Warmest Month (°C),expected_mean,1.820159096,0.515753946,0.001411979
+15,Max Temperature of Warmest Month (°C),expected_variance,1.21E-05,2.57E-05,0.640040923
+16,Min Temperature of Coldest Month (°C),rate,0.064975265,0.040477046,0.119277838
+17,Min Temperature of Coldest Month (°C),sigma.sq,-0.00174583,0.001078929,0.11646464
+18,Min Temperature of Coldest Month (°C),theta,-76.16960532,113.0531064,0.505804848
+19,Min Temperature of Coldest Month (°C),expected_mean,0.98380014,0.560213336,0.089626036
+20,Min Temperature of Coldest Month (°C),expected_variance,-0.00014876,5.88E-05,0.017027176
+21,Annual Precipitation (mm),rate,0.307222774,0.276868181,0.276273119
+22,Annual Precipitation (mm),sigma.sq,-0.139463156,0.177707752,0.438941398
+23,Annual Precipitation (mm),theta,-329.6109722,322.0523184,0.314547744
+24,Annual Precipitation (mm),expected_mean,-92.67906125,57.80116938,0.119681209
+25,Annual Precipitation (mm),expected_variance,0.145190874,0.155612312,0.358508545
+26,Precipitation of Driest Month (mm),rate,0.073934679,0.045408576,0.114297756
+27,Precipitation of Driest Month (mm),sigma.sq,0.031868073,0.026543755,0.239626943
+28,Precipitation of Driest Month (mm),theta,-7.187952272,3.374115178,0.0417534
+29,Precipitation of Driest Month (mm),expected_mean,-6.10767985,2.815103588,0.038371979
+30,Precipitation of Driest Month (mm),expected_variance,0.026449079,0.06039236,0.664664446
+31,Precipitation Seasonality (Coefficient of Variation),rate,0.036554629,0.016614636,0.035915341
+32,Precipitation Seasonality (Coefficient of Variation),sigma.sq,-0.005985521,0.007363459,0.422917075
+33,Precipitation Seasonality (Coefficient of Variation),theta,2.650151897,3.815319641,0.492828832
+34,Precipitation Seasonality (Coefficient of Variation),expected_mean,1.848854421,2.802339028,0.514617636
+35,Precipitation Seasonality (Coefficient of Variation),expected_variance,-0.036811898,0.03679118,0.32531417
+36,Aridity Index (P/PET),rate,0.214351961,0.176904842,0.235415913
+37,Aridity Index (P/PET),sigma.sq,-0.022675923,0.047957091,0.639868443
+38,Aridity Index (P/PET),theta,-2.089987076,2.929119809,0.481226937
+39,Aridity Index (P/PET),expected_mean,-0.068861088,0.019372368,0.001320209
+40,Aridity Index (P/PET),expected_variance,0.145934579,0.158662742,0.365276457

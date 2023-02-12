@@ -10,6 +10,7 @@ require(ggplotify)
 require(gridExtra)
 require(ggtree)
 require(aplot)
+require(dpl)
 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 # # # # # function # # # # #
@@ -156,7 +157,7 @@ getSummTable <- function(big_list, climatic_variable){
   return(out)
 }
 
-makePlot <- function(variable, letter, mu){
+makePlot <- function(variable, letter, mu, TABLE = FALSE){
   climate_variable <- getVariableName(variable)
   
   focal_list <- all_model_tables[[variable]]
@@ -172,6 +173,12 @@ makePlot <- function(variable, letter, mu){
   summ_data[,6] <- convertVariable(variable, summ_data[,6])
   summ_data <- summ_data[!summ_data$Group.1 == "Chorisporeae",] # remove Chorisporeae
   write.csv(summ_data, paste0("tables/parameter_tables/", variable, ".csv"))
+  if(TABLE){
+    all_ttests <- lapply(c(3,5:8), function(x) runTtest(phy, summ_data, x))
+    stats <- do.call(rbind, lapply(all_ttests, function(x) c(phylo_mean=x$dbar, se=x$se, pvalue=x$P.dbar)))
+    out <- data.frame(climate_variable = as.character(climate_variable), model_variable = c("rate", "sigma.sq", "theta", "expected_mean", "expected_variance"), stats)
+    return(out)
+  }
   if(mu == "mean" | mu == "both"){
     ttest_res <- runTtest(phy, summ_data, 7)
     a <- ggplot(summ_data %>% group_by(Group.1) %>% mutate(slope = (expected_mean[Group.2=="annual"] - expected_mean[Group.2=="perennial"])/(2-1)), 
@@ -378,23 +385,30 @@ ggsave(filename = "figures/support_for_cd.pdf", plot = ab, height = 10, width = 
 # # # # ## # # # ## # # # ## # # # ## # # # ## # # # #
 cols <- c("#8c510a", "#5ab4ac")
 # variable <- climatic_variables[1]
-a <- makePlot(climatic_variables[1], "a", "mean")
-b <- makePlot(climatic_variables[2], "b", "mean")
-c <- makePlot(climatic_variables[3], "c", "mean")
-d <- makePlot(climatic_variables[4], "d", "mean")
-e <- makePlot(climatic_variables[5], "e", "mean")
-f <- makePlot(climatic_variables[6], "f", "mean")
-g <- makePlot(climatic_variables[7], "g", "mean")
-h <- makePlot(climatic_variables[8], "h", "mean")
+a <- makePlot(climatic_variables[1], "a", "mean", TRUE)
+b <- makePlot(climatic_variables[2], "b", "mean", TRUE)
+c <- makePlot(climatic_variables[3], "c", "mean", TRUE)
+d <- makePlot(climatic_variables[4], "d", "mean", TRUE)
+e <- makePlot(climatic_variables[5], "e", "mean", TRUE)
+f <- makePlot(climatic_variables[6], "f", "mean", TRUE)
+g <- makePlot(climatic_variables[7], "g", "mean", TRUE)
+h <- makePlot(climatic_variables[8], "h", "mean", TRUE)
 
-a <- makePlot(climatic_variables[1], "a", "var")
-b <- makePlot(climatic_variables[2], "b", "var")
-c <- makePlot(climatic_variables[3], "c", "var")
-d <- makePlot(climatic_variables[4], "d", "var")
-e <- makePlot(climatic_variables[5], "e", "var")
-f <- makePlot(climatic_variables[6], "f", "var")
-g <- makePlot(climatic_variables[7], "g", "var")
-h <- makePlot(climatic_variables[8], "h", "var")
+ttest_table <- rbind(a, b, c, d, e, f, g, h)
+write.csv(ttest_table, "tables/mean_ttest_table.csv")
+
+a <- makePlot(climatic_variables[1], "a", "var", TRUE)
+b <- makePlot(climatic_variables[2], "b", "var", TRUE)
+c <- makePlot(climatic_variables[3], "c", "var", TRUE)
+d <- makePlot(climatic_variables[4], "d", "var", TRUE)
+e <- makePlot(climatic_variables[5], "e", "var", TRUE)
+f <- makePlot(climatic_variables[6], "f", "var", TRUE)
+g <- makePlot(climatic_variables[7], "g", "var", TRUE)
+h <- makePlot(climatic_variables[8], "h", "var", TRUE)
+
+ttest_table <- rbind(a, b, c, d, e, f, g, h)
+write.csv(ttest_table, "tables/var_ttest_table.csv")
+
 
 final_plot <- grid.arrange(a, b, c, d, e, f, g, h, nrow=4)
 ggsave("~/2022_life-history/figures/mean-ttests.pdf", final_plot, height = 10, width = 13, units = 

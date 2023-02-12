@@ -87,6 +87,11 @@ for(i in 1:length(group_names)){
 
 names(asr_list) <- group_names
 
+asr_table <- data.frame(clade = rep(group_names, each = length(climatic_variables)), 
+                        variable = rep(climatic_variables, length(group_names)), 
+                        do.call(rbind, asr_list), row.names = NULL)
+write.csv(asr_table, file = "tables/asr_table.csv")
+
 all_asrs <- do.call(rbind, lapply(asr_list, function(x) colMeans(x)/sum(colMeans(x))))
 p_annual <- data.frame(clade = rownames(all_asrs), p_ann = all_asrs[,1], p_min = do.call(rbind, lapply(asr_list, function(x) range(x[,1])))[,1], p_max = do.call(rbind, lapply(asr_list, function(x) range(x[,1])))[,2])
 p_annual <- p_annual[!p_annual$clade == "Chorisporeae",]
